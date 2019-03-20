@@ -7,17 +7,22 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/search_menu"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search"/>
+        android:id="@+id/quran_menu"
+        android:title="@string/quran"
+        android:icon="@drawable/ic_local_library"/>
 
     <item
-        android:id="@+id/favorite_menu"
-        android:title="@string/favorite"
-        android:icon="@drawable/ic_favorite"/>
+        android:id="@+id/ustadz_menu"
+        android:title="@string/ustadz"
+        android:icon="@drawable/ic_supervisor"/>
     <item
-        android:id="@+id/account_menu"
-        android:title="@string/account"
-        android:icon="@drawable/ic_account"/>
+        android:id="@+id/vidcall_menu"
+        android:title="@string/vidcall"
+        android:icon="@drawable/ic_videocam"/>
+
+    <item
+        android:id="@+id/certificate_menu"
+        android:title="@string/certificate"
+        android:icon="@drawable/ic_assignment"/>
 
 </menu>

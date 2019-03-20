@@ -47,14 +47,17 @@ public class MainActivity extends AppCompatActivity
             case R.id.home_menu:
                 fragment = new HomeFragment();
                 break;
-            case R.id.search_menu:
-                fragment = new SearchFragment();
+            case R.id.quran_menu:
+                fragment = new QuranFragment();
                 break;
-            case R.id.favorite_menu:
-                fragment = new FavoriteFragment();
+            case R.id.ustadz_menu:
+                fragment = new UstadzFragment();
                 break;
-            case R.id.account_menu:
-                fragment = new AccountFragment();
+            case R.id.vidcall_menu:
+                fragment = new VidcallFragment();
+                break;
+            case R.id.certificate_menu:
+                fragment = new CertificateFragment();
                 break;
         }
 
