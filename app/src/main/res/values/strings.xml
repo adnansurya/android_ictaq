@@ -6,7 +6,9 @@
     <string name="ustadz">Ustadz</string>
     <string name="vidcall">Video Call</string>
     <string name="certificate">Sertifikat</string>
-
+    <string name="profile">Profil</string>
+    <string name="logout">Keluar</string>
+    <string name="account">Akun</string>
 
 
 </resources>

@@ -13,7 +13,7 @@ public class CertificateFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ustadz, container, false);
+        View view = inflater.inflate(R.layout.fragment_certificate, container, false);
         return view;
     }
 }

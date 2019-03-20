@@ -21,7 +21,9 @@
         android:background="@color/colorPrimary"
         app:itemIconTint="@drawable/state_bnve"
         app:itemTextColor="@drawable/state_bnve"
-        app:menu="@menu/bottomnavigation_menu" />
+        app:menu="@menu/bottomnavigation_menu"
+        app:elevation="20dp"
+        />
 
 
 </RelativeLayout>
