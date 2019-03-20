@@ -11,4 +11,8 @@
     <string name="account">Akun</string>
 
 
+    <string name="register">Buat Akun Baru</string>
+    <string name="login">Masuk</string>
+
+
 </resources>
