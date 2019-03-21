@@ -1,5 +1,6 @@
 package elarham.tahfizh.ictaq;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     ActionBar actBar;
+    int backButtonCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,40 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-//
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        Intent profil;
+        switch (item.getItemId()){
+            case R.id.profile_menu:
+                profil = new Intent(MainActivity.this, Profile.class);
+                startActivity(profil);
+                break;
+            case R.id.logout_menu:
+                profil = new Intent(MainActivity.this, Login.class);
+                startActivity(profil);
+                break;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, getApplicationContext().getString(R.string.backquit), Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
 }

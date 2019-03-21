@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Daftar">
+    tools:context=".Daftar"
+    android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
+        android:id="@+id/namaTxt"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:hint="@string/fullname"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
+
+    <EditText
+        android:id="@+id/emailTxt"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
+
+    <EditText
+        android:id="@+id/usernameTxt"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/username"
+        android:inputType="textShortMessage"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
+
+    <EditText
+        android:id="@+id/passwordTxt"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/password"
+        android:inputType="textPassword"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="NIM"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
+        android:id="@+id/password2Txt"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        android:layout_width="match_parent"
+        android:hint="@string/repeatpassword"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="Nama"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/daftarBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/register"
+        android:textColor="@color/colorNavigationText"/>
+
+</LinearLayout>

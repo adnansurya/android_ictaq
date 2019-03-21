@@ -1,15 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
-    <TextView
-        android:id="@+id/tv_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/home"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-</RelativeLayout>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="Motivasi"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginTop="16dp"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="Video Motivasi Menghafal Al-Qur'an"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+                <!--android:layout_marginTop="8dp"/>-->
+
+            <!--<VideoView-->
+                <!--android:id="@+id/videoView1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="32dp"/>-->
+
+
+
+    <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="-Keutamaan Penghafal Al-Qur'an-"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:textStyle="italic"/>-->
+
+            <!--<VideoView-->
+                <!--android:id="@+id/videoView2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="32dp"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="-Ciri-Ciri Penghafal Al-Qur'an-"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:textStyle="italic"/>-->
+
+            <!--<VideoView-->
+                <!--android:id="@+id/videoView3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="32dp"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="-Cara Menghafal Al-Qur'an 30 Juz Kurang Dari 2 Tahun-"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:textStyle="italic"/>-->
+
+
+
+
+</LinearLayout>
+

@@ -9,10 +9,14 @@
     <string name="profile">Profil</string>
     <string name="logout">Keluar</string>
     <string name="account">Akun</string>
-
-
-    <string name="register">Buat Akun Baru</string>
+    <string name="askregister">Belum punya akun?</string>
+    <string name="register">Daftar</string>
+    <string name="newaccount">Registrasi Akun Baru</string>
     <string name="login">Masuk</string>
-
-
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="repeatpassword">Ulangi Password</string>
+    <string name="fullname">Nama Lengkap</string>
+    <string name="email">Email</string>
+    <string name="backquit">Tekan sekali lagi untuk keluar</string>
 </resources>
