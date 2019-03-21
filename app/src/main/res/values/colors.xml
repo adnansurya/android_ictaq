@@ -6,4 +6,11 @@
 
     <color name="colorNavigationIcon">#dae9f6</color>
     <color name="colorNavigationText">#ffffff</color>
+
+    <color name="startgold">#DAAB21</color>
+    <color name="endgold">#D6BC87</color>
+
+    <color name="graylight">#FAFAFA</color>
+
+
 </resources>

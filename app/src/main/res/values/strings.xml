@@ -7,10 +7,12 @@
     <string name="vidcall">Video Call</string>
     <string name="certificate">Sertifikat</string>
     <string name="profile">Profil</string>
+    <string name="editprofile">Ubah Profil</string>
     <string name="logout">Keluar</string>
     <string name="account">Akun</string>
     <string name="askregister">Belum punya akun?</string>
     <string name="register">Daftar</string>
+    <string name="registersuccess">Pendaftaran berhasil!</string>
     <string name="newaccount">Registrasi Akun Baru</string>
     <string name="login">Masuk</string>
     <string name="username">Username</string>
@@ -19,4 +21,16 @@
     <string name="fullname">Nama Lengkap</string>
     <string name="email">Email</string>
     <string name="backquit">Tekan sekali lagi untuk keluar</string>
+    <string name="edit">Ubah</string>
+    <string name="editsuccess">Data berhasil diubah!</string>
+    <string name="address">Alamat</string>
+    <string name="birthdate">Tanggal Lahir</string>
+    <string name="telp">No. Telepon</string>
+    <string name="province">Provinsi</string>
+    <string name="city">Kota</string>
+    <string name="occupation">Pekerjaan</string>
+    <string name="parentname">Nama Lengkap Ayah / Ibu</string>
+    <string name="startyear">Tahun Mulai</string>
+    <string name="error">Terjadi Kesalahan</string>
+
 </resources>

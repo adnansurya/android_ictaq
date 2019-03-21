@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Daftar extends AppCompatActivity {
 
@@ -41,6 +42,8 @@ public class Daftar extends AppCompatActivity {
                 username = usernameTxt.getText().toString();
                 password = passwordTxt.getText().toString();
                 password2 = password2Txt.getText().toString();
+
+                Toast.makeText(Daftar.this, getApplicationContext().getString(R.string.registersuccess), Toast.LENGTH_SHORT).show();
 
                 Intent home = new Intent(Daftar.this, MainActivity.class);
                 startActivity(home);

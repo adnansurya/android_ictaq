@@ -1,9 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    android:background="@color/graylight"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp">
+                <LinearLayout
+                    android:background="@drawable/gradientbackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_account"/>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Muhammad Adnan"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:textSize="21sp"/>
+                </LinearLayout>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="340dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="180dp"
+                    card_view:cardElevation="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_school" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Penghafal"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:paddingTop="10dp"
+                                android:textColor="@color/startgold"/>
 
-</android.support.constraint.ConstraintLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tahun"
+                                android:textSize="20sp"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2010"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:paddingTop="10dp"
+                                android:textColor="@color/startgold"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_person_pin" />
+                            <TextView
+                                android:layout_width="120dp"
+                                android:gravity="center_horizontal"
+                                android:layout_height="wrap_content"
+                                android:text="Sulawesi Selatan"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:paddingTop="10dp"
+                                android:textColor="@color/startgold"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+                <LinearLayout
+
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_assignment_ind"
+                        android:tint="@color/colorPrimary"/>
+                    <TextView
+                        android:textStyle="bold"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="Programmer"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_event"
+                        android:tint="@color/colorPrimary"/>
+                    <TextView
+                        android:textStyle="bold"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="18 Juli 1995"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_place"
+                        android:tint="@color/colorPrimary"/>
+                    <TextView
+                        android:textStyle="bold"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="Jl. Toddopuli 5 Stp. 1 no. 5, Makassar"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/colorPrimary"/>
+                    <TextView
+                        android:textStyle="bold"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="+62 8234 825 8155"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_email"
+                        android:tint="@color/colorPrimary" />
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="muh.adnansuryaazis@gmail.com"/>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_pregnant"
+                        android:tint="@color/colorPrimary"/>
+                    <TextView
+                        android:textStyle="bold"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingStart="16dp"
+                        android:text="Yulia Ranreng"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

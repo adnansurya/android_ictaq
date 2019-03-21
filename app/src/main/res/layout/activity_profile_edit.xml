@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileEdit"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/namaTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/fullname"
+                android:inputType="text"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/alamatTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+            <EditText
+                android:id="@+id/tglLahirTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/birthdate"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+            <EditText
+                android:id="@+id/telpTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/telp"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/emailTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/province"/>
+
+            <Spinner
+                android:id="@+id/provSpin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/city"/>
+
+            <Spinner
+                android:id="@+id/kotaSpin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"/>
+
+            <EditText
+                android:id="@+id/kerjaTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/occupation"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/namaOrtuTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/parentname"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/thnMulaiTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/startyear"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/usernameTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/username"
+                android:inputType="textShortMessage"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/passwordTxt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+            <EditText
+                android:id="@+id/password2Txt"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/repeatpassword"
+                android:inputType="textPassword"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" />
+
+
+            <Button
+                android:id="@+id/ubahBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/edit"
+                android:textColor="@color/colorNavigationText"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</LinearLayout>
