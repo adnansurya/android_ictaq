@@ -23,7 +23,7 @@ public class QuranFragment extends Fragment {
 
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.surah)));
-        tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.juz)));
+        tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.settings)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = view.findViewById(R.id.pager);

@@ -34,5 +34,6 @@
     <string name="error">Terjadi Kesalahan</string>
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
+    <string name="settings">Pengaturan</string>
 
 </resources>

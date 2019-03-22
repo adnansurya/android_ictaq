@@ -25,7 +25,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 break;
 
             case 1:
-                fragment = new JuzFragment();
+                fragment = new QuranSettingFragment();
                 break;
 
 
