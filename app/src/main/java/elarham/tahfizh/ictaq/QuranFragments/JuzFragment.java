@@ -1,4 +1,4 @@
-package elarham.tahfizh.ictaq;
+package elarham.tahfizh.ictaq.QuranFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import elarham.tahfizh.ictaq.R;
 
 public class JuzFragment extends Fragment {
 

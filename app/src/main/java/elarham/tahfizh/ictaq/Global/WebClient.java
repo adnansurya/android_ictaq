@@ -1,4 +1,4 @@
-package elarham.tahfizh.ictaq;
+package elarham.tahfizh.ictaq.Global;
 
 import android.webkit.WebView;
 import android.webkit.WebViewClient;

@@ -1,8 +1,10 @@
-package elarham.tahfizh.ictaq;
+package elarham.tahfizh.ictaq.QuranFragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     Fragment fragment;

@@ -1,4 +1,4 @@
-package elarham.tahfizh.ictaq;
+package elarham.tahfizh.ictaq.MainFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class UstadzFragment extends Fragment {
+import elarham.tahfizh.ictaq.R;
+
+public class CertificateFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ustadz, container, false);
+        View view = inflater.inflate(R.layout.fragment_certificate, container, false);
         return view;
     }
 }

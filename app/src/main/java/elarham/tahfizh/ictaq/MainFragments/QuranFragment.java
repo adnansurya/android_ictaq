@@ -1,4 +1,4 @@
-package elarham.tahfizh.ictaq;
+package elarham.tahfizh.ictaq.MainFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import elarham.tahfizh.ictaq.QuranFragments.PagerAdapter;
+import elarham.tahfizh.ictaq.R;
 
 
 public class QuranFragment extends Fragment {
