@@ -32,5 +32,7 @@
     <string name="parentname">Nama Lengkap Ayah / Ibu</string>
     <string name="startyear">Tahun Mulai</string>
     <string name="error">Terjadi Kesalahan</string>
+    <string name="surah">Surah</string>
+    <string name="juz">Juz</string>
 
 </resources>
