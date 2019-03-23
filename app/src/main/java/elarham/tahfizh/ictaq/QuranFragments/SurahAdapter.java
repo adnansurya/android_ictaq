@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import elarham.tahfizh.ictaq.Models.*;
@@ -64,6 +65,16 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
             artiTxt = itemView.findViewById(R.id.artiTxt);
             ayatTxt = itemView.findViewById(R.id.ayatTxt);
             typeTxt = itemView.findViewById(R.id.typeTxt);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    Surah surah = list.get(position);
+                    Toast.makeText(context, "You Clicked: " + surah.getNama(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
