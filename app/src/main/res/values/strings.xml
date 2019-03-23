@@ -6,6 +6,7 @@
     <string name="ustadz">Ustadz</string>
     <string name="vidcall">Video Call</string>
     <string name="certificate">Sertifikat</string>
+
     <string name="profile">Profil</string>
     <string name="editprofile">Ubah Profil</string>
     <string name="logout">Keluar</string>
@@ -23,6 +24,7 @@
     <string name="backquit">Tekan sekali lagi untuk keluar</string>
     <string name="edit">Ubah</string>
     <string name="editsuccess">Data berhasil diubah!</string>
+
     <string name="address">Alamat</string>
     <string name="birthdate">Tanggal Lahir</string>
     <string name="telp">No. Telepon</string>
@@ -31,7 +33,9 @@
     <string name="occupation">Pekerjaan</string>
     <string name="parentname">Nama Lengkap Ayah / Ibu</string>
     <string name="startyear">Tahun Mulai</string>
+
     <string name="error">Terjadi Kesalahan</string>
+
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="settings">Pengaturan</string>
