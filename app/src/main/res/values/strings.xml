@@ -40,5 +40,7 @@
     <string name="asma">Asma</string>
     <string name="ayat">Ayat</string>
     <string name="meaning">Arti</string>
+    <string name="mekah">Makkiyah</string>
+    <string name="madinah">Madaniyah</string>
 
 </resources>

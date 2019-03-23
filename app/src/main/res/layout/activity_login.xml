@@ -20,11 +20,11 @@
         android:id="@+id/usernameTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="@dimen/stdMargin2"
+        android:layout_marginLeft="@dimen/stdMargin2"
+        android:layout_marginTop="@dimen/stdMargin4"
+        android:layout_marginEnd="@dimen/stdMargin2"
+        android:layout_marginRight="@dimen/stdMargin2"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textShortMessage"/>
@@ -33,10 +33,10 @@
         android:id="@+id/passwordTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="@dimen/stdMargin2"
+        android:layout_marginLeft="@dimen/stdMargin2"
+        android:layout_marginEnd="@dimen/stdMargin2"
+        android:layout_marginRight="@dimen/stdMargin2"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
@@ -45,11 +45,11 @@
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="@dimen/stdMargin2"
+        android:layout_marginLeft="@dimen/stdMargin2"
+        android:layout_marginTop="@dimen/stdMargin1"
+        android:layout_marginEnd="@dimen/stdMargin2"
+        android:layout_marginRight="@dimen/stdMargin2"
         android:background="@color/colorPrimary"
         android:text="@string/login"
         android:textColor="@color/colorNavigationText"/>
@@ -57,7 +57,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="@dimen/stdMargin2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,8 +66,8 @@
             android:text="@string/askregister"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginLeft="@dimen/stdMargin1"
+            android:layout_marginStart="@dimen/stdMargin1"/>
 
         <TextView
             android:id="@+id/daftarTxt"
@@ -79,8 +79,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginRight="@dimen/stdMargin1"
+            android:layout_marginEnd="@dimen/stdMargin1"
             android:textStyle="bold" />
     </RelativeLayout>
 

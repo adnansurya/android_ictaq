@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stdMargin0">4dp</dimen>
+    <dimen name="stdMargin1">8dp</dimen>
+    <dimen name="stdMargin2">16dp</dimen>
+    <dimen name="stdMargin3">24dp</dimen>
+    <dimen name="stdMargin4">32dp</dimen>
+    <dimen name="stdMargin5">40dp</dimen>
+    
+    <dimen name="itemLargeTxt">18sp</dimen>
+    <dimen name="itemMediumTxt">15sp</dimen>
+    <dimen name="itemSmallTxt">12sp</dimen>
+    
+</resources>

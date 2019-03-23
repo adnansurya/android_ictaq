@@ -31,12 +31,19 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Surah surah = list.get(position);
 
+        String type = surah.getType();
+
+        if(type.equals("mekah")){
+            holder.typeTxt.setText(context.getString(R.string.mekah)+ ",");
+        }else if(type.equals("madinah")){
+            holder.typeTxt.setText(context.getString(R.string.madinah) + ",");
+        }
         holder.surahTxt.setText(surah.getNama());
         holder.nomorTxt.setText(surah.getNomor());
         holder.asmaTxt.setText(surah.getAsma());
         holder.artiTxt.setText(surah.getArti());
-        holder.ayatTxt.setText(surah.getAyat());
-        holder.typeTxt.setText(surah.getType());
+        holder.ayatTxt.setText(surah.getAyat()+ " " + context.getString(R.string.ayat));
+
 
     }
 
