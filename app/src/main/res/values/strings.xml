@@ -35,5 +35,10 @@
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="settings">Pengaturan</string>
+    <string name="number">Nomor</string>
+    <string name="type">Jenis</string>
+    <string name="asma">Asma</string>
+    <string name="ayat">Ayat</string>
+    <string name="meaning">Arti</string>
 
 </resources>

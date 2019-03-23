@@ -31,9 +31,12 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Surah surah = list.get(position);
 
-        holder.textTitle.setText(surah.getNama());
-        holder.textRating.setText(String.valueOf(surah.getType()));
-        holder.textYear.setText(String.valueOf(surah.getNomor()));
+        holder.surahTxt.setText(surah.getNama());
+        holder.nomorTxt.setText(surah.getNomor());
+        holder.asmaTxt.setText(surah.getAsma());
+        holder.artiTxt.setText(surah.getArti());
+        holder.ayatTxt.setText(surah.getAyat());
+        holder.typeTxt.setText(surah.getType());
 
     }
 
@@ -43,14 +46,17 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textTitle, textRating, textYear;
+        public TextView surahTxt, nomorTxt, asmaTxt, artiTxt, ayatTxt, typeTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textTitle = itemView.findViewById(R.id.main_title);
-            textRating = itemView.findViewById(R.id.main_rating);
-            textYear = itemView.findViewById(R.id.main_year);
+            surahTxt = itemView.findViewById(R.id.surahTxt);
+            nomorTxt = itemView.findViewById(R.id.nomorTxt);
+            asmaTxt = itemView.findViewById(R.id.asmaTxt);
+            artiTxt = itemView.findViewById(R.id.artiTxt);
+            ayatTxt = itemView.findViewById(R.id.ayatTxt);
+            typeTxt = itemView.findViewById(R.id.typeTxt);
         }
     }
 

@@ -17,24 +17,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/main_title"
+                android:id="@+id/nomorTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="Year"/>
+
+            <TextView
+                android:id="@+id/surahTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surah"
                 android:textSize="18sp"/>
 
 
             <TextView
-                android:id="@+id/main_rating"
+                android:id="@+id/asmaTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rating"/>
+                android:text="@string/asma"/>
 
             <TextView
-                android:id="@+id/main_year"
+                android:id="@+id/artiTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Year"/>
+                android:text="@string/meaning"/>
+
+            <TextView
+                android:id="@+id/ayatTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ayat"/>
+
+            <TextView
+                android:id="@+id/typeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/type"/>
         </LinearLayout>
 
 
