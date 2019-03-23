@@ -102,6 +102,7 @@ public class Quran extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
             case R.id.info_menu:
                 dialogSurahInfo(surahObj);
 
@@ -138,8 +139,6 @@ public class Quran extends AppCompatActivity {
                     arabic = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("ar");
                     lafaz = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("idt");
                     indo = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("id");
-
-                    Toast.makeText(Quran.this, indo.getJSONObject(0).toString(), Toast.LENGTH_LONG).show();
 
                     if(arabic.length() == lafaz.length() && arabic.length() == indo.length()){
                         for (int i=0; i <arabic.length(); i++) {
