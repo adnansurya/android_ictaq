@@ -54,6 +54,8 @@
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/itemLargeTxt"
                 android:textStyle="bold"
+                android:layout_marginEnd="@dimen/stdMargin0"
+                android:layout_marginRight="@dimen/stdMargin0"
                 android:text="@string/asma"/>
 
             <TextView

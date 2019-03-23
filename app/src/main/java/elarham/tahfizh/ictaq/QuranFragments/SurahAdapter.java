@@ -1,6 +1,7 @@
 package elarham.tahfizh.ictaq.QuranFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.List;
 import elarham.tahfizh.ictaq.Models.*;
+import elarham.tahfizh.ictaq.Quran;
 import elarham.tahfizh.ictaq.R;
 
 public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> {
@@ -73,6 +75,10 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
 
                     Surah surah = list.get(position);
                     Toast.makeText(context, "You Clicked: " + surah.getNama(), Toast.LENGTH_SHORT).show();
+
+                    Intent quran = new Intent(context, Quran.class);
+                    quran.putExtra("nomor", surah.getNomor());
+                    context.startActivity(quran);
                 }
             });
         }
