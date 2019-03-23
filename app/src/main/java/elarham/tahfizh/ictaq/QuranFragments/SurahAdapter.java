@@ -74,9 +74,9 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
                     int position = getAdapterPosition();
 
                     Surah surah = list.get(position);
-                    Toast.makeText(context, "You Clicked: " + surah.getNama(), Toast.LENGTH_SHORT).show();
 
                     Intent quran = new Intent(context, Quran.class);
+                    quran.putExtra("nama", surah.getNama());
                     quran.putExtra("nomor", surah.getNomor());
                     context.startActivity(quran);
                 }

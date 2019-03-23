@@ -9,7 +9,7 @@ import android.widget.Toast;
 public class Quran extends AppCompatActivity {
 
     ActionBar actBar;
-    String nomor;
+    String nomor, nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +17,10 @@ public class Quran extends AppCompatActivity {
         setContentView(R.layout.activity_quran);
 
         nomor = getIntent().getStringExtra("nomor");
-        Toast.makeText(this, nomor, Toast.LENGTH_SHORT).show();
+        nama = getIntent().getStringExtra("nama");
 
         actBar = getSupportActionBar();
-        actBar.setTitle(getApplicationContext().getString(R.string.editprofile));
+        actBar.setTitle(nama);
         actBar.setDisplayHomeAsUpEnabled(true);
     }
 
