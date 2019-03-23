@@ -118,5 +118,7 @@ public class SurahFragment extends Fragment {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjReq);
+
+
     }
 }

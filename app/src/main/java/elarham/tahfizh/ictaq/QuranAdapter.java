@@ -34,9 +34,10 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         Ayat Ayat = list.get(position);
 
         holder.arabicTxt.setText(Ayat.getArabic());
-        holder.lafazTxt.setText(Ayat.getLafaz());
-        holder.indoTxt.setText(Ayat.getIndo());
+        holder.lafazTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getLafaz());
+        holder.indoTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
 
+        holder.lafazTxt.setVisibility(View.INVISIBLE);
 
     }
 

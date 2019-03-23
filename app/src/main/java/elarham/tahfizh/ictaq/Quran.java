@@ -54,6 +54,8 @@ public class Quran extends AppCompatActivity {
     List<Ayat> ayatList;
     RecyclerView.Adapter adapter;
 
+    RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +103,7 @@ public class Quran extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                requestQueue.getCache().clear();
                 onBackPressed();
                 return true;
             case R.id.info_menu:
@@ -150,9 +153,10 @@ public class Quran extends AppCompatActivity {
                             indoObj = indo.getJSONObject(i);
 
 
+
                             Ayat ayat = new Ayat();
                             ayat.setArabic(arabicObj.getString("teks"));
-                            ayat.setLafaz(lafazObj.getString("teks"));
+                            ayat.setLafaz( Html.fromHtml(lafazObj.getString("teks")).toString());
                             ayat.setIndo(indoObj.getString("teks"));
                             ayat.setNomorAyat(arabicObj.getString("ayat"));
 
@@ -165,7 +169,7 @@ public class Quran extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
+                adapter.notifyDataSetChanged();
                 progressDialog.dismiss();
 
             }
@@ -176,7 +180,7 @@ public class Quran extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(Quran.this);
+        requestQueue = Volley.newRequestQueue(Quran.this);
         requestQueue.add(jsonObjReq);
 
     }
