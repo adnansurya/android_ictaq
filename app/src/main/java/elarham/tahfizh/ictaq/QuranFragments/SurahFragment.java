@@ -39,13 +39,12 @@ import static com.android.volley.VolleyLog.TAG;
 public class SurahFragment extends Fragment {
 
     RecyclerView mList;
-
     LinearLayoutManager linearLayoutManager;
     DividerItemDecoration dividerItemDecoration;
     List<Surah> surahList;
     RecyclerView.Adapter adapter;
 
-    String url = "https://api.banghasan.com/quran/format/json/surat";
+    String url;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable  Bundle savedInstanceState) {
@@ -62,8 +61,9 @@ public class SurahFragment extends Fragment {
 
         mList.setHasFixedSize(true);
         mList.setLayoutManager(linearLayoutManager);
-       // mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
+
+        url = getContext().getString(R.string.urlsurah);
 
         getData();
 
@@ -73,7 +73,7 @@ public class SurahFragment extends Fragment {
     String status;
     private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(getContext().getString(R.string.loading));
         progressDialog.show();
 
 
@@ -81,7 +81,7 @@ public class SurahFragment extends Fragment {
                 url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
+                Log.e(TAG, response.toString());
 
                 try {
                     status = response.getString("status");

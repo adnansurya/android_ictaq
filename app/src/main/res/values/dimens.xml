@@ -11,5 +11,9 @@
     <dimen name="itemLargeTxt">18sp</dimen>
     <dimen name="itemMediumTxt">15sp</dimen>
     <dimen name="itemSmallTxt">12sp</dimen>
+
+    <dimen name="stdLargeTxt">21sp</dimen>
+    <dimen name="stdMediumTxt">18sp</dimen>
+    <dimen name="stdSmallTxt">15sp</dimen>
     
 </resources>

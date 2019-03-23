@@ -37,9 +37,9 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
         String type = surah.getType();
 
         if(type.equals("mekah")){
-            holder.typeTxt.setText(context.getString(R.string.mekah)+ ",");
+            holder.typeTxt.setText(context.getString(R.string.makkiyah)+ ",");
         }else if(type.equals("madinah")){
-            holder.typeTxt.setText(context.getString(R.string.madinah) + ",");
+            holder.typeTxt.setText(context.getString(R.string.madaniyah) + ",");
         }
         holder.surahTxt.setText(surah.getNama());
         holder.nomorTxt.setText(surah.getNomor());
