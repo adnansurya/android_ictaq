@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,17 +24,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import elarham.tahfizh.ictaq.Models.Ayat;
-import elarham.tahfizh.ictaq.Models.Surah;
 
 import static com.android.volley.VolleyLog.TAG;
 
@@ -55,6 +55,7 @@ public class Quran extends AppCompatActivity {
     RecyclerView.Adapter adapter;
 
     RequestQueue requestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class Quran extends AppCompatActivity {
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
 
-        getSurahData(nomorSurah,1);
+        getSurahData(nomorSurah,ayatStart);
 
 
     }
@@ -118,6 +119,7 @@ public class Quran extends AppCompatActivity {
     String status;
     JSONObject surahObj;
     JSONArray arabic, lafaz, indo;
+
     private void getSurahData(String surahNumber, int ayatStart) {
 
         final ProgressDialog progressDialog = new ProgressDialog(Quran.this);
@@ -129,13 +131,16 @@ public class Quran extends AppCompatActivity {
 
 
 
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null, new Response.Listener<JSONObject>() {
+                url, null,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e(TAG, response.toString());
 
+
                 try {
+
                     status = response.getString("status");
                     surahObj = response.getJSONObject("surat");
 
@@ -152,21 +157,21 @@ public class Quran extends AppCompatActivity {
                             lafazObj = lafaz.getJSONObject(i);
                             indoObj = indo.getJSONObject(i);
 
-
-
                             Ayat ayat = new Ayat();
-                            ayat.setArabic(arabicObj.getString("teks"));
+                            ayat.setArabic( Html.fromHtml(arabicObj.getString("teks")).toString());
                             ayat.setLafaz( Html.fromHtml(lafazObj.getString("teks")).toString());
                             ayat.setIndo(indoObj.getString("teks"));
                             ayat.setNomorAyat(arabicObj.getString("ayat"));
 
                             ayatList.add(ayat);
 
+
                         }
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
 
                 adapter.notifyDataSetChanged();
@@ -184,6 +189,7 @@ public class Quran extends AppCompatActivity {
         requestQueue.add(jsonObjReq);
 
     }
+
 
     private void dialogSurahInfo(final JSONObject info) {
 
@@ -232,7 +238,7 @@ public class Quran extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-//                    finish();
+                    Toast.makeText(this, getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
                 dialog.show();
 

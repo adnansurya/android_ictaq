@@ -103,6 +103,7 @@ public class SurahFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getContext(), getContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
 
                 adapter.notifyDataSetChanged();
