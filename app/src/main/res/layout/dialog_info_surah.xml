@@ -16,128 +16,148 @@
             android:layout_marginStart="@dimen/stdMargin3"
             android:layout_marginRight="@dimen/stdMargin3"
             android:layout_marginEnd="@dimen/stdMargin3">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/surahname"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/namaTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdMediumTxt"
-                android:text="@string/name"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/arabic"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/asmaTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdMediumTxt"
-                android:text="@string/arabic"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/meaning"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/artiTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/meaning"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/surahnum"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/nomorTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdMediumTxt"
-                android:text="@string/surahnum"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/numofverses"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/ayatTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdMediumTxt"
-                android:text="@string/numofverses"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/versereveal"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/typeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/versereveal"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/explanation"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/keteranganTxt"
-                android:layout_gravity="fill_horizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/stdSmallTxt"
-                android:text="@string/explanation"
-                android:layout_marginTop="@dimen/stdMargin0"
-                android:layout_marginBottom="@dimen/stdMargin0"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/surahLay">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/surahname"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/namaTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:text="@string/name"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/arabic"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/asmaTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:text="@string/arabic"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/meaning"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/artiTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/meaning"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/surahnum"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/nomorTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:text="@string/surahnum"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/numofverses"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/ayatTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:text="@string/numofverses"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/versereveal"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/typeTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/versereveal"
+                    android:layout_marginLeft="@dimen/stdMargin2"
+                    android:layout_marginStart="@dimen/stdMargin2"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/explanation"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/keteranganTxt"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/explanation"
+                    android:layout_marginTop="@dimen/stdMargin0"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/juzLay">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/itemLargeTxt"
+                        android:id="@+id/juzTxt"
+                        android:text="@string/juz"/>
+            </LinearLayout>
+
+
 
 
         </LinearLayout>
+
     </ScrollView>
 
 

@@ -53,6 +53,7 @@
     <string name="mekah">Makkah</string>
     <string name="madinah">Madinah</string>
     <string name="surahinfo">Informasi Surah</string>
+    <string name="surahlist">Daftar Surah</string>
     <string name="surahname">Nama Surah</string>
     <string name="numofverses">Jumlah Ayat</string>
     <string name="versereveal">Diturunkan di</string>
@@ -61,8 +62,8 @@
     <string name="lafaz">Lafaz</string>
 
 
-    <string name="urlsurah">https://api.banghasan.com/quran/format/json/surat</string>
-    <string name="urlquran">http://api.alquran.cloud/v1/surah</string>
-    <string name="urledition">/editions/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
+    <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
+    <string name="urlquran">http://api.alquran.cloud/v1</string>
+    <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
 
 </resources>

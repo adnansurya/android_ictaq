@@ -84,6 +84,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
                     quran.putExtra("ayat", surah.getAyat());
                     quran.putExtra("type", surah.getType());
                     quran.putExtra("keterangan", surah.getKeterangan());
+                    quran.putExtra("mode", "surah");
                     context.startActivity(quran);
                 }
             });

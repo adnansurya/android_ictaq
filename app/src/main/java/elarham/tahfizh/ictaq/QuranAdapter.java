@@ -38,12 +38,17 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         Ayat Ayat = list.get(position);
 
         holder.arabicTxt.setText(Ayat.getArabic() + "   |" + Ayat.getNomorAyat());
-        holder.indoTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
+        if(Ayat.getIndo() != null){
+            holder.indoTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
+        }else{
+           holder.indoTxt.setVisibility(View.GONE);
+        }
+
 
         Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/scheherazade-webfont.ttf");
         holder.arabicTxt.setTypeface(face);
 
-//        holder.indoTxt.setVisibility(View.GONE);
+
         holder.lafazTxt.setVisibility(View.GONE);
 
 

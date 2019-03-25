@@ -63,7 +63,7 @@ public class SurahFragment extends Fragment {
         mList.setLayoutManager(linearLayoutManager);
         mList.setAdapter(adapter);
 
-        url = getContext().getString(R.string.urlsurah);
+        url = getContext().getString(R.string.urlsurahlist);
 
         getData();
 
