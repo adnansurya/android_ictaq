@@ -62,5 +62,7 @@
 
 
     <string name="urlsurah">https://api.banghasan.com/quran/format/json/surat</string>
+    <string name="urlquran">http://api.alquran.cloud/v1/surah</string>
+    <string name="urledition">/editions/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
 
 </resources>

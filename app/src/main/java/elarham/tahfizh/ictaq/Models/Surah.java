@@ -2,19 +2,20 @@ package elarham.tahfizh.ictaq.Models;
 
 public class Surah {
 
-    public String nomor, nama, asma, ayat, type, arti;
+    public String nomor, nama, asma, ayat, type, arti, keterangan;
 
     public Surah(){
 
     }
 
-    public Surah(String nomor, String nama, String asma, String ayat, String type, String arti) {
+    public Surah(String nomor, String nama, String asma, String ayat, String type, String arti, String keterangan) {
         this.nomor = nomor;
         this.nama = nama;
         this.asma = asma;
         this.ayat = ayat;
         this.type = type;
         this.arti = arti;
+        this.keterangan = keterangan;
     }
 
     public String getNomor() {
@@ -63,5 +64,13 @@ public class Surah {
 
     public void setArti(String arti) {
         this.arti = arti;
+    }
+
+    public String getKeterangan() {
+        return keterangan;
+    }
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
     }
 }

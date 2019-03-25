@@ -37,15 +37,15 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Ayat Ayat = list.get(position);
 
-        holder.arabicTxt.setText(Ayat.getArabic() + "    |" + Ayat.getNomorAyat());
-        holder.lafazTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getLafaz());
+        holder.arabicTxt.setText(Ayat.getArabic() + "   |" + Ayat.getNomorAyat());
         holder.indoTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
 
-        Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/me_quran-webfont.otf");
+        Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/scheherazade-webfont.ttf");
         holder.arabicTxt.setTypeface(face);
 
-//        holder.lafazTxt.setVisibility(View.GONE);
 //        holder.indoTxt.setVisibility(View.GONE);
+        holder.lafazTxt.setVisibility(View.GONE);
+
 
 
     }
@@ -56,14 +56,14 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView arabicTxt, lafazTxt, indoTxt;
+        public TextView arabicTxt, englishTxt, indoTxt, lafazTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             arabicTxt = itemView.findViewById(R.id.arabicTxt);
-            lafazTxt = itemView.findViewById(R.id.lafazTxt);
             indoTxt = itemView.findViewById(R.id.indoTxt);
+            lafazTxt = itemView.findViewById(R.id.lafazTxt);
 
         }
     }

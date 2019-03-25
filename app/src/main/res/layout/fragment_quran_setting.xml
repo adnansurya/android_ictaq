@@ -12,4 +12,6 @@
         android:text="@string/settings"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+
+
 </RelativeLayout>

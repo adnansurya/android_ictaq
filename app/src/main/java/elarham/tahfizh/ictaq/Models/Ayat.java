@@ -2,17 +2,18 @@ package elarham.tahfizh.ictaq.Models;
 
 public class Ayat {
 
-    public String arabic, lafaz, indo, nomorAyat;
+    public String arabic, english, indo, nomorAyat;
 
     public Ayat(){
 
     }
 
-    public Ayat(String arabic, String lafaz, String indo, String nomorAyat){
+    public Ayat(String arabic, String english, String indo, String nomorAyat){
         this.arabic = arabic;
-        this.lafaz = lafaz;
+        this.english =
         this.indo = indo;
         this.nomorAyat = nomorAyat;
+
     }
 
     public String getArabic(){
@@ -31,12 +32,12 @@ public class Ayat {
         this.indo = indo;
     }
 
-    public String getLafaz() {
-        return lafaz;
+    public String getEnglish() {
+        return english;
     }
 
-    public void setLafaz(String lafaz) {
-        this.lafaz = lafaz;
+    public void setEnglish(String english) {
+        this.english = english;
     }
 
     public String getNomorAyat() {
@@ -46,4 +47,5 @@ public class Ayat {
     public void setNomorAyat(String nomorAyat) {
         this.nomorAyat = nomorAyat;
     }
+
 }

@@ -79,6 +79,11 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
                     Intent quran = new Intent(context, Quran.class);
                     quran.putExtra("nama", surah.getNama());
                     quran.putExtra("nomor", surah.getNomor());
+                    quran.putExtra("asma", surah.getAsma());
+                    quran.putExtra("arti", surah.getArti());
+                    quran.putExtra("ayat", surah.getAyat());
+                    quran.putExtra("type", surah.getType());
+                    quran.putExtra("keterangan", surah.getKeterangan());
                     context.startActivity(quran);
                 }
             });

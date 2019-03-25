@@ -64,6 +64,11 @@ public class Quran extends AppCompatActivity {
 
         nomorSurah = getIntent().getStringExtra("nomor");
         namaSurah = getIntent().getStringExtra("nama");
+        asmaSurah = getIntent().getStringExtra("asma");
+        artiSurah = getIntent().getStringExtra("arti");
+        ayatSurah = getIntent().getStringExtra("ayat");
+        typeSurah = getIntent().getStringExtra("type");
+        keteranganSurah = getIntent().getStringExtra("keterangan");
 
         actBar = getSupportActionBar();
         actBar.setTitle(namaSurah);
@@ -108,7 +113,7 @@ public class Quran extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.info_menu:
-                dialogSurahInfo(surahObj);
+                dialogSurahInfo();
 
                 return true;
             default:
@@ -117,8 +122,7 @@ public class Quran extends AppCompatActivity {
     }
 
     String status;
-    JSONObject surahObj;
-    JSONArray arabic, lafaz, indo;
+    JSONArray data, arabic, english, indo;
 
     private void getSurahData(String surahNumber, int ayatStart) {
 
@@ -126,11 +130,8 @@ public class Quran extends AppCompatActivity {
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
 
-        String url = getApplicationContext().getString(R.string.urlsurah) + "/" + surahNumber + "/ayat/"
-                + String.valueOf(ayatStart) + "-" + String.valueOf(ayatStart+9);
-
-
-
+        String url = getApplicationContext().getString(R.string.urlquran) + "/" + surahNumber +
+                getApplicationContext().getString(R.string.urledition);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,new Response.Listener<JSONObject>() {
@@ -142,32 +143,32 @@ public class Quran extends AppCompatActivity {
                 try {
 
                     status = response.getString("status");
-                    surahObj = response.getJSONObject("surat");
+                    data = response.getJSONArray("data");
 
-                    arabic = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("ar");
-                    lafaz = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("idt");
-                    indo = response.getJSONObject("ayat").getJSONObject("data").getJSONArray("id");
+                    arabic = data.getJSONObject(0).getJSONArray("ayahs");
+                    indo = data.getJSONObject(1).getJSONArray("ayahs");
 
-                    if(arabic.length() == lafaz.length() && arabic.length() == indo.length()){
-                        for (int i=0; i <arabic.length(); i++) {
+                    if(data.getJSONObject(0).getJSONArray("ayahs").length() ==
+                            data.getJSONObject(1).getJSONArray("ayahs").length())
+                    {
+                        for (int i=0; i <data.getJSONObject(0).getJSONArray("ayahs").length(); i++) {
 
-                            JSONObject arabicObj, lafazObj, indoObj;
+                            JSONObject arabicObj, indoObj;
 
                             arabicObj = arabic.getJSONObject(i);
-                            lafazObj = lafaz.getJSONObject(i);
                             indoObj = indo.getJSONObject(i);
 
                             Ayat ayat = new Ayat();
-                            ayat.setArabic( Html.fromHtml(arabicObj.getString("teks")).toString());
-                            ayat.setLafaz( Html.fromHtml(lafazObj.getString("teks")).toString());
-                            ayat.setIndo(indoObj.getString("teks"));
-                            ayat.setNomorAyat(arabicObj.getString("ayat"));
+                            ayat.setArabic( Html.fromHtml(arabicObj.getString("text")).toString());
+                            ayat.setIndo(indoObj.getString("text"));
+                            ayat.setNomorAyat(arabicObj.getString("numberInSurah"));
 
                             ayatList.add(ayat);
 
 
                         }
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -191,7 +192,7 @@ public class Quran extends AppCompatActivity {
     }
 
 
-    private void dialogSurahInfo(final JSONObject info) {
+    private void dialogSurahInfo() {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(Quran.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -210,37 +211,30 @@ public class Quran extends AppCompatActivity {
         keteranganTxt = dialogView.findViewById(R.id.keteranganTxt);
 
 
+        nomorTxt.setText(nomorSurah);
+        namaTxt.setText(namaSurah);
+        asmaTxt.setText(asmaSurah);
+        artiTxt.setText(artiSurah);
+        ayatTxt.setText(ayatSurah);
 
-        try {
-                    nomorTxt.setText(info.getString("nomor"));
-                    namaTxt.setText(info.getString("nama"));
-                    asmaTxt.setText(info.getString("asma"));
-                    artiTxt.setText(info.getString("arti"));
-                    ayatTxt.setText(info.getString("ayat"));
+        if(typeSurah.equals("mekah")){
+            typeTxt.setText(getApplicationContext().getString(R.string.mekah));
+        }else if(typeSurah.equals("madinah")){
+            typeTxt.setText(getApplicationContext().getString(R.string.madinah));
+        }
 
-                    if(info.getString("type").equals("mekah")){
-                        typeTxt.setText(getApplicationContext().getString(R.string.mekah));
-                    }else if(info.getString("type").equals("madinah")){
-                        typeTxt.setText(getApplicationContext().getString(R.string.madinah));
-                    }
+        keteranganTxt.setText(Html.fromHtml(keteranganSurah).toString());
 
-                    keteranganTxt.setText(Html.fromHtml(info.getString("keterangan")).toString());
+        dialog.setPositiveButton(getApplicationContext().getString(R.string.close), new DialogInterface.OnClickListener() {
 
-                    dialog.setPositiveButton(getApplicationContext().getString(R.string.close), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
-                            dialog.dismiss();
-                        }
-                    });
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
-                }
-                dialog.show();
+        dialog.show();
 
 
     }

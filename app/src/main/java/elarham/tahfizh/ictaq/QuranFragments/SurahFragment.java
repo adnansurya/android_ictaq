@@ -97,6 +97,7 @@ public class SurahFragment extends Fragment {
                         surah.setAyat(jsonObj.getString("ayat"));
                         surah.setAsma(jsonObj.getString("asma"));
                         surah.setArti(jsonObj.getString("arti"));
+                        surah.setKeterangan(jsonObj.getString("keterangan"));
 
                         surahList.add(surah);
                     }
