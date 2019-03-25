@@ -37,6 +37,8 @@
     <string name="error">Terjadi Kesalahan</string>
     <string name="loading">Memuat</string>
     <string name="close">Tutup</string>
+    <string name="datanotcomplete">Data tidak lengkap! </string>
+    <string name="passwordverificationfail">Verifikasi Password Gagal!</string>
 
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
