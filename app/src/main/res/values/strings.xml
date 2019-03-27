@@ -13,7 +13,7 @@
     <string name="account">Akun</string>
     <string name="askregister">Belum punya akun?</string>
     <string name="register">Daftar</string>
-    <string name="registersuccess">Pendaftaran berhasil!</string>
+    <string name="registerok">Pendaftaran Berhasil!</string>
     <string name="newaccount">Registrasi Akun Baru</string>
     <string name="login">Masuk</string>
     <string name="username">Username</string>
@@ -39,6 +39,9 @@
     <string name="close">Tutup</string>
     <string name="datanotcomplete">Data tidak lengkap! </string>
     <string name="passwordverificationfail">Verifikasi Password Gagal!</string>
+    <string name="loginfail">Login Gagal!</string>
+    <string name="loginok">Login Berhasil!</string>
+
 
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>

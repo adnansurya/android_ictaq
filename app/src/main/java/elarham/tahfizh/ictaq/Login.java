@@ -1,5 +1,6 @@
 package elarham.tahfizh.ictaq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +10,25 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
@@ -22,6 +37,7 @@ public class Login extends AppCompatActivity {
     TextView daftarTxt;
     Button loginBtn;
     int backButtonCount = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +56,69 @@ public class Login extends AppCompatActivity {
                  username = usernameTxt.getText().toString();
                  password = passwordTxt.getText().toString();
 
-                 Intent home = new Intent(Login.this, MainActivity.class);
-                 startActivity(home);
+                 if(username.equals("") || password.equals("")){
+                     Toast.makeText(Login.this, R.string.datanotcomplete, Toast.LENGTH_SHORT).show();
+                 }
+
+                 final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+                 progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+                 progressDialog.show();
+
+                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+
+                 String url = "http://elarham-tahfizh.online/index.php/login/cek_user";
+
+
+                 StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                         new Response.Listener<String>()
+                         {
+                             @Override
+                             public void onResponse(String response)
+                             {
+
+                                 try {
+                                     JSONObject login = new JSONObject(response);
+                                     if(login.getString("status").equals("0")){
+                                         Toast.makeText(Login.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
+                                     }else if(login.getString("status").equals("1")){
+                                         Toast.makeText(Login.this, R.string.loginok, Toast.LENGTH_SHORT).show();
+                                         Intent home = new Intent(Login.this, MainActivity.class);
+                                         startActivity(home);
+                                     }else{
+                                         Toast.makeText(Login.this, R.string.error, Toast.LENGTH_SHORT).show();
+                                     }
+                                 } catch (JSONException e) {
+                                     e.printStackTrace();
+                                 }
+                                 Log.e("Volley Success", response);
+                                 progressDialog.dismiss();
+                             }
+                         },
+                         new Response.ErrorListener()
+                         {
+                             @Override
+                             public void onErrorResponse(VolleyError error)
+                             {
+
+                                 Log.e("Volley Error", error.toString());
+                                 progressDialog.dismiss();;
+                             }
+                         })
+                 {
+                     @Override
+                     protected Map<String, String> getParams()
+                     {
+                         Map<String, String> params = new HashMap<String, String>();
+                         params.put("username", username);
+                         params.put("password", password);
+
+                         return params;
+                     }
+                 };
+
+                 queue.add(strRequest);
+
 
              }
          });

@@ -1,6 +1,7 @@
 package elarham.tahfizh.ictaq;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,16 +18,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import elarham.tahfizh.ictaq.Global.Hashing;
 
 public class Daftar extends AppCompatActivity {
 
     EditText namaTxt, emailTxt, usernameTxt, passwordTxt, password2Txt;
-    String nama, email, username, password, password2;
+    String nama, email, username, password, password2, hash_pass;
     Button daftarBtn;
     ActionBar actBar;
-    RequestQueue queue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +66,66 @@ public class Daftar extends AppCompatActivity {
                 }else{
                     if(password.equals(password2)){
 
+                        hash_pass = new Hashing().md5(password);
+                        Log.e("HASH", hash_pass);
+
+                        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                        final ProgressDialog progressDialog = new ProgressDialog(Daftar.this);
+                        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+                        progressDialog.show();
+
+                        String url ="http://elarham-tahfizh.online/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=user";
 
 
-                        queue = Volley.newRequestQueue(getApplicationContext());
-                        setData();
-                        //newData();
+                        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                                new Response.Listener<String>()
+                                {
+                                    @Override
+                                    public void onResponse(String response)
+                                    {
+                                        try {
+                                            JSONObject daftar = new JSONObject(response);
+                                            if(daftar.getString("status").equals("sukses")){
+                                                Toast.makeText(Daftar.this, R.string.registerok, Toast.LENGTH_SHORT).show();
+
+                                                Intent login = new Intent(Daftar.this, Login.class);
+                                                startActivity(login);
+
+                                            }else{
+                                                Toast.makeText(Daftar.this, R.string.error, Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Log.e("Volley Success", response);
+                                        progressDialog.dismiss();
+                                    }
+                                },
+                                new Response.ErrorListener()
+                                {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error)
+                                    {
+                                        Toast.makeText(Daftar.this, R.string.error, Toast.LENGTH_SHORT).show();
+                                        Log.e("Volley Error", error.toString());
+                                        progressDialog.dismiss();;
+                                    }
+                                })
+                        {
+                            @Override
+                            protected Map<String, String> getParams()
+                            {
+
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("field", "username,password,type,nama");
+                                params.put("value","'"+ username + "','" + hash_pass + "','" + String.valueOf(3) + "','" + nama + "'");
+
+
+                                return params;
+                            }
+                        };
+
+                        queue.add(strRequest);
 
 
                     }else{
@@ -72,60 +133,12 @@ public class Daftar extends AppCompatActivity {
                     }
                 }
 
-//                Toast.makeText(Daftar.this, getApplicationContext().getString(R.string.registersuccess), Toast.LENGTH_SHORT).show();
-//
-//                Intent home = new Intent(Daftar.this, MainActivity.class);
-//                startActivity(home);
-
             }
         });
 
     }
 
-    public void setData(){
 
-        final ProgressDialog progressDialog = new ProgressDialog(Daftar.this);
-        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-        progressDialog.show();
-
-        String url ="http://elarham-tahfizh.online/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=user";
-
-
-        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response)
-                    {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        Log.e("Volley Success", response);
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.e("Volley Error", error.toString());
-                        progressDialog.dismiss();;
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("field", "username,password,type,nama");
-                params.put("value","'"+ username + "','" + password + "','" + String.valueOf(3) + "','" + nama + "'");
-
-                return params;
-            }
-        };
-
-        queue.add(strRequest);
-    }
 
 
 }
