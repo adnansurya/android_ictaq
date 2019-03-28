@@ -26,4 +26,15 @@
         <item>18sp</item>
         <item>21sp</item>
     </string-array>
+
+    <string-array name="listLanguage">
+        <item>@string/english</item>
+        <item>@string/bahasa</item>
+
+    </string-array>
+
+    <string-array name="listLanguageValues">
+        <item>en</item>
+        <item>ina</item>
+    </string-array>
 </resources>

@@ -5,22 +5,30 @@
             android:title="@string/arabicfont"
             android:summary="@string/arabicfontsummary"
             android:key="arabicFont"
-            android:defaultValue="1"
+            android:defaultValue="fonts/kfc_naskh-webfont.otf"
             android:entries="@array/listFont"
             android:entryValues="@array/listFontValues" />
         <ListPreference
             android:title="@string/arabicfontsize"
             android:summary="@string/arabicfontsizesummary"
             android:key="arabicFontSize"
-            android:defaultValue="1"
+            android:defaultValue="Sedang"
             android:entryValues="@array/listFontSizeValues"
             android:entries="@array/listFontSize"
            />
         <CheckBoxPreference
             android:title="@string/translation"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:summary="@string/translationsummary"
             android:key="translation" />
+        <ListPreference
+            android:title="@string/translationlang"
+            android:summary="@string/translationsummary"
+            android:key="arabicFontSize"
+            android:defaultValue="en"
+            android:entryValues="@array/listLanguageValues"
+            android:entries="@array/listLanguage"
+            />
         <!--<EditTextPreference-->
             <!--android:title="Your Name"-->
             <!--android:key="username"-->

@@ -76,6 +76,10 @@
     <string name="large">Besar</string>
     <string name="translation">Terjemahan</string>
     <string name="translationsummary">Tampilkan terjemahan ayat</string>
+    <string name="translationlang">Bahasa Terjemahan</string>
+    <string name="translationlangsummary">Pilih bahasa terjemahan yang ditampilkan</string>
+    <string name="english">English</string>
+    <string name="bahasa">Bahasa Indonesia</string>
 
 
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
