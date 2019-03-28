@@ -30,6 +30,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+
 public class Login extends AppCompatActivity {
 
     EditText usernameTxt, passwordTxt;
@@ -38,18 +40,31 @@ public class Login extends AppCompatActivity {
     Button loginBtn;
     int backButtonCount = 0;
 
+    SharedPreferenceManager sharePrefMan;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         daftarTxt = findViewById(R.id.daftarTxt);
-         loginBtn = findViewById(R.id.loginBtn);
-         usernameTxt = findViewById(R.id.usernameTxt);
-         passwordTxt = findViewById(R.id.passwordTxt);
+        sharePrefMan = new SharedPreferenceManager(this);
 
-         loginBtn.setOnClickListener(new View.OnClickListener() {
+        daftarTxt = findViewById(R.id.daftarTxt);
+        loginBtn = findViewById(R.id.loginBtn);
+        usernameTxt = findViewById(R.id.usernameTxt);
+        passwordTxt = findViewById(R.id.passwordTxt);
+
+
+
+        if(sharePrefMan.getSPSudahLogin()){
+            Intent login = new Intent(Login.this, MainActivity.class);
+            startActivity(login);
+        }
+        loginBtn.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
 
@@ -81,6 +96,7 @@ public class Login extends AppCompatActivity {
                                          Toast.makeText(Login.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
                                      }else if(login.getString("status").equals("1")){
                                          Toast.makeText(Login.this, R.string.loginok, Toast.LENGTH_SHORT).show();
+                                         userLogin();
                                          Intent home = new Intent(Login.this, MainActivity.class);
                                          home.putExtra("username", username);
                                          startActivity(home);
@@ -133,6 +149,65 @@ public class Login extends AppCompatActivity {
          });
 
 
+    }
+
+    public void userLogin(){
+        final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";;
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+
+                        try {
+
+                            JSONObject userData = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            sharePrefMan.setSPString(sharePrefMan.SP_USERDATA, userData.toString());
+                            sharePrefMan.setSPString(sharePrefMan.SP_NAMA, userData.getString("nama"));
+                            sharePrefMan.setSPString(sharePrefMan.SP_USERNAME, userData.getString("username"));
+                            sharePrefMan.setSPString(sharePrefMan.SP_PASSWORD, userData.getString("password"));
+                            sharePrefMan.setSPBoolean(sharePrefMan.SP_SUDAH_LOGIN, true);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Volley Success", response);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();;
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("where", "where username='" + username + "'");
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
     }
     @Override
     public void onBackPressed() {

@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.MainFragments.*;
 
 public class MainActivity extends AppCompatActivity
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     ActionBar actBar;
     int backButtonCount = 0;
     String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,63 +61,7 @@ public class MainActivity extends AppCompatActivity
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-        progressDialog.show();
 
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-
-        String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";;
-
-        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response)
-                    {
-
-//                        try {
-//                            JSONObject login = new JSONObject(response);
-//                            if(login.getString("status").equals("0")){
-//                                Toast.makeText(MainActivity.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
-//                            }else if(login.getString("status").equals("1")){
-//                                Toast.makeText(MainActivity.this, R.string.loginok, Toast.LENGTH_SHORT).show();
-//                                Intent home = new Intent(MainActivity.this, MainActivity.class);
-//                                startActivity(home);
-//                            }else{
-//                                Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-                        Log.e("Volley Success", response);
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-
-                        Log.e("Volley Error", error.toString());
-                        progressDialog.dismiss();;
-                    }
-                })
-                {
-                    @Override
-                    protected Map<String, String> getParams()
-                    {
-
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("where", "where username='" + username + "'");
-
-                        return params;
-                    }
-                };
-
-        queue.add(strRequest);
 
     }
 
@@ -174,6 +120,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(profil);
                 break;
             case R.id.logout_menu:
+                SharedPreferenceManager sharePrefMan = new SharedPreferenceManager(this);
+                sharePrefMan.logout();
                 profil = new Intent(MainActivity.this, Login.class);
                 startActivity(profil);
                 break;
