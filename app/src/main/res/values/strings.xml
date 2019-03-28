@@ -71,4 +71,6 @@
     <string name="urlquran">http://api.alquran.cloud/v1</string>
     <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
 
+    <string name="urlmain">http://elarham-tahfizh.online</string>
+
 </resources>

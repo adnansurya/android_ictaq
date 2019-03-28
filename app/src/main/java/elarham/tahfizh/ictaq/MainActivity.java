@@ -1,5 +1,6 @@
 package elarham.tahfizh.ictaq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,10 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import elarham.tahfizh.ictaq.MainFragments.*;
 
@@ -19,11 +34,14 @@ public class MainActivity extends AppCompatActivity
 
     ActionBar actBar;
     int backButtonCount = 0;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        username = getIntent().getStringExtra("username");
 
 
         actBar = getSupportActionBar();
@@ -36,11 +54,68 @@ public class MainActivity extends AppCompatActivity
         loadFragment(new HomeFragment());
 
         // inisialisasi BottomNavigaionView
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
 
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";;
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+
+//                        try {
+//                            JSONObject login = new JSONObject(response);
+//                            if(login.getString("status").equals("0")){
+//                                Toast.makeText(MainActivity.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
+//                            }else if(login.getString("status").equals("1")){
+//                                Toast.makeText(MainActivity.this, R.string.loginok, Toast.LENGTH_SHORT).show();
+//                                Intent home = new Intent(MainActivity.this, MainActivity.class);
+//                                startActivity(home);
+//                            }else{
+//                                Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+                        Log.e("Volley Success", response);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();;
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("where", "where username='" + username + "'");
+
+                        return params;
+                    }
+                };
+
+        queue.add(strRequest);
 
     }
 

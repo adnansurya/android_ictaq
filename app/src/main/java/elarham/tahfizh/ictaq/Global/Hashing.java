@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Hashing {
-    public static String md5(String string) {
+    public String md5(String string) {
         byte[] hash;
 
         try {

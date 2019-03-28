@@ -66,9 +66,7 @@ public class Login extends AppCompatActivity {
 
                  RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-
-                 String url = "http://elarham-tahfizh.online/index.php/login/cek_user";
-
+                 String url = getApplicationContext().getString(R.string.urlmain) + "/index.php/login/cek_user";
 
                  StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                          new Response.Listener<String>()
@@ -84,6 +82,7 @@ public class Login extends AppCompatActivity {
                                      }else if(login.getString("status").equals("1")){
                                          Toast.makeText(Login.this, R.string.loginok, Toast.LENGTH_SHORT).show();
                                          Intent home = new Intent(Login.this, MainActivity.class);
+                                         home.putExtra("username", username);
                                          startActivity(home);
                                      }else{
                                          Toast.makeText(Login.this, R.string.error, Toast.LENGTH_SHORT).show();

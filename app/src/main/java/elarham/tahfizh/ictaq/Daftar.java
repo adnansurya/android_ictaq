@@ -69,13 +69,14 @@ public class Daftar extends AppCompatActivity {
                         hash_pass = new Hashing().md5(password);
                         Log.e("HASH", hash_pass);
 
-                        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                         final ProgressDialog progressDialog = new ProgressDialog(Daftar.this);
                         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
                         progressDialog.show();
 
-                        String url ="http://elarham-tahfizh.online/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=user";
+                        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
+                        String url = getApplicationContext().getString(R.string.urlmain) +
+                                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=user";
 
                         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>()
