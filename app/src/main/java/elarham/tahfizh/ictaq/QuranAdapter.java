@@ -2,7 +2,9 @@ package elarham.tahfizh.ictaq;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
     private Context context;
     private List<Ayat> list;
 
+
     public QuranAdapter(Context context, List<Ayat> list) {
         this.context = context;
         this.list = list;
@@ -35,6 +38,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Ayat Ayat = list.get(position);
 
         holder.arabicTxt.setText(Ayat.getArabic() + "   |" + Ayat.getNomorAyat());
@@ -44,8 +48,10 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
            holder.indoTxt.setVisibility(View.GONE);
         }
 
+        String arabicFont = prefs.getString(context.getString(R.string.arabicfontkey),context.getResources().getStringArray(R.array.listFontValues)[0]);
 
-        Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/scheherazade-webfont.ttf");
+
+        Typeface face= Typeface.createFromAsset(context.getAssets(), arabicFont);
         holder.arabicTxt.setTypeface(face);
 
 

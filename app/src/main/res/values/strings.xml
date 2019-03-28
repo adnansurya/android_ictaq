@@ -66,20 +66,26 @@
     <string name="arabic">Arab</string>
     <string name="lafaz">Lafaz</string>
 
-    <string name="quransettings">Pengaturan Al-Quran</string>
+    <string name="qurandisplay">Tampilan Al-Quran</string>
     <string name="arabicfont">Font Arab</string>
+    <string name="arabicfontdefault">fonts/kfc_naskh-webfont.otf</string>
+    <string name="arabicfontkey">SP_setArabicFont</string>
     <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
     <string name="arabicfontsize">Ukuran Font Arab</string>
+    <string name="arabicfontsizekey">SP_setArabicFontSize</string>
     <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
     <string name="small">Kecil</string>
     <string name="medium">Sedang</string>
     <string name="large">Besar</string>
     <string name="translation">Terjemahan</string>
+    <string name="translationkey">SP_setTranslation</string>
     <string name="translationsummary">Tampilkan terjemahan ayat</string>
     <string name="translationlang">Bahasa Terjemahan</string>
+    <string name="translationlangkey">SP_setTranslationLanguage</string>
     <string name="translationlangsummary">Pilih bahasa terjemahan yang ditampilkan</string>
     <string name="english">English</string>
     <string name="bahasa">Bahasa Indonesia</string>
+
 
 
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
