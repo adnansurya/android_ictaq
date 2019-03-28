@@ -1,0 +1,29 @@
+<resources>
+    <string-array name="listFont">
+        <item>KFC Naskh</item>
+        <item>ME Quran</item>
+        <item>PDMS Saleem</item>
+        <item>Scheherazade</item>
+        <item>XB Zar</item>
+    </string-array>
+
+    <string-array name="listFontValues">
+        <item>fonts/kfc_naskh-webfont.otf</item>
+        <item>fonts/me_quran-webfont.otf</item>
+        <item>fonts/pdms_saleem-webfont.otf</item>
+        <item>fonts/scheherazade-webfont.ttf</item>
+        <item>fonts/xb_zar-webfont.ttf</item>
+    </string-array>
+
+    <string-array name="listFontSize">
+        <item>@string/small</item>
+        <item>@string/medium</item>
+        <item>@string/large</item>
+    </string-array>
+
+    <string-array name="listFontSizeValues">
+        <item>15sp</item>
+        <item>18sp</item>
+        <item>21sp</item>
+    </string-array>
+</resources>

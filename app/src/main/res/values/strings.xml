@@ -66,6 +66,17 @@
     <string name="arabic">Arab</string>
     <string name="lafaz">Lafaz</string>
 
+    <string name="quransettings">Pengaturan Al-Quran</string>
+    <string name="arabicfont">Font Arab</string>
+    <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsize">Ukuran Font Arab</string>
+    <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
+    <string name="small">Kecil</string>
+    <string name="medium">Sedang</string>
+    <string name="large">Besar</string>
+    <string name="translation">Terjemahan</string>
+    <string name="translationsummary">Tampilkan terjemahan ayat</string>
+
 
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
     <string name="urlquran">http://api.alquran.cloud/v1</string>

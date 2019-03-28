@@ -119,6 +119,10 @@ public class MainActivity extends AppCompatActivity
                 profil = new Intent(MainActivity.this, Profile.class);
                 startActivity(profil);
                 break;
+            case R.id.settings_menu:
+                profil = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(profil);
+                break;
             case R.id.logout_menu:
                 SharedPreferenceManager sharePrefMan = new SharedPreferenceManager(this);
                 sharePrefMan.logout();

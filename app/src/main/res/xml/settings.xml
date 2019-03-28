@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/quransettings">
+        <ListPreference
+            android:title="@string/arabicfont"
+            android:summary="@string/arabicfontsummary"
+            android:key="arabicFont"
+            android:defaultValue="1"
+            android:entries="@array/listFont"
+            android:entryValues="@array/listFontValues" />
+        <ListPreference
+            android:title="@string/arabicfontsize"
+            android:summary="@string/arabicfontsizesummary"
+            android:key="arabicFontSize"
+            android:defaultValue="1"
+            android:entryValues="@array/listFontSizeValues"
+            android:entries="@array/listFontSize"
+           />
+        <CheckBoxPreference
+            android:title="@string/translation"
+            android:defaultValue="false"
+            android:summary="@string/translationsummary"
+            android:key="translation" />
+        <!--<EditTextPreference-->
+            <!--android:title="Your Name"-->
+            <!--android:key="username"-->
+            <!--android:summary="Please provide your username"/>-->
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
