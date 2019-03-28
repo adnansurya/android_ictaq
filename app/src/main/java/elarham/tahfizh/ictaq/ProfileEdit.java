@@ -13,12 +13,11 @@ import android.widget.Toast;
 public class ProfileEdit extends AppCompatActivity {
 
     ActionBar actBar;
-    EditText namaTxt, alamatTxt, tglLahirTxt, telpTxt, emailTxt, kerjaTxt, namaOrtuTxt, thnMulaiTxt,
-            usernameTxt, passwordTxt, password2Txt;
+    EditText namaTxt, alamatTxt, tglLahirTxt, telpTxt, emailTxt, kerjaTxt, namaOrtuTxt, thnMulaiTxt;
     Spinner provSpin, kotaSpin;
     Button ubahBtn;
 
-    String nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai, username, password, password2;
+    String nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +33,12 @@ public class ProfileEdit extends AppCompatActivity {
         namaOrtuTxt = findViewById(R.id.namaOrtuTxt);
         thnMulaiTxt = findViewById(R.id.thnMulaiTxt);
 
-        usernameTxt = findViewById(R.id.usernameTxt);
-        passwordTxt = findViewById(R.id.passwordTxt);
-        password2Txt = findViewById(R.id.password2Txt);
+        ubahBtn = findViewById(R.id.ubahBtn);
 
         provSpin = findViewById(R.id.provSpin);
         kotaSpin = findViewById(R.id.kotaSpin);
 
-        ubahBtn = findViewById(R.id.ubahBtn);
+
 
         actBar = getSupportActionBar();
         actBar.setTitle(getApplicationContext().getString(R.string.editprofile));
@@ -58,10 +55,6 @@ public class ProfileEdit extends AppCompatActivity {
                 kerja = kerjaTxt.getText().toString();
                 namaOrtu = namaOrtuTxt.getText().toString();
                 thnMulai = thnMulaiTxt.getText().toString();
-
-                username = usernameTxt.getText().toString();
-                password = passwordTxt.getText().toString();
-                password2 = password2Txt.getText().toString();
 
                 Toast.makeText(ProfileEdit.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
 

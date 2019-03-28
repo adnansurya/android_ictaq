@@ -19,11 +19,15 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="repeatpassword">Ulangi Password</string>
+    <string name="oldpassword">Password Lama</string>
+    <string name="newpassword">Password Baru</string>
+    <string name="repeatnewpassword">Ulangi Password Baru</string>
     <string name="fullname">Nama Lengkap</string>
     <string name="email">Email</string>
     <string name="backquit">Tekan sekali lagi untuk keluar</string>
     <string name="edit">Ubah</string>
     <string name="editsuccess">Data berhasil diubah!</string>
+    <string name="save">Simpan</string>
 
     <string name="address">Alamat</string>
     <string name="birthdate">Tanggal Lahir</string>
@@ -39,6 +43,7 @@
     <string name="close">Tutup</string>
     <string name="datanotcomplete">Data tidak lengkap! </string>
     <string name="passwordverificationfail">Verifikasi Password Gagal!</string>
+    <string name="oldpasswordverificationfail">Verifikasi Password Lama Gagal!</string>
     <string name="loginfail">Login Gagal!</string>
     <string name="loginok">Login Berhasil!</string>
 
@@ -88,11 +93,13 @@
     <string name="translationsummary">Tampilkan terjemahan ayat</string>
     <string name="translationlang">Bahasa Terjemahan</string>
     <string name="translationlangkey">SP_setTranslationLanguage</string>
-    <string name="translationlangsummary">Pilih bahasa terjemahan yang ditampilkan</string>
+    <string name="translationlangsummary">Pilih bahasa terjemahan ayat yang ditampilkan</string>
     <string name="english">English</string>
     <string name="bahasa">Bahasa Indonesia</string>
 
-
+    <string name="accountsettings">Pengaturan Akun</string>
+    <string name="accountsettingskey">SP_setAccount</string>
+    <string name="accountsettingsummary">Sesuaikan username dan password akun anda</string>
 
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
     <string name="urlquran">http://api.alquran.cloud/v1</string>

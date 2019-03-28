@@ -23,14 +23,19 @@
             android:key="@string/translationkey" />
         <ListPreference
             android:title="@string/translationlang"
-            android:summary="@string/translationsummary"
+            android:summary="@string/translationlangsummary"
             android:key="@string/translationlangkey"
             android:defaultValue="ina"
             android:entryValues="@array/listLanguageValues"
             android:entries="@array/listLanguage"
             />
-
-
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/account">
+        <Preference
+            android:title="@string/accountsettings"
+            android:key="@string/accountsettingskey"
+            android:summary="@string/accountsettingsummary">
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

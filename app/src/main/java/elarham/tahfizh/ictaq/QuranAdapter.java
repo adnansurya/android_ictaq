@@ -43,10 +43,18 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         Ayat Ayat = list.get(position);
 
         holder.arabicTxt.setText(Ayat.getArabic() + "   |" + Ayat.getNomorAyat());
-        if(Ayat.getIndo() != null){
-            holder.indoTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
+        if(Ayat.getIndo() != null && Ayat.getEnglish() != null){
+            String translationLang = prefs.getString(context.getString(R.string.translationlangkey),context.getResources().getStringArray(R.array.listLanguageValues)[0]);
+            if(translationLang.equals("ina")){
+                holder.translateTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
+            }else if(translationLang.equals("en")){
+                holder.translateTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getEnglish());
+            }else{
+                holder.translateTxt.setVisibility(View.GONE);
+            }
+
         }else{
-           holder.indoTxt.setVisibility(View.GONE);
+           holder.translateTxt.setVisibility(View.GONE);
         }
 
         String arabicFont = prefs.getString(context.getString(R.string.arabicfontkey),context.getResources().getStringArray(R.array.listFontValues)[0]);
@@ -57,9 +65,9 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         holder.arabicTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(arabicFontSize));
 
         if(prefs.getBoolean(context.getString(R.string.translationkey),true)){
-            holder.indoTxt.setVisibility(View.VISIBLE);
+            holder.translateTxt.setVisibility(View.VISIBLE);
         }else{
-            holder.indoTxt.setVisibility(View.GONE);
+            holder.translateTxt.setVisibility(View.GONE);
         }
 
         holder.lafazTxt.setVisibility(View.GONE);
@@ -74,13 +82,13 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView arabicTxt, englishTxt, indoTxt, lafazTxt;
+        public TextView arabicTxt, translateTxt, lafazTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             arabicTxt = itemView.findViewById(R.id.arabicTxt);
-            indoTxt = itemView.findViewById(R.id.indoTxt);
+            translateTxt = itemView.findViewById(R.id.translateTxt);
             lafazTxt = itemView.findViewById(R.id.lafazTxt);
 
         }

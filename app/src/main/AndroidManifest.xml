@@ -12,18 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Account"
+            android:parentActivityName=".SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".SettingsActivity"
-            android:screenOrientation="portrait"
+            android:label="@string/settings"
             android:parentActivityName=".MainActivity"
-            android:label="@string/settings"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
@@ -42,9 +44,7 @@
         <activity
             android:name=".Login"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Daftar"
             android:parentActivityName=".Login"

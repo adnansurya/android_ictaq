@@ -172,6 +172,7 @@ public class Quran extends AppCompatActivity {
 
                         arabic = response.getJSONArray("data").getJSONObject(0).getJSONArray("ayahs");
                         indo = response.getJSONArray("data").getJSONObject(1).getJSONArray("ayahs");
+                        english = response.getJSONArray("data").getJSONObject(2).getJSONArray("ayahs");
                     }else if(mode.equals("juz")){
 
                         arabic = response.getJSONObject("data").getJSONArray("ayahs");
@@ -191,6 +192,7 @@ public class Quran extends AppCompatActivity {
                         ayat.setNomorAyat(arabicObj.getString("numberInSurah"));
                         if(mode.equals("surah")){
                             ayat.setIndo(indo.getJSONObject(i).getString("text"));
+                            ayat.setEnglish(english.getJSONObject(i).getString("text"));
                         }
 
                         ayatList.add(ayat);

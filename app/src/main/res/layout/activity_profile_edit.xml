@@ -146,42 +146,6 @@
                 android:layout_marginEnd="@dimen/stdMargin2"
                 android:layout_marginRight="@dimen/stdMargin2" />
 
-            <EditText
-                android:id="@+id/usernameTxt"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/username"
-                android:inputType="textShortMessage"
-                android:layout_marginTop="@dimen/stdMargin4"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginEnd="@dimen/stdMargin2"
-                android:layout_marginRight="@dimen/stdMargin2" />
-
-            <EditText
-                android:id="@+id/passwordTxt"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:layout_marginTop="@dimen/stdMargin1"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginEnd="@dimen/stdMargin2"
-                android:layout_marginRight="@dimen/stdMargin2" />
-
-            <EditText
-                android:id="@+id/password2Txt"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/repeatpassword"
-                android:inputType="textPassword"
-                android:layout_marginTop="@dimen/stdMargin1"
-                android:layout_marginStart="@dimen/stdMargin2"
-                android:layout_marginLeft="@dimen/stdMargin2"
-                android:layout_marginEnd="@dimen/stdMargin2"
-                android:layout_marginRight="@dimen/stdMargin2" />
-
 
             <Button
                 android:id="@+id/ubahBtn"
@@ -194,7 +158,7 @@
                 android:layout_marginRight="@dimen/stdMargin2"
                 android:layout_marginBottom="@dimen/stdMargin2"
                 android:background="@color/colorPrimary"
-                android:text="@string/edit"
+                android:text="@string/save"
                 android:textColor="@color/colorNavigationText"/>
 
         </LinearLayout>
