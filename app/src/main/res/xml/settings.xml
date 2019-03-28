@@ -12,7 +12,7 @@
             android:title="@string/arabicfontsize"
             android:summary="@string/arabicfontsizesummary"
             android:key="@string/arabicfontsizekey"
-            android:defaultValue="Sedang"
+            android:defaultValue="@string/arabicfontsizedefault"
             android:entryValues="@array/listFontSizeValues"
             android:entries="@array/listFontSize"
            />
@@ -25,7 +25,7 @@
             android:title="@string/translationlang"
             android:summary="@string/translationsummary"
             android:key="@string/translationlangkey"
-            android:defaultValue="en"
+            android:defaultValue="ina"
             android:entryValues="@array/listLanguageValues"
             android:entries="@array/listLanguage"
             />

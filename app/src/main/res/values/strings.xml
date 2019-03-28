@@ -72,11 +72,17 @@
     <string name="arabicfontkey">SP_setArabicFont</string>
     <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
     <string name="arabicfontsize">Ukuran Font Arab</string>
+    <string name="arabicfontsizedefault">20</string>
     <string name="arabicfontsizekey">SP_setArabicFontSize</string>
     <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsizesmall">20</string>
+    <string name="arabicfontsizemedium">24</string>
+    <string name="arabicfontsizelarge">28</string>
+    <string name="arabicfontsizejumbo">32</string>
     <string name="small">Kecil</string>
     <string name="medium">Sedang</string>
     <string name="large">Besar</string>
+    <string name="jumbo">Jumbo</string>
     <string name="translation">Terjemahan</string>
     <string name="translationkey">SP_setTranslation</string>
     <string name="translationsummary">Tampilkan terjemahan ayat</string>

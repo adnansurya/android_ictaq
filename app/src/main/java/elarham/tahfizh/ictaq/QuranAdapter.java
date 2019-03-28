@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +50,17 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         }
 
         String arabicFont = prefs.getString(context.getString(R.string.arabicfontkey),context.getResources().getStringArray(R.array.listFontValues)[0]);
-
-
         Typeface face= Typeface.createFromAsset(context.getAssets(), arabicFont);
         holder.arabicTxt.setTypeface(face);
 
+        String arabicFontSize = prefs.getString(context.getString(R.string.arabicfontsizekey),context.getResources().getStringArray(R.array.listFontSizeValues)[0]);
+        holder.arabicTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(arabicFontSize));
+
+        if(prefs.getBoolean(context.getString(R.string.translationkey),true)){
+            holder.indoTxt.setVisibility(View.VISIBLE);
+        }else{
+            holder.indoTxt.setVisibility(View.GONE);
+        }
 
         holder.lafazTxt.setVisibility(View.GONE);
 
