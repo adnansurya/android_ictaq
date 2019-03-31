@@ -67,7 +67,7 @@ public class Daftar extends AppCompatActivity {
                     if(password.equals(password2)){
 
                         hash_pass = new Hashing().md5(password);
-                        Log.e("HASH", hash_pass);
+//                        Log.e("HASH", hash_pass);
 
                         final ProgressDialog progressDialog = new ProgressDialog(Daftar.this);
                         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
@@ -76,7 +76,7 @@ public class Daftar extends AppCompatActivity {
                         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
                         String url = getApplicationContext().getString(R.string.urlmain) +
-                                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=user";
+                                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=regis";
 
                         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>()
@@ -86,6 +86,7 @@ public class Daftar extends AppCompatActivity {
                                     {
                                         try {
                                             JSONObject daftar = new JSONObject(response);
+                                            Log.e("RESPON : ", response);
                                             if(daftar.getString("status").equals("sukses")){
                                                 Toast.makeText(Daftar.this, R.string.registerok, Toast.LENGTH_SHORT).show();
 
@@ -118,8 +119,8 @@ public class Daftar extends AppCompatActivity {
                             {
 
                                 Map<String, String> params = new HashMap<String, String>();
-                                params.put("field", "username,password,type,nama");
-                                params.put("value","'"+ username + "','" + hash_pass + "','" + String.valueOf(3) + "','" + nama + "'");
+                              //  params.put("field", "username,password,type,nama, kode");
+                                params.put("value","'"+ username + "','" + hash_pass + "','" + nama + "','" + email + "'");
 
 
                                 return params;
