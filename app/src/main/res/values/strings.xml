@@ -101,6 +101,12 @@
     <string name="accountsettingskey">SP_setAccount</string>
     <string name="accountsettingsummary">Sesuaikan username dan password akun anda</string>
 
+    <string name="cameraallowed">Izin kamera diberikan!</string>
+    <string name="cameranotallowed">Izin kamera ditolak!</string>
+
+    <string name="micallowed">Izin microphone diberikan!</string>
+    <string name="micnotallowed">Izin microphone ditolak!</string>
+
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
     <string name="urlquran">http://api.alquran.cloud/v1</string>
     <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
