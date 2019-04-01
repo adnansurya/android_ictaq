@@ -120,7 +120,7 @@ public class Daftar extends AppCompatActivity {
 
                                 Map<String, String> params = new HashMap<String, String>();
                               //  params.put("field", "username,password,type,nama, kode");
-                                params.put("value","'"+ username + "','" + hash_pass + "','" + nama + "','" + email + "'");
+                                params.put("value",username + "," + hash_pass + "," + nama + "," + email);
 
 
                                 return params;
