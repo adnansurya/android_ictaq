@@ -33,11 +33,8 @@ import static android.content.ContentValues.TAG;
 
 public class VidcallFragment extends Fragment {
 
-
     private WebView mWebRTCWebView;
 
-    private static final int MY_CAMERA_REQUEST_CODE = 100;
-    private static final int MY_REC_AUDIO_REQUEST_CODE = 101;
 
     @Nullable
     @Override
@@ -48,11 +45,19 @@ public class VidcallFragment extends Fragment {
 
         setUpWebViewDefaults(mWebRTCWebView);
 
-        mWebRTCWebView.loadUrl("https://appr.tc/r/ictaqrioplewqelkshfjrslko");
+        mWebRTCWebView.loadUrl("https://appr.tc/r/123412341234?stereo=false&backasc=ISAC/16000&hd=false");
         mWebRTCWebView.getSettings().setDomStorageEnabled(true);
 
 
-        checkRequestPermission();
+
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED){
+
+            setWebChromeClient();
+
+        }
 
 
         return view;
@@ -88,63 +93,7 @@ public class VidcallFragment extends Fragment {
         });
     }
 
-    private void checkRequestPermission(){
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-
-        }
-
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.RECORD_AUDIO}, MY_REC_AUDIO_REQUEST_CODE);
-
-        }
-
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED){
-
-            setWebChromeClient();
-
-        }
-
-    }
-
-
-    @Override
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
-
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(getActivity(), getActivity().getString(R.string.cameraallowed), Toast.LENGTH_LONG).show();
-
-            } else {
-
-                Toast.makeText(getActivity(), getActivity().getString(R.string.cameranotallowed), Toast.LENGTH_LONG).show();
-
-            }
-
-        }else if(requestCode == MY_REC_AUDIO_REQUEST_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(getActivity(), getActivity().getString(R.string.micallowed), Toast.LENGTH_LONG).show();
-
-            } else {
-
-                Toast.makeText(getActivity(), getActivity().getString(R.string.micnotallowed), Toast.LENGTH_LONG).show();
-
-            }
-        }
-    }//end onRequestPermissionsResult
-
-
+    
 
     @Override
     public void onStop() {

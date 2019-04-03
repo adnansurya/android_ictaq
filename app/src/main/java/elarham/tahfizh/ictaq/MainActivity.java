@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity
     int backButtonCount = 0;
     String username;
 
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int MY_REC_AUDIO_REQUEST_CODE = 101;
+
 
 
     @Override
@@ -68,13 +71,131 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+
+                        try {
+                            JSONObject login = new JSONObject(response);
+
+
+                            if(login.getString("status").equals("0")){
+                                Toast.makeText(MainActivity.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
+                            }else if(login.getString("status").equals("1") || login.getString("status").equals("2")){
+                                Toast.makeText(MainActivity.this, R.string.loginok, Toast.LENGTH_SHORT).show();
+                                Intent home = new Intent(MainActivity.this, MainActivity.class);
+                                home.putExtra("username", username);
+                                startActivity(home);
+                            }else{
+                                Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Volley Success", response);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();;
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("where", "where username=" + username);
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+
+        checkRequestPermission();
 
 
 
     }
 
+    private void checkRequestPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECORD_AUDIO}, MY_REC_AUDIO_REQUEST_CODE);
+
+        }
+
+    }
 
 
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, this.getString(R.string.cameraallowed), Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, this.getString(R.string.cameranotallowed), Toast.LENGTH_LONG).show();
+
+            }
+
+        }else if(requestCode == MY_REC_AUDIO_REQUEST_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, this.getString(R.string.micallowed), Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, this.getString(R.string.micnotallowed), Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }//end onRequestPermissionsResult
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "RESUME", Toast.LENGTH_SHORT).show();
+        Log.e("Lanjut","hahaha");
+    }
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
