@@ -94,7 +94,7 @@ public class Login extends AppCompatActivity {
                                      JSONObject login = new JSONObject(response);
                                      if(login.getString("status").equals("0")){
                                          Toast.makeText(Login.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
-                                     }else if(login.getString("status").equals("1")){
+                                     }else if(login.getString("status").equals("1") || login.getString("status").equals("2")){
                                          Toast.makeText(Login.this, R.string.loginok, Toast.LENGTH_SHORT).show();
                                          userLogin();
                                          Intent home = new Intent(Login.this, MainActivity.class);
