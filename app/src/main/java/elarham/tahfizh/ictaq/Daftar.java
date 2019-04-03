@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -127,7 +128,22 @@ public class Daftar extends AppCompatActivity {
                             }
                         };
 
-                        queue.add(strRequest);
+                        queue.add(strRequest).setRetryPolicy(new RetryPolicy() {
+                            @Override
+                            public int getCurrentTimeout() {
+                                return 5000;
+                            }
+
+                            @Override
+                            public int getCurrentRetryCount() {
+                                return 0; //retry turn off
+                            }
+
+                            @Override
+                            public void retry(VolleyError error) throws VolleyError {
+
+                            }
+                        });;
 
 
                     }else{

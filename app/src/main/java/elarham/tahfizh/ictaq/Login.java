@@ -167,6 +167,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response)
                     {
+                        Log.e("LOGIN DATA", response);
 
                         try {
 

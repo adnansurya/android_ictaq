@@ -39,10 +39,13 @@ public class MainActivity extends AppCompatActivity
 
     ActionBar actBar;
     int backButtonCount = 0;
-    String username;
+    String username, kode;
+    SharedPreferenceManager sharePrefMan;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int MY_REC_AUDIO_REQUEST_CODE = 101;
+
+    Fragment fragment = null;
 
 
 
@@ -51,8 +54,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharePrefMan = new SharedPreferenceManager(this);
 
-        username = getIntent().getStringExtra("username");
+        username = sharePrefMan.getSpUsername();
+        kode = sharePrefMan.getSpKode();
+        Toast.makeText(this, kode, Toast.LENGTH_SHORT).show();
 
 
         actBar = getSupportActionBar();
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity
 
                         try {
                             JSONObject login = new JSONObject(response);
-
+                            Log.e("MAIN ACT", login.toString());
 
                             if(login.getString("status").equals("0")){
                                 Toast.makeText(MainActivity.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.e("Volley Success", response);
+
                         progressDialog.dismiss();
                     }
                 },
@@ -123,7 +129,7 @@ public class MainActivity extends AppCompatActivity
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", "where username=" + username);
+                params.put("where", "where kode='" + kode + "'");
 
 
                 return params;
@@ -133,6 +139,8 @@ public class MainActivity extends AppCompatActivity
         queue.add(strRequest);
 
         checkRequestPermission();
+
+
 
 
 
@@ -188,13 +196,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
+        //Log.e("FRAGMENT", fragment.getClass().getSimpleName());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(this, "RESUME", Toast.LENGTH_SHORT).show();
-        Log.e("Lanjut","hahaha");
+//        Toast.makeText(this, "RESUME", Toast.LENGTH_SHORT).show();
+//        Log.e("Lanjut","hahaha");
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -211,7 +220,7 @@ public class MainActivity extends AppCompatActivity
     // method listener untuk logika pemilihan
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
+
 
         switch (item.getItemId()){
             case R.id.home_menu:

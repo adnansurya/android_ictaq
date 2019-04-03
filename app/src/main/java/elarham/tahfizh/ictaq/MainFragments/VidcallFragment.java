@@ -93,7 +93,7 @@ public class VidcallFragment extends Fragment {
         });
     }
 
-    
+
 
     @Override
     public void onStop() {
@@ -103,8 +103,8 @@ public class VidcallFragment extends Fragment {
          * When the application falls into the background we want to stop the media stream
          * such that the camera is free to use by other apps.
          */
-        Log.e("FRAGMENT", "TERTUTUP");
-        //mWebRTCWebView.evaluateJavascript("location.reload();window.stop();}", null);
+//        Log.e("FRAGMENT", "TERTUTUP");
+
         mWebRTCWebView.loadUrl("about:blank");
     }
 

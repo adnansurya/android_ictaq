@@ -7,7 +7,9 @@ public class SharedPreferenceManager {
     public String SP_APP = "spMyTahfizhApp";
 
     public String SP_USERDATA = "spUserData";
+    public String SP_FRAGMENT = "HomeFragment";
 
+    public String SP_KODE = "spKode";
     public String SP_USERNAME = "spUsername";
     public String SP_PASSWORD = "spPassword";
     public String SP_NAMA = "spNama";
@@ -44,6 +46,12 @@ public class SharedPreferenceManager {
 
     public String getSpPassword(){
         return sp.getString(SP_PASSWORD, "");
+    }
+
+    public String getSpFragment() { return sp.getString(SP_FRAGMENT, "");}
+
+    public String getSpKode() {
+        return sp.getString(SP_KODE, "");
     }
 
     public String getSpNama() {
