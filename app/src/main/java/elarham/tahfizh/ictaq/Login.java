@@ -167,22 +167,27 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response)
                     {
-                        Log.e("LOGIN DATA", response);
+                        Log.e("Volley Success", response);
+
 
                         try {
 
                             JSONObject userData = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             sharePrefMan.setSPString(sharePrefMan.SP_USERDATA, userData.toString());
+                            sharePrefMan.setSPString(sharePrefMan.SP_KODE, userData.getString("kode"));
                             sharePrefMan.setSPString(sharePrefMan.SP_NAMA, userData.getString("nama"));
                             sharePrefMan.setSPString(sharePrefMan.SP_USERNAME, userData.getString("username"));
                             sharePrefMan.setSPString(sharePrefMan.SP_PASSWORD, userData.getString("password"));
+
+                            sharePrefMan.setSPString(sharePrefMan.SP_TYPE, userData.getString("type"));
                             sharePrefMan.setSPBoolean(sharePrefMan.SP_SUDAH_LOGIN, true);
+                            Log.e("KODE",sharePrefMan.getSpKode());
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.e("Volley Success", response);
+
                         progressDialog.dismiss();
                     }
                 },

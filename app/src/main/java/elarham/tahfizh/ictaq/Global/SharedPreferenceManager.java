@@ -10,6 +10,7 @@ public class SharedPreferenceManager {
     public String SP_FRAGMENT = "HomeFragment";
 
     public String SP_KODE = "spKode";
+    public String SP_TYPE = "spType";
     public String SP_USERNAME = "spUsername";
     public String SP_PASSWORD = "spPassword";
     public String SP_NAMA = "spNama";
@@ -53,6 +54,8 @@ public class SharedPreferenceManager {
     public String getSpKode() {
         return sp.getString(SP_KODE, "");
     }
+
+    public String getSpType() {return  sp.getString(SP_TYPE, "");}
 
     public String getSpNama() {
         return sp.getString(SP_NAMA,"");

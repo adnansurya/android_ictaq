@@ -46,7 +46,7 @@ public class VidcallFragment extends Fragment {
         setUpWebViewDefaults(mWebRTCWebView);
 
         mWebRTCWebView.loadUrl("https://appr.tc/r/123412341234?stereo=false&backasc=ISAC/16000&hd=false");
-        mWebRTCWebView.getSettings().setDomStorageEnabled(true);
+        //mWebRTCWebView.getSettings().setDomStorageEnabled(true);
 
 
 
@@ -74,8 +74,8 @@ public class VidcallFragment extends Fragment {
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                //super.onProgressChanged(view, newProgress);
-                Log.e("PROGRESS", String.valueOf(newProgress));
+                super.onProgressChanged(view, newProgress);
+//                Log.e("PROGRESS", String.valueOf(newProgress));
                 if(newProgress == 100){
                     progressDialog.dismiss();
                 }

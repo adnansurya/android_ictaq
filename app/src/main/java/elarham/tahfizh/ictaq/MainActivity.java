@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
 
     ActionBar actBar;
     int backButtonCount = 0;
-    String username, kode;
+
     SharedPreferenceManager sharePrefMan;
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
@@ -56,9 +56,8 @@ public class MainActivity extends AppCompatActivity
 
         sharePrefMan = new SharedPreferenceManager(this);
 
-        username = sharePrefMan.getSpUsername();
-        kode = sharePrefMan.getSpKode();
-        Toast.makeText(this, kode, Toast.LENGTH_SHORT).show();
+
+
 
 
         actBar = getSupportActionBar();
@@ -77,70 +76,8 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-        progressDialog.show();
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-
-        String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
-
-        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response)
-                    {
-
-                        try {
-                            JSONObject login = new JSONObject(response);
-                            Log.e("MAIN ACT", login.toString());
-
-                            if(login.getString("status").equals("0")){
-                                Toast.makeText(MainActivity.this, R.string.loginfail, Toast.LENGTH_SHORT).show();
-                            }else if(login.getString("status").equals("1") || login.getString("status").equals("2")){
-                                Toast.makeText(MainActivity.this, R.string.loginok, Toast.LENGTH_SHORT).show();
-                                Intent home = new Intent(MainActivity.this, MainActivity.class);
-                                home.putExtra("username", username);
-                                startActivity(home);
-                            }else{
-                                Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-
-                        Log.e("Volley Error", error.toString());
-                        progressDialog.dismiss();;
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("where", "where kode='" + kode + "'");
-
-
-                return params;
-            }
-        };
-
-        queue.add(strRequest);
 
         checkRequestPermission();
-
-
 
 
 
@@ -168,29 +105,33 @@ public class MainActivity extends AppCompatActivity
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+        if(grantResults.length != 0){
+            if (requestCode == MY_CAMERA_REQUEST_CODE) {
 
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                Toast.makeText(this, this.getString(R.string.cameraallowed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, this.getString(R.string.cameraallowed), Toast.LENGTH_LONG).show();
 
-            } else {
+                } else {
 
-                Toast.makeText(this, this.getString(R.string.cameranotallowed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, this.getString(R.string.cameranotallowed), Toast.LENGTH_LONG).show();
 
-            }
+                }
 
-        }else if(requestCode == MY_REC_AUDIO_REQUEST_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            }else if(requestCode == MY_REC_AUDIO_REQUEST_CODE){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                Toast.makeText(this, this.getString(R.string.micallowed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, this.getString(R.string.micallowed), Toast.LENGTH_LONG).show();
 
-            } else {
+                } else {
 
-                Toast.makeText(this, this.getString(R.string.micnotallowed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, this.getString(R.string.micnotallowed), Toast.LENGTH_LONG).show();
 
+                }
             }
         }
+
+
     }//end onRequestPermissionsResult
 
     @Override
