@@ -10,14 +10,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ProfileEdit extends AppCompatActivity {
 
     ActionBar actBar;
-    EditText namaTxt, alamatTxt, tglLahirTxt, telpTxt, emailTxt, kerjaTxt, namaOrtuTxt, thnMulaiTxt;
+    EditText namaTxt, alamatTxt, tgl_lahirTxt, telpTxt, emailTxt, pekerjaanTxt, ayah_ibuTxt, tahunTxt;
     Spinner provSpin, kotaSpin;
     Button ubahBtn;
 
-    String nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
+    String profileData, nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +29,12 @@ public class ProfileEdit extends AppCompatActivity {
 
         namaTxt = findViewById(R.id.namaTxt);
         alamatTxt = findViewById(R.id.alamatTxt);
-        tglLahirTxt = findViewById(R.id.tglLahirTxt);
+        tgl_lahirTxt = findViewById(R.id.tgl_lahirTxt);
         telpTxt = findViewById(R.id.telpTxt);
         emailTxt = findViewById(R.id.emailTxt);
-        kerjaTxt = findViewById(R.id.kerjaTxt);
-        namaOrtuTxt = findViewById(R.id.namaOrtuTxt);
-        thnMulaiTxt = findViewById(R.id.thnMulaiTxt);
+        pekerjaanTxt = findViewById(R.id.pekerjaanTxt);
+        ayah_ibuTxt = findViewById(R.id.ayah_ibuTxt);
+        tahunTxt = findViewById(R.id.tahunTxt);
 
         ubahBtn = findViewById(R.id.ubahBtn);
 
@@ -39,28 +42,45 @@ public class ProfileEdit extends AppCompatActivity {
         kotaSpin = findViewById(R.id.kotaSpin);
 
 
-
         actBar = getSupportActionBar();
         actBar.setTitle(getApplicationContext().getString(R.string.editprofile));
         actBar.setDisplayHomeAsUpEnabled(true);
 
-        ubahBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nama = namaTxt.getText().toString();
-                alamat = alamatTxt.getText().toString();
-                tglLahir = tglLahirTxt.getText().toString();
-                telp = telpTxt.getText().toString();
-                email = emailTxt.getText().toString();
-                kerja = kerjaTxt.getText().toString();
-                namaOrtu = namaOrtuTxt.getText().toString();
-                thnMulai = thnMulaiTxt.getText().toString();
+        profileData = getIntent().getStringExtra("profileData");
 
-                Toast.makeText(ProfileEdit.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+        try {
+            JSONObject profile = new JSONObject(profileData);
+            namaTxt.setText(profile.getString("nama"));
+            tahunTxt.setText(profile.getString("thn_menghafal"));
+            //provinsiTxt.setText(profile.getString("provinsi"));
+            pekerjaanTxt.setText(profile.getString("pekerjaan"));
+            tgl_lahirTxt.setText(profile.getString("tgl_lahir"));
+            alamatTxt.setText(profile.getString("alamat"));
+            telpTxt.setText(profile.getString("telp"));
+            emailTxt.setText(profile.getString("email"));
+            ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-                Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
-                startActivity(ubah);
-            }
-        });
+
+//        ubahBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                nama = namaTxt.getText().toString();
+//                alamat = alamatTxt.getText().toString();
+//                tglLahir = tglLahirTxt.getText().toString();
+//                telp = telpTxt.getText().toString();
+//                email = emailTxt.getText().toString();
+//                kerja = kerjaTxt.getText().toString();
+//                namaOrtu = namaOrtuTxt.getText().toString();
+//                thnMulai = thnMulaiTxt.getText().toString();
+//
+//                Toast.makeText(ProfileEdit.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+//
+//                Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
+//                startActivity(ubah);
+//            }
+//        });
     }
 }

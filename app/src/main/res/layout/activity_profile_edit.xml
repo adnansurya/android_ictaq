@@ -37,7 +37,7 @@
                 android:layout_marginEnd="@dimen/stdMargin2"
                 android:layout_marginRight="@dimen/stdMargin2" />
             <EditText
-                android:id="@+id/tglLahirTxt"
+                android:id="@+id/tgl_lahirTxt"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/birthdate"
@@ -111,7 +111,7 @@
                 android:layout_marginRight="@dimen/stdMargin2"/>
 
             <EditText
-                android:id="@+id/kerjaTxt"
+                android:id="@+id/pekerjaanTxt"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/occupation"
@@ -123,7 +123,7 @@
                 android:layout_marginRight="@dimen/stdMargin2" />
 
             <EditText
-                android:id="@+id/namaOrtuTxt"
+                android:id="@+id/ayah_ibuTxt"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/parentname"
@@ -135,7 +135,7 @@
                 android:layout_marginRight="@dimen/stdMargin2" />
 
             <EditText
-                android:id="@+id/thnMulaiTxt"
+                android:id="@+id/tahunTxt"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/startyear"
