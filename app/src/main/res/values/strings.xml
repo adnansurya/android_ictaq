@@ -47,7 +47,10 @@
     <string name="loginfail">Login Gagal!</string>
     <string name="loginok">Login Berhasil!</string>
 
-
+    <string name="admin">Administrator</string>
+    <string name="examiner">Penguji</string>
+    <string name="memorizer">Penghafal</string>
+    
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="settings">Pengaturan</string>

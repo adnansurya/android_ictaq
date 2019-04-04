@@ -26,15 +26,17 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/ic_account"/>
+
                     <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/namaTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:text="Muhammad Adnan"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:textSize="21sp"/>
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -59,14 +61,16 @@
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/ic_school" />
+
                             <TextView
+                                android:id="@+id/typeTxt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Penghafal"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
                                 android:paddingTop="10dp"
-                                android:textColor="@color/startgold"/>
+                                android:text="Penghafal"
+                                android:textColor="@color/startgold"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                         <LinearLayout
@@ -81,14 +85,16 @@
                                 android:text="Tahun"
                                 android:textSize="20sp"
                                 />
+
                             <TextView
+                                android:id="@+id/tahunTxt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2010"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
                                 android:paddingTop="10dp"
-                                android:textColor="@color/startgold"/>
+                                android:text="2010"
+                                android:textColor="@color/startgold"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                         <LinearLayout
@@ -102,15 +108,17 @@
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/ic_person_pin" />
+
                             <TextView
+                                android:id="@+id/provinsiTxt"
                                 android:layout_width="120dp"
-                                android:gravity="center_horizontal"
                                 android:layout_height="wrap_content"
-                                android:text="Sulawesi Selatan"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:gravity="center_horizontal"
                                 android:paddingTop="10dp"
-                                android:textColor="@color/startgold"/>
+                                android:text="Sulawesi Selatan"
+                                android:textColor="@color/startgold"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -122,27 +130,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
+                android:layout_marginStart="@dimen/stdMargin3"
+                android:layout_marginLeft="@dimen/stdMargin3"
                 android:layout_marginTop="@dimen/stdMargin2">
+
                 <LinearLayout
 
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_assignment_ind"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:textStyle="bold"
+                        android:tint="@color/colorPrimary" />
 
-                        android:layout_gravity="center_vertical"
+                    <TextView
+                        android:id="@+id/pekerjaanTxt"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="Programmer"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="Programmer"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="@dimen/stdMargin4"
@@ -154,15 +168,17 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_event"
                         android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:textStyle="bold"
 
-                        android:layout_gravity="center_vertical"
+                    <TextView
+                        android:id="@+id/tgl_lahirTxt"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="18 Juli 1995"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="18 Juli 1995"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="@dimen/stdMargin4"
@@ -175,15 +191,17 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_place"
                         android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:textStyle="bold"
 
-                        android:layout_gravity="center_vertical"
+                    <TextView
+                        android:id="@+id/alamatTxt"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="Jl. Toddopuli 5 Stp. 1 no. 5, Makassar"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="Jl. Toddopuli 5 Stp. 1 no. 5, Makassar"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="@dimen/stdMargin4"
@@ -195,15 +213,17 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_phone"
                         android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:textStyle="bold"
 
-                        android:layout_gravity="center_vertical"
+                    <TextView
+                        android:id="@+id/telpTxt"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="+62 8234 825 8155"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="+62 8234 825 8155"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="@dimen/stdMargin4"
@@ -216,14 +236,16 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_email"
                         android:tint="@color/colorPrimary" />
+
                     <TextView
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
+                        android:id="@+id/emailTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="muh.adnansuryaazis@gmail.com"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="muh.adnansuryaazis@gmail.com"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -239,15 +261,17 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_pregnant"
                         android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:textStyle="bold"
 
-                        android:layout_gravity="center_vertical"
+                    <TextView
+                        android:id="@+id/ayah_ibuTxt"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/stdMargin2"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="@dimen/stdMargin2"
-                        android:text="Yulia Ranreng"/>
+                        android:paddingLeft="@dimen/stdMargin2"
+                        android:text="Yulia Ranreng"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
