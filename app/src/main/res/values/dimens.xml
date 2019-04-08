@@ -15,5 +15,7 @@
     <dimen name="stdLargeTxt">21sp</dimen>
     <dimen name="stdMediumTxt">18sp</dimen>
     <dimen name="stdSmallTxt">15sp</dimen>
+
+    <dimen name="itemImageView">50dp</dimen>
     
 </resources>
