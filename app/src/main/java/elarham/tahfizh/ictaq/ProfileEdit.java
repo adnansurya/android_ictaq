@@ -1,17 +1,36 @@
 package elarham.tahfizh.ictaq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import elarham.tahfizh.ictaq.Models.ProvKota;
 
 public class ProfileEdit extends AppCompatActivity {
 
@@ -26,6 +45,9 @@ public class ProfileEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+
+
+
 
         namaTxt = findViewById(R.id.namaTxt);
         alamatTxt = findViewById(R.id.alamatTxt);
@@ -62,6 +84,8 @@ public class ProfileEdit extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        getProvinsi();
+
 
 
 //        ubahBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +106,81 @@ public class ProfileEdit extends AppCompatActivity {
 //                startActivity(ubah);
 //            }
 //        });
+    }
+    List<ProvKota> provKotaList;
+
+    private void getProvinsi(){
+        provKotaList = new ArrayList<>();
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) + "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=provinces";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+
+                        try {
+                            JSONArray provinsi = new JSONObject(response).getJSONArray("data");
+                            for(int i=0; i<provinsi.length(); i++ ){
+
+                                JSONObject jsonObjProv = provinsi.getJSONObject(i);
+                                ProvKota provkota = new ProvKota();
+                                provkota.setIdProvKota(jsonObjProv.getString("id"));
+                                provkota.setNamaProvKota(jsonObjProv.getString("nama"));
+                                provKotaList.add(provkota);
+
+
+
+                        }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("PROFILE EDIT", response);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();;
+                    }
+                });
+
+        queue.add(strRequest);
+
+        ArrayAdapter<ProvKota> adapter = new ArrayAdapter<ProvKota>(this,
+                android.R.layout.simple_spinner_item, provKotaList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        provSpin.setAdapter(adapter);
+
+        provSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ProvKota provkota = (ProvKota) parent.getSelectedItem();
+                //displayUserData(user);
+
+                Toast.makeText(ProfileEdit.this, provkota.getNamaProvKota().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     }
 }

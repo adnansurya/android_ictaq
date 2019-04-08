@@ -159,7 +159,7 @@ public class Login extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";;
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()

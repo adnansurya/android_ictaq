@@ -66,7 +66,7 @@ public class Profile extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        String url = getApplicationContext().getString(R.string.urlmain) +
+        final String url = getApplicationContext().getString(R.string.urlmain) +
                 "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
@@ -75,7 +75,10 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void onResponse(String response)
                     {
-                        Log.e("PROFILE", response);
+                        Log.e("URL PROFILE", url);
+                        Log.e("ID", kode);
+                        Log.e("PROFILE ", response);
+
 
 
                         try {
@@ -125,7 +128,7 @@ public class Profile extends AppCompatActivity {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", "where id='" + kode + "'");
+                params.put("where", "where a.id='" + kode +"'");
 
                 return params;
             }

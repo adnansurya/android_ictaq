@@ -183,9 +183,7 @@ public class Quran extends AppCompatActivity {
 
                     for (int i=0; i <arabic.length(); i++) {
 
-                        JSONObject arabicObj;
-
-                        arabicObj = arabic.getJSONObject(i);
+                        JSONObject arabicObj = arabic.getJSONObject(i);
 
                         Ayat ayat = new Ayat();
                         ayat.setArabic( Html.fromHtml(arabicObj.getString("text")).toString());

@@ -4,12 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/ustadz"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ustadzList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
