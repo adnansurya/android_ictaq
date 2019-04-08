@@ -41,6 +41,7 @@ public class ProfileEdit extends AppCompatActivity {
 
     String profileData, nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +82,14 @@ public class ProfileEdit extends AppCompatActivity {
             telpTxt.setText(profile.getString("telp"));
             emailTxt.setText(profile.getString("email"));
             ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+
+            prov = profile.getString("provinsi");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         getProvinsi();
+
+
 
 
 
@@ -107,10 +112,11 @@ public class ProfileEdit extends AppCompatActivity {
 //            }
 //        });
     }
-    List<ProvKota> provKotaList;
+    List<String> provKotaId, provKotaNama;
 
     private void getProvinsi(){
-        provKotaList = new ArrayList<>();
+        provKotaId = new ArrayList<>();
+        provKotaNama = new ArrayList<>();
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
@@ -131,14 +137,10 @@ public class ProfileEdit extends AppCompatActivity {
                             for(int i=0; i<provinsi.length(); i++ ){
 
                                 JSONObject jsonObjProv = provinsi.getJSONObject(i);
-                                ProvKota provkota = new ProvKota();
-                                provkota.setIdProvKota(jsonObjProv.getString("id"));
-                                provkota.setNamaProvKota(jsonObjProv.getString("nama"));
-                                provKotaList.add(provkota);
+                                provKotaId.add(jsonObjProv.getString("id"));
+                                provKotaNama.add(jsonObjProv.getString("name"));
 
-
-
-                        }
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -160,19 +162,19 @@ public class ProfileEdit extends AppCompatActivity {
 
         queue.add(strRequest);
 
-        ArrayAdapter<ProvKota> adapter = new ArrayAdapter<ProvKota>(this,
-                android.R.layout.simple_spinner_item, provKotaList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, provKotaNama);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         provSpin.setAdapter(adapter);
+        provSpin.setSelection(provKotaNama.indexOf(prov));
 
         provSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ProvKota provkota = (ProvKota) parent.getSelectedItem();
-                //displayUserData(user);
 
-                Toast.makeText(ProfileEdit.this, provkota.getNamaProvKota().toString(), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(ProfileEdit.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -89,7 +89,8 @@
                 android:layout_marginStart="@dimen/stdMargin2"
                 android:layout_marginLeft="@dimen/stdMargin2"
                 android:layout_marginEnd="@dimen/stdMargin2"
-                android:layout_marginRight="@dimen/stdMargin2"/>
+                android:layout_marginRight="@dimen/stdMargin2"
+                android:layout_marginBottom="@dimen/stdMargin2" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +109,9 @@
                 android:layout_marginStart="@dimen/stdMargin2"
                 android:layout_marginLeft="@dimen/stdMargin2"
                 android:layout_marginEnd="@dimen/stdMargin2"
-                android:layout_marginRight="@dimen/stdMargin2"/>
+                android:layout_marginRight="@dimen/stdMargin2"
+                android:layout_marginBottom="@dimen/stdMargin1"
+                />
 
             <EditText
                 android:id="@+id/pekerjaanTxt"
