@@ -207,7 +207,7 @@ public class Login extends AppCompatActivity {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", "where username='" + username + "'");
+                params.put("where", String.format("where username='%s'",username));
 
                 return params;
             }

@@ -128,7 +128,7 @@ public class Profile extends AppCompatActivity {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", "where a.id='" + kode +"'");
+                params.put("where", String.format("where a.id='%s'",kode));
 
                 return params;
             }

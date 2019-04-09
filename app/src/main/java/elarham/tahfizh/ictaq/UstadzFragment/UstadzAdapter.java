@@ -53,7 +53,6 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
             itemImageView = itemView.findViewById(R.id.itemImageView);
 
 
-
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
