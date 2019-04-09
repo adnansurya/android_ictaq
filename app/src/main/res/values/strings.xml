@@ -33,7 +33,7 @@
     <string name="birthdate">Tanggal Lahir</string>
     <string name="telp">No. Telepon</string>
     <string name="province">Provinsi</string>
-    <string name="city">Kota</string>
+    <string name="city">Kabupaten / Kota</string>
     <string name="occupation">Pekerjaan</string>
     <string name="parentname">Nama Lengkap Ayah / Ibu</string>
     <string name="startyear">Tahun Mulai</string>

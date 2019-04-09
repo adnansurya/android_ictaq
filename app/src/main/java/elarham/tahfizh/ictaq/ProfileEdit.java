@@ -39,15 +39,15 @@ public class ProfileEdit extends AppCompatActivity {
     Spinner provSpin, kotaSpin;
     Button ubahBtn;
 
-    String profileData, nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
+    String profileData, nama, alamat, tglLahir, telp, email, provinsi, kota, kerja, namaOrtu, thnMulai;
+    String selectedIdKota, selectedIdProvinsi;
 
-    ArrayAdapter<String> adapter;
+    List<String> provId, provNama, kotaId, kotaNama;
+    ArrayAdapter<String> adapter, adapter1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
-
-
 
 
         namaTxt = findViewById(R.id.namaTxt);
@@ -83,29 +83,43 @@ public class ProfileEdit extends AppCompatActivity {
             emailTxt.setText(profile.getString("email"));
             ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
 
-            prov = profile.getString("provinsi");
+            provinsi = profile.getString("provinsi");
+            kota = profile.getString("kota");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        provKotaId = new ArrayList<>();
-        provKotaNama = new ArrayList<>();
+        provId = new ArrayList<>();
+        provNama = new ArrayList<>();
+        kotaId = new ArrayList<>();
+        kotaNama = new ArrayList<>();
 
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, provKotaNama);
+                android.R.layout.simple_spinner_item, provNama);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         provSpin.setAdapter(adapter);
+
+
+        adapter1 = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, kotaNama);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        kotaSpin.setAdapter(adapter1);
 
 
         provSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                adapter.notifyDataSetChanged();
+               // adapter.notifyDataSetChanged();
 //                Toast.makeText(ProfileEdit.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                selectedIdProvinsi = provId.get(provNama.indexOf(parent.getSelectedItem().toString()));
 
-                Toast.makeText(ProfileEdit.this,  provKotaId.get(provKotaNama.indexOf(parent.getSelectedItem().toString())), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileEdit.this, selectedIdProvinsi , Toast.LENGTH_SHORT).show();
+                kotaId.clear();
+                kotaNama.clear();
+                getKota();
             }
 
             @Override
@@ -113,6 +127,22 @@ public class ProfileEdit extends AppCompatActivity {
 
             }
         });
+
+        kotaSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedIdKota = kotaId.get(kotaNama.indexOf(parent.getSelectedItem().toString()));
+
+                Toast.makeText(ProfileEdit.this, selectedIdKota , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
         getProvinsi();
 
 
@@ -138,7 +168,7 @@ public class ProfileEdit extends AppCompatActivity {
 //            }
 //        });
     }
-    List<String> provKotaId, provKotaNama;
+
 
     private void getProvinsi(){
 
@@ -148,7 +178,8 @@ public class ProfileEdit extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        String url = getApplicationContext().getString(R.string.urlmain) + "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=provinces";
+        String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=provinces";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -162,8 +193,8 @@ public class ProfileEdit extends AppCompatActivity {
                             for(int i=0; i<provinsi.length(); i++ ){
 
                                 JSONObject jsonObjProv = provinsi.getJSONObject(i);
-                                provKotaId.add(jsonObjProv.getString("id"));
-                                provKotaNama.add(jsonObjProv.getString("name"));
+                                provId.add(jsonObjProv.getString("id"));
+                                provNama.add(jsonObjProv.getString("name"));
 
                             }
 
@@ -171,10 +202,10 @@ public class ProfileEdit extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.e("PROFILE EDIT", response);
+                        Log.e("PROFILE EDIT PROVINSI", response);
 
                         adapter.notifyDataSetChanged();
-                        provSpin.setSelection(provKotaNama.indexOf(prov));
+                        provSpin.setSelection(provNama.indexOf(provinsi));
                         progressDialog.dismiss();
                     }
                 },
@@ -194,5 +225,70 @@ public class ProfileEdit extends AppCompatActivity {
 
 
 
+
+
     }
+
+    private void getKota(){
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) + "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=regencies";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+
+                        try {
+                            JSONArray provinsi = new JSONObject(response).getJSONArray("data");
+                            for(int i=0; i<provinsi.length(); i++ ){
+
+                                JSONObject jsonObjProv = provinsi.getJSONObject(i);
+                                kotaId.add(jsonObjProv.getString("id"));
+                                kotaNama.add(jsonObjProv.getString("name"));
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("PROFILE EDIT KOTA", response);
+
+                        adapter1.notifyDataSetChanged();
+                        kotaSpin.setSelection(kotaNama.indexOf(kota));
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("where", "where province_id='"+ selectedIdProvinsi +"'");
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+
+
+
+    }
+
+
 }
