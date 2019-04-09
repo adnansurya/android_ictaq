@@ -178,6 +178,7 @@ public class Login extends AppCompatActivity {
                             sharePrefMan.setSPString(sharePrefMan.SP_NAMA, userData.getString("nama"));
                             sharePrefMan.setSPString(sharePrefMan.SP_USERNAME, userData.getString("username"));
                             sharePrefMan.setSPString(sharePrefMan.SP_PASSWORD, userData.getString("password"));
+                            sharePrefMan.setSPString(sharePrefMan.SP_ID_USER, userData.getString("id_user"));
 
                             sharePrefMan.setSPString(sharePrefMan.SP_TYPE, userData.getString("type"));
                             sharePrefMan.setSPBoolean(sharePrefMan.SP_SUDAH_LOGIN, true);

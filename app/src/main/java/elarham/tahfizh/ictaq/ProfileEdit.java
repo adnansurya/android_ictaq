@@ -182,7 +182,7 @@ public class ProfileEdit extends AppCompatActivity {
                             public void onResponse(String response)
                             {
                                 Log.e("PROFILE EDIT SIMPAN", response);
-                                dialog.dismiss();
+                                progressDialog.dismiss();
 
                                 Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
                                 startActivity(ubah);

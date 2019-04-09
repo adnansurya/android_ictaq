@@ -43,6 +43,7 @@
     <string name="close">Tutup</string>
     <string name="datanotcomplete">Data tidak lengkap! </string>
     <string name="passwordverificationfail">Verifikasi Password Gagal!</string>
+    <string name="newpasswordverificationfail">Verifikasi Password Baru Gagal!</string>
     <string name="oldpasswordverificationfail">Verifikasi Password Lama Gagal!</string>
     <string name="loginfail">Login Gagal!</string>
     <string name="loginok">Login Berhasil!</string>

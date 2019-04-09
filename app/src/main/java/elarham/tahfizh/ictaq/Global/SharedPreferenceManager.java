@@ -14,6 +14,7 @@ public class SharedPreferenceManager {
     public String SP_USERNAME = "spUsername";
     public String SP_PASSWORD = "spPassword";
     public String SP_NAMA = "spNama";
+    public String SP_ID_USER = "spIdUser";
 
 
     public String SP_SUDAH_LOGIN = "spSudahLogin";
@@ -40,6 +41,8 @@ public class SharedPreferenceManager {
         spEditor.putBoolean(keySP, value);
         spEditor.commit();
     }
+
+    public String getSPIdUser(){ return sp.getString(SP_ID_USER, "");}
 
     public String getSpUsername(){
         return sp.getString(SP_USERNAME, "");
@@ -68,6 +71,8 @@ public class SharedPreferenceManager {
     public Boolean getSPSudahLogin(){
         return sp.getBoolean(SP_SUDAH_LOGIN, false);
     }
+
+
 
     public void logout(){
         spEditor.clear();
