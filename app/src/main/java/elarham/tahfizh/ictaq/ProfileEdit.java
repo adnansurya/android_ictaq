@@ -41,7 +41,7 @@ public class ProfileEdit extends AppCompatActivity {
 
     String profileData, nama, alamat, tglLahir, telp, email, prov, kota, kerja, namaOrtu, thnMulai;
 
-
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +87,32 @@ public class ProfileEdit extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        provKotaId = new ArrayList<>();
+        provKotaNama = new ArrayList<>();
+
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, provKotaNama);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        provSpin.setAdapter(adapter);
+
+
+        provSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                adapter.notifyDataSetChanged();
+//                Toast.makeText(ProfileEdit.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(ProfileEdit.this,  provKotaId.get(provKotaNama.indexOf(parent.getSelectedItem().toString())), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         getProvinsi();
 
 
@@ -115,8 +141,7 @@ public class ProfileEdit extends AppCompatActivity {
     List<String> provKotaId, provKotaNama;
 
     private void getProvinsi(){
-        provKotaId = new ArrayList<>();
-        provKotaNama = new ArrayList<>();
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
@@ -142,10 +167,14 @@ public class ProfileEdit extends AppCompatActivity {
 
                             }
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         Log.e("PROFILE EDIT", response);
+
+                        adapter.notifyDataSetChanged();
+                        provSpin.setSelection(provKotaNama.indexOf(prov));
                         progressDialog.dismiss();
                     }
                 },
@@ -162,26 +191,7 @@ public class ProfileEdit extends AppCompatActivity {
 
         queue.add(strRequest);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, provKotaNama);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        provSpin.setAdapter(adapter);
-        provSpin.setSelection(provKotaNama.indexOf(prov));
-
-        provSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
-                Toast.makeText(ProfileEdit.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
     }
