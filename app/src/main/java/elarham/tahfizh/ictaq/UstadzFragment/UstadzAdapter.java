@@ -1,7 +1,9 @@
 package elarham.tahfizh.ictaq.UstadzFragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,7 +57,7 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
         User user = list.get(position);
 
         holder.namaTxt.setText(user.getNama());
-
+        holder.detailImg.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView namaTxt;
-        public ImageView itemImageView, reqJadwalImg;
+        public ImageView itemImageView, reqJadwalImg, detailImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,79 +75,47 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
             namaTxt = itemView.findViewById(R.id.namaTxt);
             itemImageView = itemView.findViewById(R.id.itemImageView);
             reqJadwalImg = itemView.findViewById(R.id.reqJadwalImg);
+            detailImg = itemView.findViewById(R.id.detailImg);
 
             reqJadwalImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     final User user = list.get(getAdapterPosition());
-                    sharePrefMan = new SharedPreferenceManager(context);
-//                    Toast.makeText(context, user.getKode(), Toast.LENGTH_SHORT).show();
 
                     final Calendar myCalendar = Calendar.getInstance();
-
                     String myFormat = "yyyy-MM-dd"; //In which you need put here
                     final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-                    final ProgressDialog progressDialog = new ProgressDialog(context);
-                    progressDialog.setMessage(context.getString(R.string.loading));
-                    progressDialog.show();
+                    sharePrefMan = new SharedPreferenceManager(context);
 
-                    RequestQueue queue = Volley.newRequestQueue(context);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                    String url = context.getString(R.string.urlmain) +
-                            "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=permintaan";
+                    builder.setTitle(context.getString(R.string.examrequest));
+                    builder.setMessage(context.getString(R.string.examrequestdialog) + " " + user.getNama() + " ?");
 
-                    StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>()
-                            {
-                                @Override
-                                public void onResponse(String response)
-                                {
-                                    Log.e("PROFILE EDIT SIMPAN", response);
-                                    progressDialog.dismiss();
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
-//                        Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
-//                        startActivity(ubah);
-                                    try {
-                                        JSONObject simpan = new JSONObject(response);
-                                        if(simpan.getString("status").equals("sukses")){
-                                            Toast.makeText(context, R.string.registerok, Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(context, R.string.error, Toast.LENGTH_SHORT).show();
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                        public void onClick(DialogInterface dialog, int which) {
 
-
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("Volley", error.toString());
-                            Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
+                            requestJadwal(sharePrefMan.getSpKode(),user.getKode(),String.valueOf(sdf.format(myCalendar.getTime())),"0");
+                            dialog.dismiss();
                         }
-                    })
-                    {
+                    });
+
+                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
                         @Override
-                        protected Map<String, String> getParams()
-                        {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                            Map<String, String> params = new HashMap<String, String>();
-
-                            params.put("field", "id_regis,id_penguji,tgl,status");
-
-                            params.put("value", String.format("'%s','%s','%s','%s'",sharePrefMan.getSpKode(), user.getKode(), sdf.format(myCalendar.getTime()), "0"));
-                            return params;
+                            // Do nothing
+                            dialog.dismiss();
                         }
-                    };
+                    });
 
-                    queue.add(strRequest);
+                    AlertDialog alert = builder.create();
+                    alert.show();
 
-
-//                    requestJadwal(sharePrefMan.getSpKode(),user.getKode(),sdf.format(myCalendar.getTime().toString()),"0");
                 }
             });
 
@@ -155,8 +125,67 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
         }
     }
 
-    public void requestJadwal(final String id_regis, final String id_penguji, final String tanggal, final String status){
+    private void requestJadwal(final String id_regis, final String id_penguji, final String tanggal, final String status){
 
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage(context.getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        String url = context.getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=permintaan";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("PROFILE EDIT SIMPAN", response);
+                        progressDialog.dismiss();
+
+//                        Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
+//                        startActivity(ubah);
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                Toast.makeText(context, R.string.registerok, Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(context, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("field", "id_regis,id_penguji,tgl,status");
+
+                //params.put("value", String.format("'%s','%s','%s','%s'",sharePrefMan.getSpKode(), user.getKode(), sdf.format(myCalendar.getTime()), "0"));
+                params.put("value", String.format("'%s','%s','%s','%s'",id_regis, id_penguji, tanggal, status));
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
 
     }
 

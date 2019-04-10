@@ -111,6 +111,12 @@
     <string name="micallowed">Izin microphone diberikan!</string>
     <string name="micnotallowed">Izin microphone ditolak!</string>
 
+    <string name="examrequest">Permintaan Ujian</string>
+    <string name="examrequestdialog">Meminta jadwal ujian dari Ustadz</string>
+
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
     <string name="urlquran">http://api.alquran.cloud/v1</string>
     <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
