@@ -103,6 +103,7 @@ public class Login extends AppCompatActivity {
                                      }
                                  } catch (JSONException e) {
                                      e.printStackTrace();
+                                     Toast.makeText(Login.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                                  }
                                  Log.e("Volley Success", response);
                                  progressDialog.dismiss();
@@ -190,6 +191,7 @@ public class Login extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(Login.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                         }
 
                         progressDialog.dismiss();

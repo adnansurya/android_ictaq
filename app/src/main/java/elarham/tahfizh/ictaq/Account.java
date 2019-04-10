@@ -131,6 +131,7 @@ public class Account extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(Account.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                         }
 
 

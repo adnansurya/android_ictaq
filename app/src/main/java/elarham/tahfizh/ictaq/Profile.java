@@ -107,6 +107,7 @@ public class Profile extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(Profile.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                         }
 
                         progressDialog.dismiss();

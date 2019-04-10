@@ -48,6 +48,7 @@
     <string name="oldpasswordverificationfail">Verifikasi Password Lama Gagal!</string>
     <string name="loginfail">Login Gagal!</string>
     <string name="loginok">Login Berhasil!</string>
+    <string name="wrongdataformat">Kesalahan Format Data</string>
 
     <string name="admin">Administrator</string>
     <string name="examiner">Penguji</string>

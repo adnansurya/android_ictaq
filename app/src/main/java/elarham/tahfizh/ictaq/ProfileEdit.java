@@ -95,6 +95,7 @@ public class ProfileEdit extends AppCompatActivity {
             kota = profile.getString("kota");
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(ProfileEdit.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
         }
 
         provId = new ArrayList<>();
@@ -195,6 +196,7 @@ public class ProfileEdit extends AppCompatActivity {
                                      }
                                  } catch (JSONException e) {
                                      e.printStackTrace();
+                                    Toast.makeText(ProfileEdit.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                                  }
 
 
@@ -305,6 +307,7 @@ public class ProfileEdit extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(ProfileEdit.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                         }
                         Log.e("PROFILE EDIT PROVINSI", response);
 
@@ -360,6 +363,7 @@ public class ProfileEdit extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(ProfileEdit.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                         }
                         Log.e("PROFILE EDIT KOTA", response);
 

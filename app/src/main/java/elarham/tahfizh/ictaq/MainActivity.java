@@ -40,20 +40,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         sharePrefMan = new SharedPreferenceManager(this);
-
-
-
-
 
         actBar = getSupportActionBar();
         actBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_USE_LOGO);
 
         actBar.setIcon(R.mipmap.ic_mytahfizh);
         actBar.setTitle(" "+ getApplicationContext().getString(R.string.app_name));
-
 
 
         // inisialisasi BottomNavigaionView
@@ -67,7 +60,7 @@ public class MainActivity extends AppCompatActivity
             ustadz.setVisible(false);
         }
 
-        
+
         checkRequestPermission();
 
         // kita set default nya Home Fragment

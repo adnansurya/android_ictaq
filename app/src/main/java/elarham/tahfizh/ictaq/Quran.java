@@ -202,7 +202,7 @@ public class Quran extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Quran.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                 }
 
                 adapter.notifyDataSetChanged();
@@ -275,6 +275,7 @@ public class Quran extends AppCompatActivity {
                     surahInJuz += key + ". " + ((JSONObject) value).getString("englishName") + "\n";
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(Quran.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
                 }
             }
 
