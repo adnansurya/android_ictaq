@@ -31,7 +31,7 @@ import elarham.tahfizh.ictaq.R;
 
 import static android.content.ContentValues.TAG;
 
-public class VidcallFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
 
     private WebView mWebRTCWebView;
 

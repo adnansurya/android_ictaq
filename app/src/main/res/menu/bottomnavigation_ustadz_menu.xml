@@ -12,10 +12,6 @@
         android:icon="@drawable/ic_local_library"/>
 
     <item
-        android:id="@+id/ustadz_menu"
-        android:title="@string/ustadz"
-        android:icon="@drawable/ic_supervisor"/>
-    <item
         android:id="@+id/schedule_menu"
         android:title="@string/schedule"
         android:icon="@drawable/ic_event_note"/>

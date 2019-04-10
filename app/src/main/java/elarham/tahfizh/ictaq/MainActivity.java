@@ -1,7 +1,6 @@
 package elarham.tahfizh.ictaq;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -12,24 +11,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.MainFragments.*;
@@ -54,6 +40,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         sharePrefMan = new SharedPreferenceManager(this);
 
 
@@ -66,8 +54,7 @@ public class MainActivity extends AppCompatActivity
         actBar.setIcon(R.mipmap.ic_mytahfizh);
         actBar.setTitle(" "+ getApplicationContext().getString(R.string.app_name));
 
-        // kita set default nya Home Fragment
-        loadFragment(new HomeFragment());
+
 
         // inisialisasi BottomNavigaionView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
@@ -75,9 +62,16 @@ public class MainActivity extends AppCompatActivity
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
+        if(sharePrefMan.getSpType().trim().equals("2")){
+            MenuItem ustadz = bottomNavigationView.getMenu().findItem(R.id.ustadz_menu);
+            ustadz.setVisible(false);
+        }
 
-
+        
         checkRequestPermission();
+
+        // kita set default nya Home Fragment
+        loadFragment(new HomeFragment());
 
 
 
@@ -160,7 +154,7 @@ public class MainActivity extends AppCompatActivity
 
     // method listener untuk logika pemilihan
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected( MenuItem item) {
 
 
         switch (item.getItemId()){
@@ -173,8 +167,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.ustadz_menu:
                 fragment = new UstadzFragment();
                 break;
-            case R.id.vidcall_menu:
-                fragment = new VidcallFragment();
+            case R.id.schedule_menu:
+                fragment = new ScheduleFragment();
                 break;
             case R.id.certificate_menu:
                 fragment = new CertificateFragment();

@@ -97,9 +97,7 @@ public class Login extends AppCompatActivity {
                                      }else if(login.getString("status").equals("1") || login.getString("status").equals("2")){
                                          Toast.makeText(Login.this, R.string.loginok, Toast.LENGTH_SHORT).show();
                                          userLogin();
-                                         Intent home = new Intent(Login.this, MainActivity.class);
-                                         home.putExtra("username", username);
-                                         startActivity(home);
+
                                      }else{
                                          Toast.makeText(Login.this, R.string.error, Toast.LENGTH_SHORT).show();
                                      }
@@ -184,6 +182,10 @@ public class Login extends AppCompatActivity {
                             sharePrefMan.setSPString(sharePrefMan.SP_TYPE, userData.getString("type"));
                             sharePrefMan.setSPBoolean(sharePrefMan.SP_SUDAH_LOGIN, true);
                             Log.e("KODE",sharePrefMan.getSpKode());
+
+                            Intent home = new Intent(Login.this, MainActivity.class);
+                            home.putExtra("username", username);
+                            startActivity(home);
 
 
                         } catch (JSONException e) {
