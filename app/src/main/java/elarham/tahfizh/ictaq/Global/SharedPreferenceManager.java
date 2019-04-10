@@ -42,7 +42,7 @@ public class SharedPreferenceManager {
         spEditor.commit();
     }
 
-    public String getSPIdUser(){ return sp.getString(SP_ID_USER, "");}
+    public String getSpIdUser(){ return sp.getString(SP_ID_USER, "");}
 
     public String getSpUsername(){
         return sp.getString(SP_USERNAME, "");

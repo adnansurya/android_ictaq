@@ -17,5 +17,6 @@
     <dimen name="stdSmallTxt">15sp</dimen>
 
     <dimen name="itemImageView">50dp</dimen>
+    <dimen name="itemImageButton">30dp</dimen>
     
 </resources>

@@ -151,7 +151,7 @@ public class Account extends AppCompatActivity {
 
                 params.put("value", String.format("username='%s',password='%s'",username, new Hashing().md5(newPassword)));
 
-                params.put("where", String.format("where id_user='%s'",sharePrefMan.getSPIdUser()));
+                params.put("where", String.format("where id_user='%s'",sharePrefMan.getSpIdUser()));
                 return params;
             }
         };

@@ -28,18 +28,37 @@
                 android:layout_marginRight="@dimen/stdMargin1"
                 android:layout_marginEnd="@dimen/stdMargin1"
                 android:src="@drawable/ic_person"
-
                 />
 
             <TextView
                 android:id="@+id/namaTxt"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/itemImageView"
                 android:layout_toEndOf="@+id/itemImageView"
                 android:text="@string/ustadz"
                 android:textSize="@dimen/itemMediumTxt"/>
+
+            <ImageView
+                android:id="@+id/detailImg"
+                android:layout_width="@dimen/itemImageView"
+                android:layout_height="@dimen/itemImageView"
+                android:src="@drawable/ic_person_pin"
+                android:padding="@dimen/stdMargin1"
+                android:layout_toLeftOf="@id/reqJadwalImg"
+                android:layout_toStartOf="@id/reqJadwalImg"/>
+
+
+            <ImageView
+                android:id="@+id/reqJadwalImg"
+                android:layout_width="@dimen/itemImageView"
+                android:layout_height="@dimen/itemImageView"
+                android:padding="@dimen/stdMargin1"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/stdMargin1"
+                android:src="@drawable/ic_event_available"/>
 
 
 
