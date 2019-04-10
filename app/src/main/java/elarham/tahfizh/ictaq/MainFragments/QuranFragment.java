@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import elarham.tahfizh.ictaq.QuranFragments.PagerAdapter;
+import elarham.tahfizh.ictaq.QuranFragments.QuranPagerAdapter;
 import elarham.tahfizh.ictaq.R;
 
 
@@ -27,7 +27,7 @@ public class QuranFragment extends Fragment {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = view.findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
+        final QuranPagerAdapter adapter = new QuranPagerAdapter
                 (getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

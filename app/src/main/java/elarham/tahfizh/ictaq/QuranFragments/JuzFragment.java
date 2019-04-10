@@ -29,9 +29,9 @@ public class JuzFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@Nullable  ViewGroup container, @Nullable  Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_juz, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_only, container, false);
 
-        mList = view.findViewById(R.id.juzList);
+        mList = view.findViewById(R.id.recycleList);
 
         juzList = new ArrayList<>();
         adapter = new JuzAdapter(getContext(),juzList);

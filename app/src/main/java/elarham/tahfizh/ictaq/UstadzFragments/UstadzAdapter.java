@@ -1,4 +1,4 @@
-package elarham.tahfizh.ictaq.UstadzFragment;
+package elarham.tahfizh.ictaq.UstadzFragments;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

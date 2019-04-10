@@ -18,7 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -33,9 +32,7 @@ import java.util.Map;
 
 import elarham.tahfizh.ictaq.Models.User;
 import elarham.tahfizh.ictaq.R;
-import elarham.tahfizh.ictaq.UstadzFragment.UstadzAdapter;
-
-import static android.content.ContentValues.TAG;
+import elarham.tahfizh.ictaq.UstadzFragments.UstadzAdapter;
 
 public class UstadzFragment extends Fragment {
 
@@ -50,9 +47,9 @@ public class UstadzFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ustadz, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_only, container, false);
 
-        mList = view.findViewById(R.id.ustadzList);
+        mList = view.findViewById(R.id.recycleList);
 
         ustadzList = new ArrayList<>();
         adapter = new UstadzAdapter(getContext(),ustadzList);

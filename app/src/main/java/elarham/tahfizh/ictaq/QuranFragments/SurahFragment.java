@@ -1,7 +1,6 @@
 package elarham.tahfizh.ictaq.QuranFragments;
 
 import android.app.ProgressDialog;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.Request.Method;
@@ -48,9 +46,9 @@ public class SurahFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable  Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_surah, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_only, container, false);
 
-        mList = view.findViewById(R.id.surahList);
+        mList = view.findViewById(R.id.recycleList);
 
         surahList = new ArrayList<>();
         adapter = new SurahAdapter(getContext(),surahList);

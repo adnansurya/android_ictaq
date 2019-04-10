@@ -60,6 +60,16 @@ public class Profile extends AppCompatActivity {
         emailTxt = findViewById(R.id.emailTxt);
         ayah_ibuTxt = findViewById(R.id.ayah_ibuTxt);
 
+        if(sharePrefMan.getSpType().equals("1")){
+            typeTxt.setText(getApplicationContext().getString(R.string.admin));
+        }else if(sharePrefMan.getSpType().equals("2")){
+            typeTxt.setText(getApplicationContext().getString(R.string.examiner));
+        }else if(sharePrefMan.getSpType().equals("3")){
+            typeTxt.setText(getApplicationContext().getString(R.string.memorizer));
+        }else{
+            typeTxt.setText(sharePrefMan.getSpType());
+        }
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
@@ -86,15 +96,6 @@ public class Profile extends AppCompatActivity {
                             JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             profileData = profile.toString();
                             namaTxt.setText(profile.getString("nama"));
-                            if(sharePrefMan.getSpType().equals("1")){
-                                typeTxt.setText(getApplicationContext().getString(R.string.admin));
-                            }else if(sharePrefMan.getSpType().equals("2")){
-                                typeTxt.setText(getApplicationContext().getString(R.string.examiner));
-                            }else if(sharePrefMan.getSpType().equals("3")){
-                                typeTxt.setText(getApplicationContext().getString(R.string.memorizer));
-                            }else{
-                                typeTxt.setText(sharePrefMan.getSpType());
-                            }
                             tahunTxt.setText(profile.getString("thn_menghafal"));
                             provinsiTxt.setText(profile.getString("provinsi"));
                             pekerjaanTxt.setText(profile.getString("pekerjaan"));

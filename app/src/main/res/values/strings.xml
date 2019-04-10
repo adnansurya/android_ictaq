@@ -50,10 +50,13 @@
     <string name="loginok">Login Berhasil!</string>
     <string name="wrongdataformat">Kesalahan Format Data</string>
 
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+
     <string name="admin">Administrator</string>
     <string name="examiner">Penguji</string>
     <string name="memorizer">Penghafal</string>
-    
+
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="settings">Pengaturan</string>
@@ -116,8 +119,8 @@
     <string name="examrequest">Permintaan Ujian</string>
     <string name="examrequestdialog">Meminta jadwal ujian dari Ustadz</string>
 
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
+    <string name="ready">Siap</string>
+    <string name="request">Permintaan</string>
 
     <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
     <string name="urlquran">http://api.alquran.cloud/v1</string>
