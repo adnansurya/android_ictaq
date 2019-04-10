@@ -138,7 +138,7 @@
                     android:textSize="@dimen/stdSmallTxt"
                     android:text="@string/explanation"
                     android:layout_marginTop="@dimen/stdMargin0"
-                    android:layout_marginBottom="@dimen/stdMargin0"/>
+                    android:layout_marginBottom="@dimen/stdMargin1"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +150,8 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/itemLargeTxt"
                         android:id="@+id/juzTxt"
-                        android:text="@string/juz"/>
+                        android:text="@string/juz"
+                        android:layout_marginBottom="@dimen/stdMargin1"/>
             </LinearLayout>
 
 

@@ -24,11 +24,13 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
 
     private Context context;
     private List<Ayat> list;
+    public String mode;
 
 
-    public QuranAdapter(Context context, List<Ayat> list) {
+    public QuranAdapter(Context context, List<Ayat> list, String mode) {
         this.context = context;
         this.list = list;
+        this.mode = mode;
     }
 
     @Override
@@ -69,6 +71,11 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         }else{
             holder.translateTxt.setVisibility(View.GONE);
         }
+
+        if(mode.equals("juz")){
+            holder.translateTxt.setVisibility(View.GONE);
+        }
+
 
         holder.lafazTxt.setVisibility(View.GONE);
 

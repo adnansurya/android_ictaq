@@ -66,13 +66,16 @@ public class Quran extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quran);
 
+        mode = getIntent().getStringExtra("mode");
+        nomor = getIntent().getStringExtra("nomor");
+
         actBar = getSupportActionBar();
         actBar.setDisplayHomeAsUpEnabled(true);
 
         mList = findViewById(R.id.ayatList);
 
         ayatList = new ArrayList<>();
-        adapter = new QuranAdapter(getApplicationContext(),ayatList);
+        adapter = new QuranAdapter(getApplicationContext(),ayatList, mode);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -83,8 +86,7 @@ public class Quran extends AppCompatActivity {
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
 
-        mode = getIntent().getStringExtra("mode");
-        nomor = getIntent().getStringExtra("nomor");
+
 
         if(mode.equals("surah")){
 
@@ -245,7 +247,7 @@ public class Quran extends AppCompatActivity {
 
         if(mode.equals("surah")){
             dialog.setTitle(getApplicationContext().getString(R.string.surahinfo));
-            juzLay.setVisibility(View.GONE);
+            juzLay.setVisibility(View.INVISIBLE);
 
             nomorTxt.setText(nomor);
             namaTxt.setText(namaSurah);
