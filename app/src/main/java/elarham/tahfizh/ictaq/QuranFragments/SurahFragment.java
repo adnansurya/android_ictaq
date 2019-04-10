@@ -116,6 +116,7 @@ public class SurahFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Volley", error.toString());
                 progressDialog.dismiss();
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());

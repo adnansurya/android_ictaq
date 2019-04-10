@@ -117,6 +117,7 @@ public class Login extends AppCompatActivity {
                              {
 
                                  Log.e("Volley Error", error.toString());
+                                 Toast.makeText(Login.this, R.string.error, Toast.LENGTH_SHORT).show();
                                  progressDialog.dismiss();;
                              }
                          })
@@ -199,7 +200,8 @@ public class Login extends AppCompatActivity {
                     {
 
                         Log.e("Volley Error", error.toString());
-                        progressDialog.dismiss();;
+                        progressDialog.dismiss();
+                        Toast.makeText(Login.this, R.string.error, Toast.LENGTH_SHORT).show();
                     }
                 })
         {

@@ -117,7 +117,7 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-
+                        Toast.makeText(Profile.this, R.string.error, Toast.LENGTH_SHORT).show();
                         Log.e("Volley Error", error.toString());
                         progressDialog.dismiss();
                     }

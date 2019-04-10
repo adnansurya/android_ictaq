@@ -202,6 +202,7 @@ public class ProfileEdit extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ProfileEdit.this, R.string.error, Toast.LENGTH_SHORT).show();
                         Log.e("Volley", error.toString());
                         progressDialog.dismiss();
                     }
@@ -319,7 +320,8 @@ public class ProfileEdit extends AppCompatActivity {
                     {
 
                         Log.e("Volley Error", error.toString());
-                        progressDialog.dismiss();;
+                        progressDialog.dismiss();
+                        Toast.makeText(ProfileEdit.this, R.string.error, Toast.LENGTH_SHORT).show();
                     }
                 });
 

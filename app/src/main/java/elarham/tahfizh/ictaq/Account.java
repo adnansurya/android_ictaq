@@ -139,6 +139,7 @@ public class Account extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Volley", error.toString());
+                Toast.makeText(Account.this, R.string.error, Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         })

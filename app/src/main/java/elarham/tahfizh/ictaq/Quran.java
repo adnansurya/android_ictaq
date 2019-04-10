@@ -210,6 +210,7 @@ public class Quran extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Quran.this, R.string.error, Toast.LENGTH_SHORT).show();
                 Log.e("Volley", error.toString());
                 progressDialog.dismiss();
             }
