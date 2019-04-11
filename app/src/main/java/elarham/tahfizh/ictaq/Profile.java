@@ -151,6 +151,9 @@ public class Profile extends AppCompatActivity {
 
         Intent profil;
         switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.edit_menu:
                 profil = new Intent(Profile.this, ProfileEdit.class);
                 profil.putExtra("profileData", profileData);

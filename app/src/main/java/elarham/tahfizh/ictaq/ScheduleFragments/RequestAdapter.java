@@ -3,6 +3,7 @@ package elarham.tahfizh.ictaq.ScheduleFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                     int position = getAdapterPosition();
 
                     Request request = list.get(position);
-
-                    Toast.makeText(context, request.getIdPenguji(), Toast.LENGTH_SHORT).show();
+                    Log.e("UPDATE PERMINTAAN ID", request.getId());
                     Intent open = new Intent(context, DetailRequest.class);
                     open.putExtra("id",request.getId());
                     open.putExtra("idRegis", request.getIdRegis());

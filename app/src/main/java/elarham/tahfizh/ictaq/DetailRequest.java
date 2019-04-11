@@ -42,18 +42,21 @@ import java.util.Locale;
 import java.util.Map;
 
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 
 public class DetailRequest extends AppCompatActivity {
 
     ActionBar actBar;
-    String id, idRegis, idPenguji, tanggal, status;
+    String idRequest, idRegis, idPenguji, tanggal, status;
     TextView typeTxt, tanggalTxt, namaTxt, pekerjaanTxt, alamatTxt, tgl_LahirTxt, ayah_ibuTxt, tahunTxt, emailTxt, telpTxt;
 
     CardView kontakCard;
     LinearLayout personLay;
 
     String nama;
-    String url;
+    String url, urlUpdateRequest, urlAddJadwal, urlAddRoom;
+
+    String tglJadwal, jamJadwal;
 
     SharedPreferenceManager sharePrefMan;
 
@@ -69,7 +72,7 @@ public class DetailRequest extends AppCompatActivity {
         actBar.setDisplayHomeAsUpEnabled(true);
 
 
-        id = getIntent().getStringExtra("id");
+        idRequest = getIntent().getStringExtra("id");
         idRegis = getIntent().getStringExtra("idRegis");
         idPenguji = getIntent().getStringExtra("idPenguji");
         tanggal = getIntent().getStringExtra("tanggal");
@@ -105,6 +108,16 @@ public class DetailRequest extends AppCompatActivity {
                     "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
         }
+
+        urlUpdateRequest = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=permintaan";
+
+        urlAddJadwal = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=jadwal";
+
+        urlAddRoom = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=room";
+
 
         tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + tanggal);
 
@@ -207,6 +220,9 @@ public class DetailRequest extends AppCompatActivity {
 
 
         switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.accept_menu:
                 showScheduleDialog();
                 break;
@@ -302,13 +318,16 @@ public class DetailRequest extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
 
-            if(tglTxt.getText().equals("") || waktuTxt.getText().equals("")){
+            tglJadwal = tglTxt.getText().toString();
+            jamJadwal = waktuTxt.getText().toString();
+
+            if(tglJadwal.equals("") || jamJadwal.equals("")){
                 Toast.makeText(DetailRequest.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
             }else{
-                Intent terima = new Intent(DetailRequest.this, MainActivity.class);
-                startActivity(terima);
-                dialog.dismiss();
+
+                updateStatusRequest(urlUpdateRequest);
             }
+                dialog.dismiss();
 
             }
         });
@@ -317,7 +336,6 @@ public class DetailRequest extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 // Do nothing
                 dialog.dismiss();
             }
@@ -325,5 +343,193 @@ public class DetailRequest extends AppCompatActivity {
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void updateStatusRequest(final String url){
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL UPDATE REQ", url);
+                        Log.e("UPDATE REQ ", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                addJadwal(urlAddJadwal);
+                            }else{
+                                Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(DetailRequest.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                    params.put("value", String.format("status='%s'","1"));
+                    params.put("where", String.format("where id='%s'",idRequest));
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+
+    }
+
+    private void addJadwal(final String url){
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL ADD JADWAL", url);
+                        Log.e("ADD JADWAL", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                addRoom(urlAddRoom);
+                            }else{
+                                Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(DetailRequest.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("field", "id_permintaan,tgl,jam,mulai");
+                params.put("value", String.format("'%s','%s','%s','%s'", idRequest, tglJadwal, jamJadwal, "1" ));
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+    }
+
+    private void addRoom(final String url){
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL ADD ROOM", url);
+                        Log.e("ADD ROOM", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                Toast.makeText(DetailRequest.this, R.string.editsuccess, Toast.LENGTH_SHORT).show();
+                                Intent terima = new Intent(DetailRequest.this, MainActivity.class);
+                                startActivity(terima);
+                            }else{
+                                Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(DetailRequest.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(DetailRequest.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("field", "id_permintaan,id_room");
+                params.put("value", String.format("'%s','%s'", idRequest, new StringUtility().randomRoomID()));
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
     }
 }

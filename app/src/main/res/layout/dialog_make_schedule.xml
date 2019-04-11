@@ -36,7 +36,8 @@
                     android:textSize="@dimen/stdMediumTxt"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/date"
-                    android:layout_marginBottom="@dimen/stdMargin0"/>
+                    android:layout_marginBottom="@dimen/stdMargin0"
+                    android:descendantFocusability="blocksDescendants"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
                     android:textSize="@dimen/stdMediumTxt"
                     android:hint="@string/time"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/stdMargin0"/>
+                    android:layout_marginBottom="@dimen/stdMargin0"
+                    android:descendantFocusability="blocksDescendants"/>
 
                 </LinearLayout>
 
