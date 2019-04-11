@@ -1,17 +1,28 @@
 package elarham.tahfizh.ictaq;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,7 +35,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
@@ -33,9 +47,13 @@ public class DetailRequest extends AppCompatActivity {
 
     ActionBar actBar;
     String id, idRegis, idPenguji, tanggal, status;
-    TextView tanggalTxt, namaTxt, pekerjaanTxt, alamatTxt, tgl_LahirTxt, ayah_ibuTxt, tahunTxt, emailTxt, telpTxt;
+    TextView typeTxt, tanggalTxt, namaTxt, pekerjaanTxt, alamatTxt, tgl_LahirTxt, ayah_ibuTxt, tahunTxt, emailTxt, telpTxt;
+
+    CardView kontakCard;
+    LinearLayout personLay;
 
     String nama;
+    String url;
 
     SharedPreferenceManager sharePrefMan;
 
@@ -49,7 +67,6 @@ public class DetailRequest extends AppCompatActivity {
         actBar = getSupportActionBar();
         actBar.setTitle(getApplicationContext().getString(R.string.request));
         actBar.setDisplayHomeAsUpEnabled(true);
-
 
 
         id = getIntent().getStringExtra("id");
@@ -67,27 +84,42 @@ public class DetailRequest extends AppCompatActivity {
         tahunTxt = findViewById(R.id.tahunTxt);
         emailTxt = findViewById(R.id.emailTxt);
         telpTxt = findViewById(R.id.telpTxt);
+        typeTxt = findViewById(R.id.typeTxt);
 
-        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + tanggal);
+        kontakCard = findViewById(R.id.kontakCard);
+        personLay = findViewById(R.id.personLay);
 
 
         sharePrefMan = new SharedPreferenceManager(this);
 
+
+        if(sharePrefMan.getSpType().equals("3")){
+            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.examiner));
+            kontakCard.setVisibility(View.GONE);
+            personLay.setVisibility(View.GONE);
+            url = getApplicationContext().getString(R.string.urlmain) +
+                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
+        }else if(sharePrefMan.getSpType().equals("2")){
+            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.memorizer));
+            url = getApplicationContext().getString(R.string.urlmain) +
+                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
+
+        }
+
+        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + tanggal);
+
         getUserData();
-
-
 
     }
 
     private void getUserData(){
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        final String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -104,13 +136,16 @@ public class DetailRequest extends AppCompatActivity {
                             JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             nama = profile.getString("nama");
                             namaTxt.setText(nama);
-                            tahunTxt.setText(profile.getString("thn_menghafal"));
-                            pekerjaanTxt.setText(profile.getString("pekerjaan"));
-                            tgl_LahirTxt.setText(profile.getString("tgl_lahir"));
-                            alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota") + ", " + profile.getString("provinsi"));
-                            telpTxt.setText(profile.getString("telp"));
-                            emailTxt.setText(profile.getString("email"));
-                            ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+                            if(sharePrefMan.getSpType().equals("2")){
+                                tahunTxt.setText(profile.getString("thn_menghafal"));
+                                pekerjaanTxt.setText(profile.getString("pekerjaan"));
+                                tgl_LahirTxt.setText(profile.getString("tgl_lahir"));
+                                alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota") + ", " + profile.getString("provinsi"));
+                                telpTxt.setText(profile.getString("telp"));
+                                emailTxt.setText(profile.getString("email"));
+                                ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+                            }
+
 
 
                         } catch (JSONException e) {
@@ -137,10 +172,10 @@ public class DetailRequest extends AppCompatActivity {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                if(sharePrefMan.getSpType().equals("2")){
+                if(sharePrefMan.getSpType().equals("3")){
+                    params.put("where", String.format("where kode='%s'",idPenguji));
+                }else if(sharePrefMan.getSpType().equals("2")){
                     params.put("where", String.format("where a.id='%s'",idRegis));
-                }else{
-                    params.put("where", String.format("where a.id='%s'",idPenguji));
                 }
 
 
@@ -166,46 +201,129 @@ public class DetailRequest extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
 
         switch (item.getItemId()){
             case R.id.accept_menu:
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle(getApplicationContext().getString(R.string.examrequest));
-                builder.setMessage(getApplicationContext().getString(R.string.examrequestdialog) + " " + nama + " ?");
-
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-
-//                        requestJadwal(sharePrefMan.getSpKode(),user.getKode(),String.valueOf(sdf.format(myCalendar.getTime())),"0");
-                        Intent terima = new Intent(DetailRequest.this, MainActivity.class);
-                        startActivity(terima);
-                        dialog.dismiss();
-                    }
-                });
-
-                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // Do nothing
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-
+                showScheduleDialog();
                 break;
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    DatePickerDialog.OnDateSetListener date;
+    DatePickerDialog dateDial;
+    TimePickerDialog.OnTimeSetListener time;
+    TimePickerDialog timeDial;
+    Calendar myCalendar;
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void showScheduleDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_make_schedule, null);
+        builder.setView(dialogView);
+        builder.setCancelable(true);
+
+        final EditText tglTxt, waktuTxt;
+        tglTxt = dialogView.findViewById(R.id.tanggalTxt);
+        waktuTxt = dialogView.findViewById(R.id.waktuTxt);
+
+
+        myCalendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                tglTxt.setText(sdf.format(myCalendar.getTime()));
+                dateDial.dismiss();
+            }
+        };
+
+        dateDial = new DatePickerDialog(this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+
+        tglTxt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                dateDial.show();
+                return false;
+            }
+        });
+
+
+
+
+        time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, i);
+                myCalendar.set(Calendar.MINUTE, i1);
+
+
+                String myFormat = "h:mm a"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                waktuTxt.setText(sdf.format(myCalendar.getTime()));
+
+                timeDial.dismiss();
+            }
+        };
+
+        timeDial = new TimePickerDialog(DetailRequest.this, time, myCalendar.get(Calendar.HOUR_OF_DAY),
+                myCalendar.get(Calendar.MINUTE),false);
+
+        waktuTxt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                timeDial.show();
+                return false;
+            }
+        });
+
+        builder.setTitle(getApplicationContext().getString(R.string.makeschedule));
+
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+            if(tglTxt.getText().equals("") || waktuTxt.getText().equals("")){
+                Toast.makeText(DetailRequest.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
+            }else{
+                Intent terima = new Intent(DetailRequest.this, MainActivity.class);
+                startActivity(terima);
+                dialog.dismiss();
+            }
+
+            }
+        });
+
+        builder.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

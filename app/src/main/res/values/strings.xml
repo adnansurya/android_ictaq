@@ -31,7 +31,7 @@
     <string name="save">Simpan</string>
     <string name="title">Judul</string>
     <string name="sent">Dikirim</string>
-    <string name="personaldata">Data Personal</string>
+    <string name="data">Data</string>
     <string name="contact">Kontak</string>
 
     <string name="address">Alamat</string>
@@ -124,6 +124,9 @@
 
     <string name="examrequest">Permintaan Ujian</string>
     <string name="examrequestdialog">Meminta jadwal ujian dari Ustadz</string>
+    <string name="makeschedule">Atur Jadwal</string>
+    <string name="date">Tanggal</string>
+    <string name="time">Waktu</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

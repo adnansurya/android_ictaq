@@ -52,9 +52,10 @@
                     android:layout_margin="@dimen/stdMargin1"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/typeTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/personaldata"
+                        android:text="@string/data"
                         android:textSize="@dimen/itemMediumTxt"
                         android:gravity="right"/>
                     <View
@@ -75,103 +76,108 @@
                         android:textSize="@dimen/stdSmallTxt"
                         android:text="@string/name"
                         android:layout_marginBottom="@dimen/stdMargin0"/>
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
+                    <LinearLayout
+                        android:id="@+id/personLay"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/stdLine"
+                            android:background="#c0c0c0"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/occupation"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/occupation"
+                            android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/pekerjaanTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/occupation"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <TextView
+                            android:id="@+id/pekerjaanTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/occupation"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/stdLine"
+                            android:background="#c0c0c0"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/address"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/address"
+                            android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/alamatTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/address"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/birthdate"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/alamatTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/address"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/stdLine"
+                            android:background="#c0c0c0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/birthdate"
+                            android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/tgl_lahirTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/birthdate"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <TextView
+                            android:id="@+id/tgl_lahirTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/birthdate"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/parentname"
-                        android:textStyle="bold"/>
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/stdLine"
+                            android:background="#c0c0c0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/parentname"
+                            android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/ayah_ibuTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/parentname"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <TextView
+                            android:id="@+id/ayah_ibuTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/parentname"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/startyear"
-                        android:textStyle="bold"/>
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/stdLine"
+                            android:background="#c0c0c0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/startyear"
+                            android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/tahunTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/startyear"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <TextView
+                            android:id="@+id/tahunTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/startyear"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
 
-
+                    </LinearLayout>
 
 
 
@@ -179,7 +185,7 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/card_view1"
+                android:id="@+id/kontakCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/stdMargin2"
+            android:layout_marginLeft="@dimen/stdMargin3"
+            android:layout_marginStart="@dimen/stdMargin3"
+            android:layout_marginRight="@dimen/stdMargin3"
+            android:layout_marginEnd="@dimen/stdMargin3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/surahLay">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/date"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/tanggalTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/date"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdSmallTxt"
+                    android:text="@string/time"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/waktuTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:hint="@string/time"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/stdMargin0"/>
+
+                </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>
