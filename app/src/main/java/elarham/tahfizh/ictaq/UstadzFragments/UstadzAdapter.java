@@ -56,7 +56,7 @@ public class UstadzAdapter extends RecyclerView.Adapter<UstadzAdapter.ViewHolder
         User user = list.get(position);
 
         holder.namaTxt.setText(user.getNama());
-        holder.detailImg.setVisibility(View.INVISIBLE);
+        holder.detailImg.setVisibility(View.GONE);
     }
 
     @Override

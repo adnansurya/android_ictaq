@@ -29,6 +29,7 @@
     <string name="edit">Ubah</string>
     <string name="editsuccess">Data berhasil diubah!</string>
     <string name="save">Simpan</string>
+    <string name="title">Judul</string>
 
     <string name="address">Alamat</string>
     <string name="birthdate">Tanggal Lahir</string>
