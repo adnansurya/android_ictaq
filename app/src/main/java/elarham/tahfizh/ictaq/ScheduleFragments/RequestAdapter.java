@@ -1,6 +1,7 @@
 package elarham.tahfizh.ictaq.ScheduleFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import elarham.tahfizh.ictaq.DetailRequest;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Models.Request;
 import elarham.tahfizh.ictaq.R;
@@ -19,7 +21,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     private Context context;
     private List<Request> list;
-    SharedPreferenceManager sharePrefMan;
+
 
     public RequestAdapter(Context context, List<Request> list) {
         this.context = context;
@@ -35,8 +37,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Request request = list.get(position);
-        holder.judulTxt.setText(request.getTanggal());
-        holder.detailImg.setVisibility(View.GONE);
+        holder.judulTxt.setText(context.getString(R.string.sent) + " : " +request.getTanggal());
+        holder.personImg.setVisibility(View.GONE);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             detailImg = itemView.findViewById(R.id.detailImg);
             personImg = itemView.findViewById(R.id.personImg);
 
-            personImg.setOnClickListener(new View.OnClickListener() {
+            detailImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -64,14 +66,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
                     Request request = list.get(position);
 
-
-                    sharePrefMan = new SharedPreferenceManager(context);
-                    if(sharePrefMan.getSpType().equals("2")){
-                        Toast.makeText(context, context.getString(R.string.memorizer) + " " + request.getIdRegis(), Toast.LENGTH_SHORT).show();
-                    }else if(sharePrefMan.getSpType().equals("3")){
-                        Toast.makeText(context, context.getString(R.string.examiner) + " " + request.getIdPenguji(), Toast.LENGTH_SHORT).show();
-                    }
-
+                    Toast.makeText(context, request.getId(), Toast.LENGTH_SHORT).show();
+                    Intent open = new Intent(context, DetailRequest.class);
+                    open.putExtra("id",request.getId());
+                    open.putExtra("idRegis", request.getIdRegis());
+                    open.putExtra("idPenguji", request.getIdPenguji());
+                    open.putExtra("tanggal", request.getTanggal());
+                    open.putExtra("status", request.getStatus());
+                    context.startActivity(open);
 
 
                 }

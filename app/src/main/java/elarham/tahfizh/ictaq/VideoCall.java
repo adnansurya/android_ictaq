@@ -1,5 +1,6 @@
 package elarham.tahfizh.ictaq;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.Manifest;
@@ -27,12 +28,17 @@ import static android.content.ContentValues.TAG;
 public class VideoCall extends AppCompatActivity {
 
     private WebView mWebRTCWebView;
+    ActionBar actBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_call);
         mWebRTCWebView = findViewById(R.id.main_webview);
+
+        actBar = getSupportActionBar();
+        actBar.setTitle(getApplicationContext().getString(R.string.profile));
+        actBar.setDisplayHomeAsUpEnabled(true);
 
         setUpWebViewDefaults(mWebRTCWebView);
 

@@ -90,7 +90,6 @@ public class Profile extends AppCompatActivity {
                         Log.e("PROFILE ", response);
 
 
-
                         try {
 
                             JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);

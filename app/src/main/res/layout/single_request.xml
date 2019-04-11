@@ -38,7 +38,7 @@
                 android:layout_toRightOf="@+id/itemImageView"
                 android:layout_toEndOf="@+id/itemImageView"
                 android:text="@string/title"
-                android:textSize="@dimen/itemMediumTxt"/>
+                android:textSize="@dimen/itemSmallTxt"/>
 
             <ImageView
                 android:id="@+id/personImg"
@@ -46,18 +46,18 @@
                 android:layout_height="@dimen/itemImageView"
                 android:src="@drawable/ic_person"
                 android:padding="@dimen/stdMargin1"
-                android:layout_toLeftOf="@id/checkImg"
-                android:layout_toStartOf="@id/checkImg"/>
+                android:layout_toLeftOf="@id/detailImg"
+                android:layout_toStartOf="@id/detailImg"/>
 
 
             <ImageView
-                android:id="@+id/checkImg"
+                android:id="@+id/detailImg"
                 android:layout_width="@dimen/itemImageView"
                 android:layout_height="@dimen/itemImageView"
                 android:padding="@dimen/stdMargin1"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_check_circle"/>
+                android:src="@drawable/ic_next"/>
 
 
 

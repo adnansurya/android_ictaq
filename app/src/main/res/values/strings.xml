@@ -30,6 +30,7 @@
     <string name="editsuccess">Data berhasil diubah!</string>
     <string name="save">Simpan</string>
     <string name="title">Judul</string>
+    <string name="sent">Dikirim</string>
 
     <string name="address">Alamat</string>
     <string name="birthdate">Tanggal Lahir</string>
@@ -39,6 +40,7 @@
     <string name="occupation">Pekerjaan</string>
     <string name="parentname">Nama Lengkap Ayah / Ibu</string>
     <string name="startyear">Tahun Mulai</string>
+
 
     <string name="error">Terjadi Kesalahan</string>
     <string name="loading">Memuat</string>
