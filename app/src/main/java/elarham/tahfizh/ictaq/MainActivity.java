@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     ActionBar actBar;
     int backButtonCount = 0;
+    float defaultElevation = (float) 15;
 
     SharedPreferenceManager sharePrefMan;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         sharePrefMan = new SharedPreferenceManager(this);
 
         actBar = getSupportActionBar();
+
         actBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_USE_LOGO);
 
         actBar.setIcon(R.mipmap.ic_mytahfizh);
@@ -153,18 +155,23 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()){
             case R.id.home_menu:
                 fragment = new HomeFragment();
+                actBar.setElevation(defaultElevation);
                 break;
             case R.id.quran_menu:
                 fragment = new QuranFragment();
+                actBar.setElevation(0);
                 break;
             case R.id.ustadz_menu:
                 fragment = new UstadzFragment();
+                actBar.setElevation(defaultElevation);
                 break;
             case R.id.schedule_menu:
                 fragment = new ScheduleFragment();
+                actBar.setElevation(0);
                 break;
             case R.id.certificate_menu:
                 fragment = new CertificateFragment();
+                actBar.setElevation(defaultElevation);
                 break;
         }
 
