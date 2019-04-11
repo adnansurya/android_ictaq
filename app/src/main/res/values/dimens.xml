@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="stdLine">1dp</dimen>
+    <dimen name="stdLine1">2dp</dimen>
+
     <dimen name="stdMargin0">4dp</dimen>
     <dimen name="stdMargin1">8dp</dimen>
     <dimen name="stdMargin2">16dp</dimen>

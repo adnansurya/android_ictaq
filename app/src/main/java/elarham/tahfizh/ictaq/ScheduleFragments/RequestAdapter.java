@@ -66,7 +66,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
                     Request request = list.get(position);
 
-                    Toast.makeText(context, request.getId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, request.getIdPenguji(), Toast.LENGTH_SHORT).show();
                     Intent open = new Intent(context, DetailRequest.class);
                     open.putExtra("id",request.getId());
                     open.putExtra("idRegis", request.getIdRegis());

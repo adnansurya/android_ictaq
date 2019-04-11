@@ -31,6 +31,8 @@
     <string name="save">Simpan</string>
     <string name="title">Judul</string>
     <string name="sent">Dikirim</string>
+    <string name="personaldata">Data Personal</string>
+    <string name="contact">Kontak</string>
 
     <string name="address">Alamat</string>
     <string name="birthdate">Tanggal Lahir</string>
@@ -52,6 +54,7 @@
     <string name="loginfail">Login Gagal!</string>
     <string name="loginok">Login Berhasil!</string>
     <string name="wrongdataformat">Kesalahan Format Data</string>
+    <string name="accept">Terima</string>
 
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
