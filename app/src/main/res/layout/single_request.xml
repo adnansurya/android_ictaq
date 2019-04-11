@@ -27,8 +27,7 @@
                 android:gravity="center"
                 android:layout_marginRight="@dimen/stdMargin1"
                 android:layout_marginEnd="@dimen/stdMargin1"
-                android:src="@drawable/ic_event"
-                />
+                android:src="@drawable/ic_description" />
 
             <TextView
                 android:id="@+id/judulTxt"
@@ -39,15 +38,6 @@
                 android:layout_toEndOf="@+id/itemImageView"
                 android:text="@string/title"
                 android:textSize="@dimen/itemSmallTxt"/>
-
-            <ImageView
-                android:id="@+id/personImg"
-                android:layout_width="@dimen/itemImageView"
-                android:layout_height="@dimen/itemImageView"
-                android:src="@drawable/ic_person"
-                android:padding="@dimen/stdMargin1"
-                android:layout_toLeftOf="@id/detailImg"
-                android:layout_toStartOf="@id/detailImg"/>
 
 
             <ImageView

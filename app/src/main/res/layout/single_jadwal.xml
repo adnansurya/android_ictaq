@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/stdMargin0"
+        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/stdMargin0">
+            <RelativeLayout
+                android:id="@+id/bodyLayout"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/editImg"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/itemImageView"
+                    android:layout_width="@dimen/itemImageButton"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/stdMargin1"
+                    android:layout_marginEnd="@dimen/stdMargin1"
+                    android:src="@drawable/ic_event" />
+                <TextView
+                    android:id="@+id/tanggalTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:layout_toRightOf="@+id/itemImageView"
+                    android:layout_toEndOf="@+id/itemImageView"
+                    android:text="@string/date"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/itemSmallTxt"/>
+
+                <ImageView
+                    android:id="@+id/itemImageView3"
+                    android:layout_width="@dimen/itemImageButton"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:gravity="center"
+                    android:layout_below="@+id/itemImageView"
+                    android:layout_marginRight="@dimen/stdMargin1"
+                    android:layout_marginEnd="@dimen/stdMargin1"
+                    android:src="@drawable/ic_alarm" />
+
+                <TextView
+                    android:id="@+id/jamTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:layout_toRightOf="@+id/itemImageView3"
+                    android:layout_toEndOf="@+id/itemImageView3"
+                    android:text="@string/time"
+                    android:layout_alignBottom="@+id/itemImageView3"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/itemSmallTxt"/>
+                <ImageView
+                    android:id="@+id/itemImageView2"
+                    android:layout_width="@dimen/itemImageButton"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/itemImageView3"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/stdMargin1"
+                    android:layout_marginEnd="@dimen/stdMargin1"
+                    android:src="@drawable/ic_assignment_turned_in"
+                    />
+
+
+                <TextView
+                    android:id="@+id/nilaiTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/itemImageButton"
+                    android:gravity="center_vertical"
+                    android:layout_alignBottom="@+id/itemImageView2"
+                    android:layout_toRightOf="@+id/itemImageView2"
+                    android:layout_toEndOf="@+id/itemImageView2"
+                    android:text="@string/score"
+                    android:textSize="@dimen/itemSmallTxt"/>
+
+            </RelativeLayout>
+
+
+
+            <ImageView
+                android:id="@+id/editImg"
+                android:layout_width="@dimen/itemImageView"
+                android:layout_height="@dimen/itemImageView"
+                android:src="@drawable/ic_edit"
+                android:padding="@dimen/stdMargin1"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/personImg"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/personImg"/>
+
+
+
+            <ImageView
+                android:id="@+id/personImg"
+                android:layout_width="@dimen/itemImageView"
+                android:layout_height="@dimen/itemImageView"
+                android:src="@drawable/ic_assignment_ind"
+                android:padding="@dimen/stdMargin1"
+                android:layout_toLeftOf="@+id/nextImg"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/nextImg"/>
+
+
+            <ImageView
+                android:id="@+id/nextImg"
+                android:layout_width="@dimen/itemImageView"
+                android:layout_height="@dimen/itemImageView"
+                android:padding="@dimen/stdMargin1"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_next"/>
+
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

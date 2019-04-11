@@ -19,16 +19,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import elarham.tahfizh.ictaq.Daftar;
-import elarham.tahfizh.ictaq.MainActivity;
-import static android.content.ContentValues.TAG;
 
 public class VideoCall extends AppCompatActivity {
 
     private WebView mWebRTCWebView;
     ActionBar actBar;
+    String roomId, url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +33,19 @@ public class VideoCall extends AppCompatActivity {
         setContentView(R.layout.activity_video_call);
         mWebRTCWebView = findViewById(R.id.main_webview);
 
+        roomId = getIntent().getStringExtra("idRoom");
+
+        Log.e("ROOM ID", roomId);
+
         actBar = getSupportActionBar();
-        actBar.setTitle(getApplicationContext().getString(R.string.profile));
+        actBar.setTitle(getApplicationContext().getString(R.string.vidcall));
         actBar.setDisplayHomeAsUpEnabled(true);
 
         setUpWebViewDefaults(mWebRTCWebView);
 
-        mWebRTCWebView.loadUrl("https://appr.tc/r/123412341234?stereo=false&backasc=ISAC/16000&hd=false");
+        url = "https://appr.tc/r/" + roomId+ "?stereo=false&backasc=ISAC/16000&hd=false";
+
+        mWebRTCWebView.loadUrl(url);
 
 
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO)
@@ -56,7 +59,7 @@ public class VideoCall extends AppCompatActivity {
     }
     private void setWebChromeClient(){
 
-        final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
+        final ProgressDialog progressDialog = new ProgressDialog(VideoCall.this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
 
@@ -86,6 +89,8 @@ public class VideoCall extends AppCompatActivity {
 
 
 
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -94,12 +99,17 @@ public class VideoCall extends AppCompatActivity {
          * When the application falls into the background we want to stop the media stream
          * such that the camera is free to use by other apps.
          */
-//        Log.e("FRAGMENT", "TERTUTUP");
+        Log.e("VIDCALL", "STOP");
 
         mWebRTCWebView.loadUrl("about:blank");
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mWebRTCWebView.loadUrl("about:blank");
+        Log.e("VIDCALL", "PAUSE");
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setUpWebViewDefaults(WebView webView) {
@@ -137,4 +147,5 @@ public class VideoCall extends AppCompatActivity {
         cookieManager.setAcceptThirdPartyCookies(mWebRTCWebView, true);
     }
 
+    
 }

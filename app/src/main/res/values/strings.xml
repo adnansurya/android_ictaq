@@ -127,6 +127,9 @@
     <string name="makeschedule">Atur Jadwal</string>
     <string name="date">Tanggal</string>
     <string name="time">Waktu</string>
+    <string name="score">Nilai</string>
+    <string name="notes">Catatan</string>
+    <string name="notavailable">Belum Tersedia</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

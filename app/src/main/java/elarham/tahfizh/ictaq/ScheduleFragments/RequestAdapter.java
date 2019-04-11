@@ -22,6 +22,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     private Context context;
     private List<Request> list;
+    SharedPreferenceManager sharePrefMan;
 
 
     public RequestAdapter(Context context, List<Request> list) {
@@ -38,8 +39,12 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Request request = list.get(position);
+        sharePrefMan = new SharedPreferenceManager(context);
         holder.judulTxt.setText(context.getString(R.string.sent) + " : " +request.getTanggal());
-        holder.personImg.setVisibility(View.GONE);
+        if(sharePrefMan.getSpType().equals("3")){
+            holder.detailImg.setImageDrawable(context.getDrawable(R.drawable.ic_person_pin));
+        }
+
     }
 
     @Override
@@ -49,7 +54,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView judulTxt;
-        ImageView detailImg, personImg;
+        ImageView detailImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,7 +62,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
             judulTxt = itemView.findViewById(R.id.judulTxt);
             detailImg = itemView.findViewById(R.id.detailImg);
-            personImg = itemView.findViewById(R.id.personImg);
+
 
             detailImg.setOnClickListener(new View.OnClickListener() {
                 @Override

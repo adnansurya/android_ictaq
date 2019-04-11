@@ -78,6 +78,7 @@ public class DetailRequest extends AppCompatActivity {
         tanggal = getIntent().getStringExtra("tanggal");
         status = getIntent().getStringExtra("status");
 
+
         tanggalTxt = findViewById(R.id.tanggalTxt);
         namaTxt = findViewById(R.id.namaTxt);
         pekerjaanTxt = findViewById(R.id.pekerjaanTxt);
@@ -206,7 +207,7 @@ public class DetailRequest extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.detail_request_menu, menu);
 
-        if(sharePrefMan.getSpType().trim().equals("3")){
+        if(sharePrefMan.getSpType().trim().equals("3") || status.equals("1")){
             MenuItem check = menu.findItem(R.id.accept_menu);
             check.setVisible(false);
         }
