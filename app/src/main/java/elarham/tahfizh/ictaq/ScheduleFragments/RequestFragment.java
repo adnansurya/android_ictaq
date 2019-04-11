@@ -95,28 +95,29 @@ public class RequestFragment extends Fragment {
 
                         try {
 
-                            JSONArray ustadz = new JSONObject(response).getJSONArray("data");
-                            for (int i=0; i <ustadz.length(); i++){
+                            JSONArray request = new JSONObject(response).getJSONArray("data");
+                            for (int i=0; i <request.length(); i++){
 
-                                JSONObject jsonObj = ustadz.getJSONObject(i);
+                                JSONObject jsonObj = request.getJSONObject(i);
 
-                                Request req = new Request();
+
                                 String id,status;
                                 id = jsonObj.getString("id");
                                 status = jsonObj.getString("status");
 
-                                req.setId(id);
-                                req.setIdRegis(jsonObj.getString("id_regis"));
-                                req.setIdPenguji(jsonObj.getString("id_penguji"));
-                                req.setTanggal(jsonObj.getString("tgl"));
-                                req.setStatus(status);
-
-                                reqList.add(req);
 
                                 if(status.equals("1")){
                                     reqSiap.append(id);
                                     reqSiap.append(",");
 
+                                }else if(status.equals("0")){
+                                    Request req = new Request();
+                                    req.setId(id);
+                                    req.setIdRegis(jsonObj.getString("id_regis"));
+                                    req.setIdPenguji(jsonObj.getString("id_penguji"));
+                                    req.setTanggal(jsonObj.getString("tgl"));
+                                    req.setStatus(status);
+                                    reqList.add(req);
                                 }
 
 
