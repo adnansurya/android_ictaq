@@ -41,23 +41,23 @@
                 android:textSize="@dimen/itemMediumTxt"/>
 
             <ImageView
-                android:id="@+id/detailImg"
+                android:id="@+id/personImg"
                 android:layout_width="@dimen/itemImageView"
                 android:layout_height="@dimen/itemImageView"
-                android:src="@drawable/ic_person_pin"
+                android:src="@drawable/ic_person"
                 android:padding="@dimen/stdMargin1"
-                android:layout_toLeftOf="@id/personImg"
-                android:layout_toStartOf="@id/personImg"/>
+                android:layout_toLeftOf="@id/checkImg"
+                android:layout_toStartOf="@id/checkImg"/>
 
 
             <ImageView
-                android:id="@+id/personImg"
+                android:id="@+id/checkImg"
                 android:layout_width="@dimen/itemImageView"
                 android:layout_height="@dimen/itemImageView"
                 android:padding="@dimen/stdMargin1"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_person"/>
+                android:src="@drawable/ic_check_circle"/>
 
 
 
