@@ -31,6 +31,7 @@ import java.util.Map;
 
 import elarham.tahfizh.ictaq.DetailRequest;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Jadwal;
 import elarham.tahfizh.ictaq.Models.Request;
 import elarham.tahfizh.ictaq.R;
@@ -60,7 +61,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
 
         sharePrefMan = new SharedPreferenceManager(context);
         Jadwal ready = list.get(position);
-        holder.tanggalTxt.setText(ready.getTanggal());
+        holder.tanggalTxt.setText(new StringUtility().relativeTime(ready.getTanggal(), context));
         holder.jamTxt.setText(ready.getJam());
         if(ready.getNilai().equals("null")){
             holder.nilaiTxt.setText(context.getString(R.string.notavailable));

@@ -3,18 +3,20 @@ package elarham.tahfizh.ictaq.ScheduleFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.List;
 
 import elarham.tahfizh.ictaq.DetailRequest;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Request;
 import elarham.tahfizh.ictaq.R;
 
@@ -40,9 +42,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Request request = list.get(position);
         sharePrefMan = new SharedPreferenceManager(context);
-        holder.judulTxt.setText(context.getString(R.string.sent) + " : " +request.getTanggal());
+
+
+        holder.judulTxt.setText(context.getString(R.string.sent) + " : " + new StringUtility().relativeTime(request.getTanggal(), context));
         if(sharePrefMan.getSpType().equals("3")){
-            holder.detailImg.setImageDrawable(context.getDrawable(R.drawable.ic_person_pin));
+            holder.detailImg.setImageDrawable(context.getDrawable(R.drawable.ic_assignment_ind));
         }
 
     }

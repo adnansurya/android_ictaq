@@ -26,8 +26,7 @@
         <activity
             android:name=".VideoCall"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Account"
             android:parentActivityName=".SettingsActivity"
