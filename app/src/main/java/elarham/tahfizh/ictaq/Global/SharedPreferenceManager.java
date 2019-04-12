@@ -16,7 +16,6 @@ public class SharedPreferenceManager {
     public String SP_NAMA = "spNama";
     public String SP_ID_USER = "spIdUser";
 
-    public String SP_REQ_READY = "spReqReady";
 
 
     public String SP_SUDAH_LOGIN = "spSudahLogin";
@@ -74,8 +73,6 @@ public class SharedPreferenceManager {
         return sp.getBoolean(SP_SUDAH_LOGIN, false);
     }
 
-
-    public String getSpReqReady(){return sp.getString(SP_REQ_READY,"");}
 
 
 

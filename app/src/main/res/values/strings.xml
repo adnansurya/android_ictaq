@@ -123,7 +123,7 @@
     <string name="micnotallowed">Izin microphone ditolak!</string>
 
     <string name="examrequest">Permintaan Ujian</string>
-    <string name="examrequestdialog">Meminta jadwal ujian dari Ustadz</string>
+    <string name="examrequestdialog">Meminta jadwal ujian dari</string>
     <string name="makeschedule">Atur Jadwal</string>
     <string name="date">Tanggal</string>
     <string name="time">Waktu</string>

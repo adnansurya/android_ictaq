@@ -40,10 +40,12 @@ public class ReadyFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     DividerItemDecoration dividerItemDecoration;
     List<Jadwal> readyList;
+    List<Request> reqList;
     RecyclerView.Adapter adapter;
     SharedPreferenceManager sharePrefMan;
 
     String url;
+    StringBuilder reqSiap;
 
     @Nullable
     @Override
@@ -54,6 +56,7 @@ public class ReadyFragment extends Fragment {
         mList = view.findViewById(R.id.recycleList);
 
         readyList = new ArrayList<>();
+        reqList = new ArrayList<>();
         adapter = new ReadyAdapter(getContext(),readyList);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -65,11 +68,85 @@ public class ReadyFragment extends Fragment {
         mList.setAdapter(adapter);
 
         url = getContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=permintaan";
 
-        getData();
+        reqSiap = new StringBuilder("(");
+
+        getReqData();
+
 
         return view;
+    }
+
+    private void getReqData(){
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getContext().getString(R.string.loading));
+        progressDialog.show();
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+        StringRequest strRequest = new StringRequest(com.android.volley.Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL REQ READY", url);
+                        Log.e("REQ READY", response);
+
+                        try {
+
+                            JSONArray request = new JSONObject(response).getJSONArray("data");
+                            for (int i=0; i <request.length(); i++){
+
+                                JSONObject jsonObj = request.getJSONObject(i);
+
+                                String id = jsonObj.getString("id");
+
+                                reqSiap.append(id);
+                                reqSiap.append(",");
+
+
+                            }
+                            reqSiap.deleteCharAt(reqSiap.length()-1);
+                            reqSiap.append(")");
+
+                            url = getContext().getString(R.string.urlmain) +
+                                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
+                            getData();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), getContext().getString(R.string.wrongdataformat), Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+                if(sharePrefMan.getSpType().equals("3")){
+                    params.put("where", String.format("where id_regis='%s' AND status='1'",sharePrefMan.getSpKode() ));
+                }else if(sharePrefMan.getSpType().equals("2")){
+                    params.put("where", String.format("where id_penguji='%s'AND status='1'",sharePrefMan.getSpKode() ));
+                }
+                return params;
+            }
+        };
+
+        requestQueue.add(strRequest);
     }
 
     private void getData() {
@@ -134,12 +211,7 @@ public class ReadyFragment extends Fragment {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", String.format("where id_permintaan IN %s",sharePrefMan.getSpReqReady()));
-//                if(sharePrefMan.getSpType().equals("3")){
-//                    params.put("where", String.format("where id_regis='%s'",sharePrefMan.getSpKode() ));
-//                }else if(sharePrefMan.getSpType().equals("2")){
-//                    params.put("where", String.format("where id_penguji='%s'",sharePrefMan.getSpKode() ));
-//                }
+                params.put("where", String.format("where id_permintaan IN %s",reqSiap.toString()));
                 return params;
             }
         };

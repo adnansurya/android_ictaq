@@ -42,7 +42,7 @@ public class RequestFragment extends Fragment {
     RecyclerView.Adapter adapter;
     SharedPreferenceManager sharePrefMan;
 
-    StringBuilder reqSiap;
+
 
     String url;
     @Nullable
@@ -71,7 +71,7 @@ public class RequestFragment extends Fragment {
 
         getData();
 
-        reqSiap = new StringBuilder("(");
+
 
         return view;
     }
@@ -106,24 +106,19 @@ public class RequestFragment extends Fragment {
                                 status = jsonObj.getString("status");
 
 
-                                if(status.equals("1")){
-                                    reqSiap.append(id);
-                                    reqSiap.append(",");
 
-                                }else if(status.equals("0")){
-                                    Request req = new Request();
-                                    req.setId(id);
-                                    req.setIdRegis(jsonObj.getString("id_regis"));
-                                    req.setIdPenguji(jsonObj.getString("id_penguji"));
-                                    req.setTanggal(jsonObj.getString("tgl"));
-                                    req.setStatus(status);
-                                    reqList.add(req);
-                                }
+                                Request req = new Request();
+                                req.setId(id);
+                                req.setIdRegis(jsonObj.getString("id_regis"));
+                                req.setIdPenguji(jsonObj.getString("id_penguji"));
+                                req.setTanggal(jsonObj.getString("tgl"));
+                                req.setStatus(status);
+                                reqList.add(req);
+
 
 
                             }
-                            reqSiap.deleteCharAt(reqSiap.length()-1);
-                            reqSiap.append(")");
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -131,8 +126,8 @@ public class RequestFragment extends Fragment {
                         }
 
 
-                        Log.e("REQUEST to READY", reqSiap.toString());
-                        sharePrefMan.setSPString(sharePrefMan.SP_REQ_READY,reqSiap.toString());
+
+
                         adapter.notifyDataSetChanged();
                         progressDialog.dismiss();
 
@@ -152,9 +147,9 @@ public class RequestFragment extends Fragment {
 
                 Map<String, String> params = new HashMap<String, String>();
                 if(sharePrefMan.getSpType().equals("3")){
-                    params.put("where", String.format("where id_regis='%s'",sharePrefMan.getSpKode() ));
+                    params.put("where", String.format("where id_regis='%s' AND status='0'",sharePrefMan.getSpKode() ));
                 }else if(sharePrefMan.getSpType().equals("2")){
-                    params.put("where", String.format("where id_penguji='%s'",sharePrefMan.getSpKode() ));
+                    params.put("where", String.format("where id_penguji='%s' AND status='0'",sharePrefMan.getSpKode() ));
                 }
                 return params;
             }

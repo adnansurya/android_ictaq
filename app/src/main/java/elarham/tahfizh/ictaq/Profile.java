@@ -35,6 +35,10 @@ public class Profile extends AppCompatActivity {
     TextView namaTxt, typeTxt, tahunTxt, provinsiTxt, pekerjaanTxt, tgl_lahirTxt, alamatTxt, telpTxt, emailTxt, ayah_ibuTxt;
 
 
+    boolean itemLoaded = false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,9 +109,16 @@ public class Profile extends AppCompatActivity {
                             ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
 
 
+
+                            itemLoaded = true;
+                            invalidateOptionsMenu();
+
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(Profile.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                            onBackPressed();
                         }
 
                         progressDialog.dismiss();
@@ -121,6 +132,7 @@ public class Profile extends AppCompatActivity {
                         Toast.makeText(Profile.this, R.string.error, Toast.LENGTH_SHORT).show();
                         Log.e("Volley Error", error.toString());
                         progressDialog.dismiss();
+                        onBackPressed();
                     }
                 })
         {
@@ -142,6 +154,13 @@ public class Profile extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profil_menu, menu);
+
+        MenuItem check = menu.findItem(R.id.edit_menu);
+        if(itemLoaded){
+            check.setVisible(true);
+        }else{
+            check.setVisible(false);
+        }
 
         return true;
     }
