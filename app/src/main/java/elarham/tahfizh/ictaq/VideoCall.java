@@ -1,5 +1,7 @@
 package elarham.tahfizh.ictaq;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,10 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.webkit.CookieManager;
 import android.webkit.PermissionRequest;
@@ -19,21 +25,37 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+
+import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 
 
 public class VideoCall extends AppCompatActivity {
 
+    SharedPreferenceManager sharePrefMan;
+
     private WebView mWebRTCWebView;
+    LinearLayout editLay;
     ActionBar actBar;
     String roomId, url;
+
+    String jadwalId, reqId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_call);
+
+        sharePrefMan = new SharedPreferenceManager(this);
         mWebRTCWebView = findViewById(R.id.main_webview);
+        editLay = findViewById(R.id.editLay);
+
+
+
 
         roomId = getIntent().getStringExtra("idRoom");
+        jadwalId = getIntent().getStringExtra("idJadwal");
+        reqId = getIntent().getStringExtra("idReq");
 
         Log.e("ROOM ID", roomId);
 
@@ -45,17 +67,16 @@ public class VideoCall extends AppCompatActivity {
 
         url = "https://appr.tc/r/" + roomId+ "?stereo=false&backasc=ISAC/16000&hd=false";
 
-        mWebRTCWebView.loadUrl(url);
-
-
-        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                        == PackageManager.PERMISSION_GRANTED){
-
-            setWebChromeClient();
-
+        if(sharePrefMan.getSpType().equals("2")){
+            mWebRTCWebView.setVisibility(View.GONE);
+            editLay.setVisibility(View.VISIBLE);
+        }else if(sharePrefMan.getSpType().equals("3")){
+            editLay.setVisibility(View.GONE);
+            openRTC();
         }
+
+
+
     }
     private void setWebChromeClient(){
 
@@ -147,5 +168,62 @@ public class VideoCall extends AppCompatActivity {
         cookieManager.setAcceptThirdPartyCookies(mWebRTCWebView, true);
     }
 
-    
+     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.videocall_menu, menu);
+
+         if(sharePrefMan.getSpType().trim().equals("3")){
+             MenuItem check = menu.findItem(R.id.edit_menu);
+             check.setVisible(false);
+         }
+
+        return true;
+    }
+
+    public void openRTC(){
+        mWebRTCWebView.setVisibility(View.VISIBLE);
+        mWebRTCWebView.loadUrl(url);
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED){
+
+            setWebChromeClient();
+
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mWebRTCWebView.loadUrl("about:blank");
+                editLay.setVisibility(View.GONE);
+                onBackPressed();
+                return true;
+            case R.id.browser_menu:
+                mWebRTCWebView.loadUrl("about:blank");
+                mWebRTCWebView.setVisibility(View.GONE);
+                editLay.setVisibility(View.GONE);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                break;
+
+            case R.id.exam_menu:
+                editLay.setVisibility(View.GONE);
+                openRTC();
+                break;
+            case R.id.edit_menu:
+                mWebRTCWebView.loadUrl("about:blank");
+                mWebRTCWebView.setVisibility(View.GONE);
+                editLay.setVisibility(View.VISIBLE);
+
+                break;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -130,6 +130,9 @@
     <string name="score">Nilai</string>
     <string name="notes">Catatan</string>
     <string name="notavailable">Belum Tersedia</string>
+    <string name="openbrowser">Buka Browser</string>
+    <string name="startexam">Mulai Ujian</string>
+    <string name="exam">Ujian</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

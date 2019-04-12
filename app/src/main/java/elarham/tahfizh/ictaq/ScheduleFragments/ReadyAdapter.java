@@ -149,7 +149,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
                     url = context.getString(R.string.urlmain) +
                             "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=room";
 
-                   getRoomById(ready.getIdReq());
+                   getRoomById(ready.getIdReq(), ready.getId());
 
 
                 }
@@ -157,7 +157,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         }
     }
 
-    private void getRoomById(final String idReq){
+    private void getRoomById(final String idReq, final String idJadwal){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
         progressDialog.show();
@@ -177,7 +177,9 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
 
                             JSONObject room = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             Intent vidCall = new Intent(context, VideoCall.class);
+                            vidCall.putExtra("idJadwal", idJadwal);
                             vidCall.putExtra("idRoom", room.getString("id_room"));
+                            vidCall.putExtra("idReq", idReq);
                             context.startActivity(vidCall);
 
 

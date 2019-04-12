@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/vidcall_menu"
+        android:title="@string/exam"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_assignment">
+        <menu>
+            <item
+                android:id="@+id/exam_menu"
+                android:title="@string/startexam"
+                app:showAsAction="never"
+                android:icon="@drawable/ic_play"/>
+            <item
+                android:id="@+id/browser_menu"
+                android:title="@string/openbrowser"
+                app:showAsAction="never"
+                android:icon="@drawable/ic_open_in_browser"/>
+            <item
+                android:id="@+id/edit_menu"
+                android:title="@string/edit"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_edit"/>
+        </menu>
+    </item>
+
+
+
+</menu>
