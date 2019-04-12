@@ -135,6 +135,9 @@
     <string name="startexam">Mulai Ujian</string>
     <string name="exam">Ujian</string>
     <string name="resetroomid">Ganti Kode Room</string>
+    <string name="today">Hari Ini</string>
+    <string name="recently">Baru Saja</string>
+    <string name="soon">Sesaat Lagi</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

@@ -33,6 +33,15 @@ public class StringUtility {
             PrettyTime pTime = new PrettyTime(Locale.forLanguageTag("ID"));
 
             dateFormatted =  pTime.format((date));
+            if(dateFormatted.contains("jam") || dateFormatted.contains("menit") || dateFormatted.contains("detik")){
+                dateFormatted = context.getString(R.string.today);
+//                if(dateFormatted.contains("lalu")){
+//                    dateFormatted =  context.getString(R.string.recently);
+//                }else{
+//                    dateFormatted =  context.getString(R.string.soon);
+//                }
+
+            }
 
         }
         catch (Exception e)
@@ -40,7 +49,9 @@ public class StringUtility {
             e.printStackTrace();
             Toast.makeText(context, context.getString(R.string.wrongdataformat), Toast.LENGTH_SHORT).show();
         }
+
         return dateFormatted;
+
 
     }
 
