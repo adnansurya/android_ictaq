@@ -120,7 +120,7 @@ public class DetailRequest extends AppCompatActivity {
                 "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=room";
 
 
-        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + tanggal);
+        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + new StringUtility().exactTime(tanggal,this));
 
         getUserData();
 
