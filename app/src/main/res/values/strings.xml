@@ -128,11 +128,13 @@
     <string name="date">Tanggal</string>
     <string name="time">Waktu</string>
     <string name="score">Nilai</string>
+    <string name="scoring">Penilaian</string>
     <string name="notes">Catatan</string>
     <string name="notavailable">Belum Tersedia</string>
     <string name="openbrowser">Buka Browser</string>
     <string name="startexam">Mulai Ujian</string>
     <string name="exam">Ujian</string>
+    <string name="resetroomid">Ganti Kode Room</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

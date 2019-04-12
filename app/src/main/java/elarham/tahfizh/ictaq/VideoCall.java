@@ -26,8 +26,23 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 
 
 public class VideoCall extends AppCompatActivity {
@@ -173,9 +188,11 @@ public class VideoCall extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.videocall_menu, menu);
 
-         if(sharePrefMan.getSpType().trim().equals("3")){
+         if(sharePrefMan.getSpType().equals("3")){
              MenuItem check = menu.findItem(R.id.edit_menu);
              check.setVisible(false);
+             MenuItem changeRoom = menu.findItem(R.id.room_menu);
+             changeRoom.setVisible(false);
          }
 
         return true;
@@ -210,7 +227,9 @@ public class VideoCall extends AppCompatActivity {
                 editLay.setVisibility(View.GONE);
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 break;
-
+            case R.id.room_menu:
+                changeRoomId(reqId, new StringUtility().randomRoomID());
+                break;
             case R.id.exam_menu:
                 editLay.setVisibility(View.GONE);
                 openRTC();
@@ -225,5 +244,69 @@ public class VideoCall extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void changeRoomId(final String idReq, final String newRoomId){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=room";
+
+
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL UPDATE ROOM", url);
+                        Log.e("UPDATE ROOM ", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                roomId = newRoomId;
+                                Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(VideoCall.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", String.format("id_room='%s'", newRoomId));
+                params.put("where", String.format("where id_permintaan='%s'",idReq));
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
     }
 }

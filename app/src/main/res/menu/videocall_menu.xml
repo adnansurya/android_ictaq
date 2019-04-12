@@ -20,8 +20,13 @@
                 app:showAsAction="never"
                 android:icon="@drawable/ic_open_in_browser"/>
             <item
+                android:id="@+id/room_menu"
+                android:title="@string/resetroomid"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_sync"/>
+            <item
                 android:id="@+id/edit_menu"
-                android:title="@string/edit"
+                android:title="@string/scoring"
                 app:showAsAction="ifRoom"
                 android:icon="@drawable/ic_edit"/>
         </menu>
