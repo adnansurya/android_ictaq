@@ -65,9 +65,6 @@ public class VideoCall extends AppCompatActivity {
         mWebRTCWebView = findViewById(R.id.main_webview);
         editLay = findViewById(R.id.editLay);
 
-
-
-
         roomId = getIntent().getStringExtra("idRoom");
         jadwalId = getIntent().getStringExtra("idJadwal");
         reqId = getIntent().getStringExtra("idReq");
@@ -75,7 +72,7 @@ public class VideoCall extends AppCompatActivity {
         Log.e("ROOM ID", roomId);
 
         actBar = getSupportActionBar();
-        actBar.setTitle(getApplicationContext().getString(R.string.vidcall));
+        actBar.setTitle(getApplicationContext().getString(R.string.exam));
         actBar.setDisplayHomeAsUpEnabled(true);
 
         setUpWebViewDefaults(mWebRTCWebView);

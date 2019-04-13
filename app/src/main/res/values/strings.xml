@@ -138,6 +138,10 @@
     <string name="recently">Baru Saja</string>
     <string name="soon">Sesaat Lagi</string>
     <string name="notavailable">Belum Tersedia</string>
+    
+    <string name="scorea">Tuntas : A (91 &#8211; 100)</string>
+    <string name="scoreb">Sangat Baik : B (80 &#8211; 90)</string>
+    <string name="scorec">Baik : C ( &#8249; 80)</string>
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>

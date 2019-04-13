@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/stdMargin1"
+            android:layout_margin="@dimen/stdMargin2"
             card_view:cardElevation="3dp"
             card_view:cardCornerRadius="0dp">
             <LinearLayout
@@ -27,28 +27,53 @@
                 android:orientation="vertical"
                 android:layout_margin="@dimen/stdMargin1">
                 <TextView
-                    android:layout_marginTop="@dimen/stdMargin1"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/stdMediumTxt"
                     android:text="@string/score"
-
+                    android:layout_marginBottom="@dimen/stdMargin2"
                     android:textStyle="bold"/>
 
-                <EditText
-                    android:id="@+id/tanggalTxt"
+                <RadioGroup
+                    android:id="@+id/radioGroupNb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/stdLargeTxt"
-                    android:hint="@string/score"
-                    android:layout_marginBottom="@dimen/stdMargin0"/>
+                    android:layout_below="@+id/textView1"
+                    android:layout_marginBottom="@dimen/stdMargin2">
+
+                    <RadioButton
+                        android:id="@+id/scoreA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/stdMediumTxt"
+                        android:text="@string/scorea"
+                        android:layout_marginBottom="@dimen/stdMargin1"/>
+
+                    <RadioButton
+                        android:id="@+id/scoreB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scoreb"
+                        android:textSize="@dimen/stdMediumTxt"
+                        android:layout_marginBottom="@dimen/stdMargin1"/>
+
+                    <RadioButton
+                        android:id="@+id/scoreC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scorec"
+                        android:textSize="@dimen/stdMediumTxt"
+                        android:layout_marginBottom="@dimen/stdMargin1"/>
+
+
+                </RadioGroup>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/stdMediumTxt"
                     android:text="@string/notes"
-
                     android:textStyle="bold"/>
 
                 <EditText
