@@ -27,7 +27,7 @@
                 android:gravity="center"
                 android:layout_marginRight="@dimen/stdMargin1"
                 android:layout_marginEnd="@dimen/stdMargin1"
-                android:src="@drawable/ic_person"
+                android:src="@mipmap/ic_ustadz"
                 />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:id="@+id/detailImg"
                 android:layout_width="@dimen/itemImageView"
                 android:layout_height="@dimen/itemImageView"
-                android:src="@drawable/ic_person_pin"
+                android:src="@drawable/ic_assignment_ind"
                 android:padding="@dimen/stdMargin1"
                 android:layout_toLeftOf="@id/reqJadwalImg"
                 android:layout_toStartOf="@id/reqJadwalImg"/>

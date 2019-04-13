@@ -25,7 +25,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_account"/>
+                        android:tint="#FFFFFF"
+                        android:src="@mipmap/ic_hafizh"/>
 
                     <TextView
                         android:id="@+id/namaTxt"
