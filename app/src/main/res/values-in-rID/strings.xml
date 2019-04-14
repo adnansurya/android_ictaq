@@ -1,0 +1,155 @@
+<resources>
+    <string name="app_name">MyTahfizh</string>
+
+    <string name="home">Beranda</string>
+    <string name="quran">Quran</string>
+    <string name="ustadz">Ustadz</string>
+    <string name="vidcall">Video Call</string>
+    <string name="schedule">Jadwal</string>
+    <string name="certificate">Sertifikat</string>
+
+    <string name="profile">Profil</string>
+    <string name="editprofile">Ubah Profil</string>
+    <string name="logout">Keluar</string>
+    <string name="account">Akun</string>
+    <string name="askregister">Belum punya akun?</string>
+    <string name="register">Daftar</string>
+    <string name="registerok">Pendaftaran Berhasil!</string>
+    <string name="newaccount">Registrasi Akun Baru</string>
+    <string name="login">Masuk</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="repeatpassword">Ulangi Password</string>
+    <string name="oldpassword">Password Lama</string>
+    <string name="newpassword">Password Baru</string>
+    <string name="repeatnewpassword">Ulangi Password Baru</string>
+    <string name="fullname">Nama Lengkap</string>
+    <string name="email">Email</string>
+    <string name="backquit">Tekan sekali lagi untuk keluar</string>
+    <string name="edit">Ubah</string>
+    <string name="editsuccess">Data berhasil diubah!</string>
+    <string name="save">Simpan</string>
+    <string name="title">Judul</string>
+    <string name="sent">Dikirim</string>
+    <string name="data">Data</string>
+    <string name="contact">Kontak</string>
+
+    <string name="address">Alamat</string>
+    <string name="birthdate">Tanggal Lahir</string>
+    <string name="telp">No. Telepon</string>
+    <string name="province">Provinsi</string>
+    <string name="city">Kabupaten / Kota</string>
+    <string name="occupation">Pekerjaan</string>
+    <string name="parentname">Nama Lengkap Ayah / Ibu</string>
+    <string name="startyear">Tahun Mulai</string>
+
+
+    <string name="error">Terjadi Kesalahan</string>
+    <string name="loading">Memuat</string>
+    <string name="close">Tutup</string>
+    <string name="datanotcomplete">Data tidak lengkap! </string>
+    <string name="passwordverificationfail">Verifikasi Password Gagal!</string>
+    <string name="newpasswordverificationfail">Verifikasi Password Baru Gagal!</string>
+    <string name="oldpasswordverificationfail">Verifikasi Password Lama Gagal!</string>
+    <string name="loginfail">Login Gagal!</string>
+    <string name="loginok">Login Berhasil!</string>
+    <string name="wrongdataformat">Kesalahan Format Data</string>
+    <string name="accept">Terima</string>
+
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+
+    <string name="admin">Administrator</string>
+    <string name="examiner">Penguji</string>
+    <string name="memorizer">Penghafal</string>
+
+    <string name="surah">Surah</string>
+    <string name="juz">Juz</string>
+    <string name="settings">Pengaturan</string>
+    <string name="name">Nama</string>
+    <string name="surahnum">Surah ke</string>
+    <string name="type">Jenis</string>
+    <string name="asma">Asma</string>
+
+    <string name="ayat">Ayat</string>
+    <string name="meaning">Artinya</string>
+    <string name="makkiyah">Makkiyah</string>
+    <string name="madaniyah">Madaniyah</string>
+    <string name="mekah">Makkah</string>
+    <string name="madinah">Madinah</string>
+    <string name="surahinfo">Informasi Surah</string>
+    <string name="surahlist">Daftar Surah</string>
+    <string name="surahname">Nama Surah</string>
+    <string name="numofverses">Jumlah Ayat</string>
+    <string name="versereveal">Diturunkan di</string>
+    <string name="explanation">Penjelasan</string>
+    <string name="arabic">Arab</string>
+    <string name="lafaz">Lafaz</string>
+
+    <string name="qurandisplay">Tampilan Al-Quran</string>
+    <string name="arabicfont">Font Arab</string>
+    <string name="arabicfontdefault">fonts/kfc_naskh-webfont.otf</string>
+    <string name="arabicfontkey">SP_setArabicFont</string>
+    <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsize">Ukuran Font Arab</string>
+    <string name="arabicfontsizedefault">20</string>
+    <string name="arabicfontsizekey">SP_setArabicFontSize</string>
+    <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsizesmall">20</string>
+    <string name="arabicfontsizemedium">24</string>
+    <string name="arabicfontsizelarge">28</string>
+    <string name="arabicfontsizejumbo">32</string>
+    <string name="small">Kecil</string>
+    <string name="medium">Sedang</string>
+    <string name="large">Besar</string>
+    <string name="jumbo">Jumbo</string>
+    <string name="translation">Terjemahan</string>
+    <string name="translationkey">SP_setTranslation</string>
+    <string name="translationsummary">Tampilkan terjemahan ayat</string>
+    <string name="translationlang">Bahasa Terjemahan</string>
+    <string name="translationlangkey">SP_setTranslationLanguage</string>
+    <string name="translationlangsummary">Pilih bahasa terjemahan ayat yang ditampilkan</string>
+    <string name="english">English</string>
+    <string name="bahasa">Bahasa Indonesia</string>
+
+    <string name="accountsettings">Pengaturan Akun</string>
+    <string name="accountsettingskey">SP_setAccount</string>
+    <string name="accountsettingsummary">Sesuaikan username dan password akun anda</string>
+
+    <string name="cameraallowed">Izin kamera diberikan!</string>
+    <string name="cameranotallowed">Izin kamera ditolak!</string>
+
+    <string name="micallowed">Izin microphone diberikan!</string>
+    <string name="micnotallowed">Izin microphone ditolak!</string>
+
+    <string name="examrequest">Permintaan Ujian</string>
+    <string name="examrequestdialog">Meminta jadwal ujian dari</string>
+    <string name="makeschedule">Atur Jadwal</string>
+    <string name="date">Tanggal</string>
+    <string name="time">Waktu</string>
+    <string name="score">Nilai</string>
+    <string name="scoring">Penilaian</string>
+    <string name="notes">Catatan</string>
+    <string name="openbrowser">Buka Browser</string>
+    <string name="startexam">Mulai Ujian</string>
+    <string name="exam">Ujian</string>
+    <string name="resetroomid">Ganti Kode Room</string>
+    <string name="today">Hari Ini</string>
+    <string name="recently">Baru Saja</string>
+    <string name="soon">Sesaat Lagi</string>
+    <string name="notavailable">Belum Tersedia</string>
+
+    <string name="scorea">Tuntas : A (91 &#8211; 100)</string>
+    <string name="scoreb">Sangat Baik : B (80 &#8211; 90)</string>
+    <string name="scorec">Baik : C ( &#8249; 80)</string>
+
+    <string name="ready">Siap</string>
+    <string name="request">Permintaan</string>
+
+    <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
+    <string name="urlquran">http://api.alquran.cloud/v1</string>
+    <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
+
+    <string name="urlmain">http://elarham-tahfizh.online</string>
+
+</resources>

@@ -1,0 +1,155 @@
+<resources>
+    <string name="app_name">MyTahfizh</string>
+
+    <string name="home">Beranda</string>
+    <string name="quran">Quran</string>
+    <string name="ustadz">Ustadz</string>
+    <string name="vidcall">Video Call</string>
+    <string name="schedule">Schedule</string>
+    <string name="certificate">Certificate</string>
+
+    <string name="profile">Profile</string>
+    <string name="editprofile">Edit Profile</string>
+    <string name="logout">Log Out</string>
+    <string name="account">Account</string>
+    <string name="askregister">Don\'t have an Account?</string>
+    <string name="register">Register</string>
+    <string name="registerok">Registration Completed!</string>
+    <string name="newaccount">New Account Registration</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="repeatpassword">Repeat Password</string>
+    <string name="oldpassword">Old Password</string>
+    <string name="newpassword">New Password</string>
+    <string name="repeatnewpassword">Repeat New Password</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="backquit">Press once more to quit</string>
+    <string name="edit">Ubah</string>
+    <string name="editsuccess">Data changed succesfully!</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="sent">Sent</string>
+    <string name="data">Data</string>
+    <string name="contact">Contact</string>
+
+    <string name="address">Address</string>
+    <string name="birthdate">Birth Date</string>
+    <string name="telp">Telephone</string>
+    <string name="province">Province</string>
+    <string name="city">City</string>
+    <string name="occupation">Occupation</string>
+    <string name="parentname">Parent Name</string>
+    <string name="startyear">Start Year</string>
+
+
+    <string name="error">There is an error</string>
+    <string name="loading">Loading</string>
+    <string name="close">Close</string>
+    <string name="datanotcomplete">Incomplete data! </string>
+    <string name="passwordverificationfail">Password Verification Fail!</string>
+    <string name="newpasswordverificationfail">New Password Verification Fail!</string>
+    <string name="oldpasswordverificationfail">Old Password Verification Fail!</string>
+    <string name="loginfail">Login Failed!</string>
+    <string name="loginok">Login Success!</string>
+    <string name="wrongdataformat">Wrong Data Format</string>
+    <string name="accept">Accept</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="admin">Administrator</string>
+    <string name="examiner">Examiner</string>
+    <string name="memorizer">Hafizh</string>
+
+    <string name="surah">Surah</string>
+    <string name="juz">Juz</string>
+    <string name="settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="surahnum">Surah Number</string>
+    <string name="type">Type</string>
+    <string name="asma">Asma</string>
+
+    <string name="ayat">Verse</string>
+    <string name="meaning">Meaning</string>
+    <string name="makkiyah">Makkiyah</string>
+    <string name="madaniyah">Madaniyah</string>
+    <string name="mekah">Mecca</string>
+    <string name="madinah">Madinah</string>
+    <string name="surahinfo">Surah Information</string>
+    <string name="surahlist">Surah List</string>
+    <string name="surahname">Surah Name</string>
+    <string name="numofverses">Number of Verses</string>
+    <string name="versereveal">Verse Revealed in</string>
+    <string name="explanation">Explanation</string>
+    <string name="arabic">Arabic</string>
+    <string name="lafaz">Lafaz</string>
+
+    <string name="qurandisplay">Quran Display</string>
+    <string name="arabicfont">Arabic Font</string>
+    <string name="arabicfontdefault">fonts/kfc_naskh-webfont.otf</string>
+    <string name="arabicfontkey">SP_setArabicFont</string>
+    <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsize">Ukuran Font Arab</string>
+    <string name="arabicfontsizedefault">20</string>
+    <string name="arabicfontsizekey">SP_setArabicFontSize</string>
+    <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontsizesmall">20</string>
+    <string name="arabicfontsizemedium">24</string>
+    <string name="arabicfontsizelarge">28</string>
+    <string name="arabicfontsizejumbo">32</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="jumbo">Jumbo</string>
+    <string name="translation">Translation</string>
+    <string name="translationkey">SP_setTranslation</string>
+    <string name="translationsummary">Display Verse Translation</string>
+    <string name="translationlang">Translation Language</string>
+    <string name="translationlangkey">SP_setTranslationLanguage</string>
+    <string name="translationlangsummary">Choose displayed translation language</string>
+    <string name="english">English</string>
+    <string name="bahasa">Bahasa Indonesia</string>
+
+    <string name="accountsettings">Account Settings</string>
+    <string name="accountsettingskey">SP_setAccount</string>
+    <string name="accountsettingsummary">Adjust your account username and password</string>
+
+    <string name="cameraallowed">Camera permission accepted!</string>
+    <string name="cameranotallowed">Camera permission rejected!</string>
+
+    <string name="micallowed">Microphone permission accepted!</string>
+    <string name="micnotallowed">Microphone permission rejected!</string>
+
+    <string name="examrequest">Exam Request</string>
+    <string name="examrequestdialog">Request exam schedule from</string>
+    <string name="makeschedule">Set a schedule</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="score">Score</string>
+    <string name="scoring">Scoring</string>
+    <string name="notes">Notes</string>
+    <string name="openbrowser">Open Browser</string>
+    <string name="startexam">Start Exam</string>
+    <string name="exam">Exam</string>
+    <string name="resetroomid">Set Room Id</string>
+    <string name="today">Today</string>
+    <string name="recently">Recently</string>
+    <string name="soon">Soon</string>
+    <string name="notavailable">Not Available</string>
+
+    <string name="scorea">Perfect : A (91 &#8211; 100)</string>
+    <string name="scoreb">Very Good : B (80 &#8211; 90)</string>
+    <string name="scorec">Good : C ( &#8249; 80)</string>
+
+    <string name="ready">Ready</string>
+    <string name="request">Request</string>
+
+    <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
+    <string name="urlquran">http://api.alquran.cloud/v1</string>
+    <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
+
+    <string name="urlmain">http://elarham-tahfizh.online</string>
+
+</resources>
