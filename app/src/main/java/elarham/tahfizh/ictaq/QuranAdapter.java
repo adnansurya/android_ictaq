@@ -47,7 +47,7 @@ public class QuranAdapter extends RecyclerView.Adapter<QuranAdapter.ViewHolder> 
         holder.arabicTxt.setText(Ayat.getArabic() + "   |" + Ayat.getNomorAyat());
         if(Ayat.getIndo() != null && Ayat.getEnglish() != null){
             String translationLang = prefs.getString(context.getString(R.string.translationlangkey),context.getResources().getStringArray(R.array.listLanguageValues)[0]);
-            if(translationLang.equals("ina")){
+            if(translationLang.equals("in")){
                 holder.translateTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getIndo());
             }else if(translationLang.equals("en")){
                 holder.translateTxt.setText(Ayat.getNomorAyat() + ". " + Ayat.getEnglish());

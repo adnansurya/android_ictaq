@@ -2,7 +2,10 @@ package elarham.tahfizh.ictaq.QuranFragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Surah surah = list.get(position);
 
         String type = surah.getType();
@@ -41,10 +45,19 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
         }else if(type.equals("madinah")){
             holder.typeTxt.setText(context.getString(R.string.madaniyah) + ",");
         }
+
+        String translationLang = prefs.getString(context.getString(R.string.translationlangkey),context.getResources().getStringArray(R.array.listLanguageValues)[0]);
+        if(translationLang.equals("in")){
+            holder.artiTxt.setText(surah.getArti());
+        }else{
+            holder.artiTxt.setVisibility(View.GONE);
+            holder.typeTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.itemSmallTxt));
+            holder.ayatTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.itemSmallTxt));
+        }
         holder.surahTxt.setText(surah.getNama());
         holder.nomorTxt.setText(surah.getNomor());
         holder.asmaTxt.setText(surah.getAsma());
-        holder.artiTxt.setText(surah.getArti());
+
         holder.ayatTxt.setText(surah.getAyat()+ " " + context.getString(R.string.ayat));
 
 

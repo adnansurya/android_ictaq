@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/vidcall_menu"
         android:title="@string/exam"
@@ -29,6 +28,11 @@
                 android:title="@string/scoring"
                 app:showAsAction="ifRoom"
                 android:icon="@drawable/ic_edit"/>
+            <item
+                android:id="@+id/reschedule_menu"
+                android:title="@string/reschedule"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_event"/>
         </menu>
     </item>
 

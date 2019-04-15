@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import elarham.tahfizh.ictaq.Global.LocaleHelper;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.MainFragments.*;
 
@@ -34,12 +35,15 @@ public class MainActivity extends AppCompatActivity
 
     Fragment fragment = null;
 
-
+    private String initialLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initialLocale = LocaleHelper.getPersistedLocale(this);
+        LocaleHelper.setLocale(this,initialLocale);
 
         sharePrefMan = new SharedPreferenceManager(this);
 

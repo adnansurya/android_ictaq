@@ -1,5 +1,10 @@
 package elarham.tahfizh.ictaq;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -14,9 +19,11 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.CookieManager;
@@ -25,7 +32,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,9 +48,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
+import elarham.tahfizh.ictaq.Global.LocaleHelper;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Global.StringUtility;
 
@@ -54,12 +69,16 @@ public class VideoCall extends AppCompatActivity {
     ActionBar actBar;
     String roomId, url;
 
-    String jadwalId, reqId;
+    String jadwalId, reqId, jam, tanggal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_call);
+
+
+
 
         sharePrefMan = new SharedPreferenceManager(this);
         mWebRTCWebView = findViewById(R.id.main_webview);
@@ -68,6 +87,9 @@ public class VideoCall extends AppCompatActivity {
         roomId = getIntent().getStringExtra("idRoom");
         jadwalId = getIntent().getStringExtra("idJadwal");
         reqId = getIntent().getStringExtra("idReq");
+        jam = getIntent().getStringExtra("jam");
+        tanggal = getIntent().getStringExtra("tanggal");
+
 
         Log.e("ROOM ID", roomId);
 
@@ -118,6 +140,129 @@ public class VideoCall extends AppCompatActivity {
 
 
         });
+    }
+
+    DatePickerDialog.OnDateSetListener date;
+    DatePickerDialog dateDial;
+    TimePickerDialog.OnTimeSetListener time;
+    TimePickerDialog timeDial;
+    Calendar myCalendar;
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void showScheduleDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_make_schedule, null);
+        builder.setView(dialogView);
+        builder.setCancelable(true);
+
+        final EditText tglTxt, waktuTxt;
+        tglTxt = dialogView.findViewById(R.id.tanggalTxt);
+        waktuTxt = dialogView.findViewById(R.id.waktuTxt);
+
+
+        myCalendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "yyyy-MM-dd "; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                try {
+                    myCalendar.setTime(sdf.parse(tanggal));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                tglTxt.setText(sdf.format(myCalendar.getTime()));
+                dateDial.dismiss();
+            }
+        };
+
+        dateDial = new DatePickerDialog(this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+
+        tglTxt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                dateDial.show();
+                return false;
+            }
+        });
+
+
+
+
+        time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, i);
+                myCalendar.set(Calendar.MINUTE, i1);
+
+
+                String myFormat = "h:mm a"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                try {
+                    myCalendar.setTime(sdf.parse(jam));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                waktuTxt.setText(sdf.format(myCalendar.getTime()));
+
+                timeDial.dismiss();
+            }
+        };
+
+        timeDial = new TimePickerDialog(this, time, myCalendar.get(Calendar.HOUR_OF_DAY),
+                myCalendar.get(Calendar.MINUTE),false);
+
+        waktuTxt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                timeDial.show();
+                return false;
+            }
+        });
+
+        builder.setTitle(getApplicationContext().getString(R.string.makeschedule));
+
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+//                tglJadwal = tglTxt.getText().toString();
+//                jamJadwal = waktuTxt.getText().toString();
+//
+//                if(tglJadwal.equals("") || jamJadwal.equals("")){
+//                    Toast.makeText(DetailRequest.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
+//                }else{
+//
+//                    updateStatusRequest(urlUpdateRequest);
+//                }
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 
@@ -190,6 +335,8 @@ public class VideoCall extends AppCompatActivity {
              check.setVisible(false);
              MenuItem changeRoom = menu.findItem(R.id.room_menu);
              changeRoom.setVisible(false);
+             MenuItem reschedule = menu.findItem(R.id.reschedule_menu);
+             reschedule.setVisible(false);
          }
 
         return true;

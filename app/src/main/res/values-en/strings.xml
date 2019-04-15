@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyTahfizh</string>
 
-    <string name="home">Beranda</string>
+    <string name="home">Home</string>
     <string name="quran">Quran</string>
     <string name="ustadz">Ustadz</string>
     <string name="vidcall">Video Call</string>
@@ -88,32 +88,19 @@
 
     <string name="qurandisplay">Quran Display</string>
     <string name="arabicfont">Arabic Font</string>
-    <string name="arabicfontdefault">fonts/kfc_naskh-webfont.otf</string>
-    <string name="arabicfontkey">SP_setArabicFont</string>
-    <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
-    <string name="arabicfontsize">Ukuran Font Arab</string>
-    <string name="arabicfontsizedefault">20</string>
-    <string name="arabicfontsizekey">SP_setArabicFontSize</string>
-    <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
-    <string name="arabicfontsizesmall">20</string>
-    <string name="arabicfontsizemedium">24</string>
-    <string name="arabicfontsizelarge">28</string>
-    <string name="arabicfontsizejumbo">32</string>
+    <string name="arabicfontsummary">Choose displayed arabic font</string>
+    <string name="arabicfontsize">Arabic Font Size</string>
+    <string name="arabicfontsizesummary">Choose displayed arabic font size</string>
     <string name="small">Small</string>
     <string name="medium">Medium</string>
     <string name="large">Large</string>
     <string name="jumbo">Jumbo</string>
     <string name="translation">Translation</string>
-    <string name="translationkey">SP_setTranslation</string>
     <string name="translationsummary">Display Verse Translation</string>
     <string name="translationlang">Translation Language</string>
-    <string name="translationlangkey">SP_setTranslationLanguage</string>
     <string name="translationlangsummary">Choose displayed translation language</string>
-    <string name="english">English</string>
-    <string name="bahasa">Bahasa Indonesia</string>
 
     <string name="accountsettings">Account Settings</string>
-    <string name="accountsettingskey">SP_setAccount</string>
     <string name="accountsettingsummary">Adjust your account username and password</string>
 
     <string name="cameraallowed">Camera permission accepted!</string>
@@ -145,11 +132,11 @@
 
     <string name="ready">Ready</string>
     <string name="request">Request</string>
-
-    <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
-    <string name="urlquran">http://api.alquran.cloud/v1</string>
-    <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
-
-    <string name="urlmain">http://elarham-tahfizh.online</string>
+    <string name="reschedule">Reset Schedule</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
+    <string name="preferences_category_general">General</string>
+    <string name="preferences_language">Language</string>
 
 </resources>

@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/preferences_category_general">
+        <ListPreference
+            android:key="pref_key_language"
+            android:title="@string/preferences_language"
+            android:dialogTitle="@string/preferences_language"
+            android:entries="@array/settings_language_values"
+            android:entryValues="@array/locales"
+            android:defaultValue="@string/system_locale"
+            android:summary="%s">
+        </ListPreference>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/qurandisplay">
         <ListPreference
             android:title="@string/arabicfont"
-            android:summary="@string/arabicfontsummary"
+            android:summary="%s"
             android:key="@string/arabicfontkey"
             android:defaultValue="@string/arabicfontdefault"
             android:entries="@array/listFont"
             android:entryValues="@array/listFontValues" />
         <ListPreference
             android:title="@string/arabicfontsize"
-            android:summary="@string/arabicfontsizesummary"
+            android:summary="%s"
             android:key="@string/arabicfontsizekey"
             android:defaultValue="@string/arabicfontsizedefault"
             android:entryValues="@array/listFontSizeValues"
@@ -23,7 +35,7 @@
             android:key="@string/translationkey" />
         <ListPreference
             android:title="@string/translationlang"
-            android:summary="@string/translationlangsummary"
+            android:summary="%s"
             android:key="@string/translationlangkey"
             android:defaultValue="ina"
             android:entryValues="@array/listLanguageValues"
@@ -37,5 +49,7 @@
             android:summary="@string/accountsettingsummary">
         </Preference>
     </PreferenceCategory>
+
+
 
 </PreferenceScreen>

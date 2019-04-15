@@ -88,32 +88,32 @@
 
     <string name="qurandisplay">Tampilan Al-Quran</string>
     <string name="arabicfont">Font Arab</string>
-    <string name="arabicfontdefault">fonts/kfc_naskh-webfont.otf</string>
-    <string name="arabicfontkey">SP_setArabicFont</string>
-    <string name="arabicfontsummary">Pilih tampilan font Arab yang ditampilkan</string>
+    <string name="arabicfontdefault" translatable="false">fonts/kfc_naskh-webfont.otf</string>
+    <string name="arabicfontkey" translatable="false">SP_setArabicFont</string>
+    <string name="arabicfontsummary">Pilih font Arab yang ditampilkan</string>
     <string name="arabicfontsize">Ukuran Font Arab</string>
-    <string name="arabicfontsizedefault">20</string>
-    <string name="arabicfontsizekey">SP_setArabicFontSize</string>
-    <string name="arabicfontsizesummary">Pilih ukuran tampilan font Arab yang ditampilkan</string>
-    <string name="arabicfontsizesmall">20</string>
-    <string name="arabicfontsizemedium">24</string>
-    <string name="arabicfontsizelarge">28</string>
-    <string name="arabicfontsizejumbo">32</string>
+    <string name="arabicfontsizedefault" translatable="false">20</string>
+    <string name="arabicfontsizekey" translatable="false">SP_setArabicFontSize</string>
+    <string name="arabicfontsizesummary">Pilih ukuran font Arab yang ditampilkan</string>
+    <string name="arabicfontsizesmall" translatable="false">20</string>
+    <string name="arabicfontsizemedium" translatable="false">24</string>
+    <string name="arabicfontsizelarge" translatable="false">28</string>
+    <string name="arabicfontsizejumbo" translatable="false">32</string>
     <string name="small">Kecil</string>
     <string name="medium">Sedang</string>
     <string name="large">Besar</string>
     <string name="jumbo">Jumbo</string>
     <string name="translation">Terjemahan</string>
-    <string name="translationkey">SP_setTranslation</string>
+    <string name="translationkey" translatable="false">SP_setTranslation</string>
     <string name="translationsummary">Tampilkan terjemahan ayat</string>
     <string name="translationlang">Bahasa Terjemahan</string>
-    <string name="translationlangkey">SP_setTranslationLanguage</string>
+    <string name="translationlangkey" translatable="false">SP_setTranslationLanguage</string>
     <string name="translationlangsummary">Pilih bahasa terjemahan ayat yang ditampilkan</string>
-    <string name="english">English</string>
-    <string name="bahasa">Bahasa Indonesia</string>
+    <string name="english" translatable="false">English</string>
+    <string name="bahasa" translatable="false">Bahasa Indonesia</string>
 
     <string name="accountsettings">Pengaturan Akun</string>
-    <string name="accountsettingskey">SP_setAccount</string>
+    <string name="accountsettingskey" translatable="false">SP_setAccount</string>
     <string name="accountsettingsummary">Sesuaikan username dan password akun anda</string>
 
     <string name="cameraallowed">Izin kamera diberikan!</string>
@@ -145,11 +145,22 @@
 
     <string name="ready">Siap</string>
     <string name="request">Permintaan</string>
+    <string name="reschedule">Atur Ulang Jadwal</string>
 
-    <string name="urlsurahlist">https://api.banghasan.com/quran/format/json/surat</string>
-    <string name="urlquran">http://api.alquran.cloud/v1</string>
-    <string name="urledition">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
+    <string name="hour">Jam</string>
+    <string name="minute">Menit</string>
+    <string name="second">Detik</string>
 
-    <string name="urlmain">http://elarham-tahfizh.online</string>
+    <string name="system_locale" translatable="false">system</string>
+    <string name="default_locale" translatable="false">en</string>
+
+    <string name="preferences_category_general">Umum</string>
+    <string name="preferences_language">Bahasa</string>
+
+    <string name="urlsurahlist" translatable="false">https://api.banghasan.com/quran/format/json/surat</string>
+    <string name="urlquran" translatable="false">http://api.alquran.cloud/v1</string>
+    <string name="urledition" translatable="false">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
+
+    <string name="urlmain" translatable="false">http://elarham-tahfizh.online</string>
 
 </resources>

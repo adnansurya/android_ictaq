@@ -30,10 +30,11 @@ public class StringUtility {
 
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             Date date = formatter.parse(dateStr);
-            PrettyTime pTime = new PrettyTime(Locale.forLanguageTag("ID"));
+            PrettyTime pTime = new PrettyTime(Locale.getDefault());
 
             dateFormatted =  pTime.format((date));
-            if(dateFormatted.contains("jam") || dateFormatted.contains("menit") || dateFormatted.contains("detik")){
+            if(dateFormatted.contains(context.getString(R.string.hour).toLowerCase()) ||
+                    dateFormatted.contains(context.getString(R.string.minute)) || dateFormatted.contains(context.getString(R.string.second))){
                 dateFormatted = context.getString(R.string.today);
 //                if(dateFormatted.contains("lalu")){
 //                    dateFormatted =  context.getString(R.string.recently);
@@ -61,7 +62,7 @@ public class StringUtility {
         try {
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             Date date = formatter.parse(dateStr);
-            SimpleDateFormat newFormat = new  SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.forLanguageTag("ID"));
+            SimpleDateFormat newFormat = new  SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault());
             dateFormatted = newFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
