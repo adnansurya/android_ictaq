@@ -5,8 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +68,9 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         if(ready.getNilai().equals("null")){
             holder.nilaiTxt.setText(context.getString(R.string.notavailable));
         }else{
-            holder.nilaiTxt.setText(ready.getNilai());
+            holder.nilaiTxt.setTypeface(Typeface.DEFAULT_BOLD);
+            holder.nilaiTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.itemMediumTxt));
+            holder.nilaiTxt.setText(context.getString(R.string.score)+ " : " + ready.getNilai());
         }
 
 
@@ -150,7 +154,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
                     url = context.getString(R.string.urlmain) +
                             "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=room";
 
-                   getRoomById(ready.getIdReq(), ready.getId(), ready.getJam(), ready.getTanggal());
+                   getRoomById(ready.getIdReq(), ready.getId(), ready.getJam(), ready.getTanggal(), ready.getNilai(), ready.getCatatan());
 
 
                 }
@@ -158,7 +162,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         }
     }
 
-    private void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal){
+    private void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
         progressDialog.show();
@@ -183,6 +187,8 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
                             vidCall.putExtra("idReq", idReq);
                             vidCall.putExtra("jam",jam);
                             vidCall.putExtra("tanggal", tanggal);
+                            vidCall.putExtra("nilai",nilai);
+                            vidCall.putExtra("catatan",catatan);
                             context.startActivity(vidCall);
 
 

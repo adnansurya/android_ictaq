@@ -32,9 +32,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -67,9 +71,21 @@ public class VideoCall extends AppCompatActivity {
     private WebView mWebRTCWebView;
     LinearLayout editLay;
     ActionBar actBar;
-    String roomId, url;
+    String roomId, url, urlUpdateJadwal;
 
-    String jadwalId, reqId, jam, tanggal;
+    String jadwalId, reqId, jam, tanggal, catatan;
+
+    TextView jadwalTxt;
+    EditText catatanTxt;
+    RadioGroup nilaiRad;
+    RadioButton nilaiRadBtn, radBtnA, radBtnB, radBtnC;
+    Button simpanBtn;
+
+    String nilai = "";
+
+
+
+
 
 
     @Override
@@ -77,6 +93,13 @@ public class VideoCall extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_call);
 
+        jadwalTxt = findViewById(R.id.jadwalTxt);
+        catatanTxt = findViewById(R.id.catatanTxt);
+        nilaiRad = findViewById(R.id.nilaiRadio);
+        radBtnA = findViewById(R.id.scoreA);
+        radBtnB = findViewById(R.id.scoreB);
+        radBtnC = findViewById(R.id.scoreC);
+        simpanBtn = findViewById(R.id.simpanBtn);
 
 
 
@@ -89,6 +112,21 @@ public class VideoCall extends AppCompatActivity {
         reqId = getIntent().getStringExtra("idReq");
         jam = getIntent().getStringExtra("jam");
         tanggal = getIntent().getStringExtra("tanggal");
+        nilai = getIntent().getStringExtra("nilai");
+        catatan = getIntent().getStringExtra("catatan");
+
+        if(!nilai.equals("null")){
+            if(nilai.equals("A")){
+                radBtnA.setChecked(true);
+            }else if(nilai.equals("B")){
+                radBtnB.setChecked(true);
+            }else if(nilai.equals("C")){
+                radBtnC.setChecked(true);
+            }
+
+        }
+
+
 
 
         Log.e("ROOM ID", roomId);
@@ -101,6 +139,9 @@ public class VideoCall extends AppCompatActivity {
 
         url = "https://appr.tc/r/" + roomId+ "?stereo=false&backasc=ISAC/16000&hd=false";
 
+        urlUpdateJadwal = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=jadwal";
+
         if(sharePrefMan.getSpType().equals("2")){
             mWebRTCWebView.setVisibility(View.GONE);
             editLay.setVisibility(View.VISIBLE);
@@ -108,6 +149,43 @@ public class VideoCall extends AppCompatActivity {
             editLay.setVisibility(View.GONE);
             openRTC();
         }
+
+        jadwalTxt.setText(new StringUtility().exactTime(tanggal, this) + " " + jam);
+
+        if(catatan.trim().equals("null")){
+            catatanTxt.setText("");
+        }else{
+            catatanTxt.setText(catatan);
+        }
+
+        simpanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                catatan = catatanTxt.getText().toString();
+
+                if(nilaiRad.getCheckedRadioButtonId() != -1){
+                    int selectedId = nilaiRad.getCheckedRadioButtonId();
+
+                    nilaiRadBtn = findViewById(selectedId);
+
+
+
+                    if(nilaiRadBtn.getText().equals(getApplicationContext().getString(R.string.scorea))){
+                        nilai = "A";
+                    }else if(nilaiRadBtn.getText().equals(getApplicationContext().getString(R.string.scoreb))){
+                        nilai = "B";
+                    }else if(nilaiRadBtn.getText().equals(getApplicationContext().getString(R.string.scorec))){
+                        nilai = "C";
+                    }
+
+                    ubahNilai(nilai, catatan, urlUpdateJadwal);
+                }else{
+                    Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
 
@@ -147,9 +225,12 @@ public class VideoCall extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener time;
     TimePickerDialog timeDial;
     Calendar myCalendar;
+    String tglJadwal, jamJadwal;
 
     @SuppressLint("ClickableViewAccessibility")
     private void showScheduleDialog(){
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_make_schedule, null);
@@ -160,25 +241,27 @@ public class VideoCall extends AppCompatActivity {
         tglTxt = dialogView.findViewById(R.id.tanggalTxt);
         waktuTxt = dialogView.findViewById(R.id.waktuTxt);
 
+        tglTxt.setText(tanggal);
+        waktuTxt.setText(jam);
+
 
         myCalendar = Calendar.getInstance();
+        String myFormat = "yyyy-MM-dd h:mm a"; //In which you need put here
+        SimpleDateFormat sdfNow = new SimpleDateFormat(myFormat, Locale.US);
+        try {
+            myCalendar.setTime(sdfNow.parse(tanggal+" "+jam));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                String myFormat = "yyyy-MM-dd "; //In which you need put here
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                try {
-                    myCalendar.setTime(sdf.parse(tanggal));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
                 tglTxt.setText(sdf.format(myCalendar.getTime()));
                 dateDial.dismiss();
@@ -209,12 +292,6 @@ public class VideoCall extends AppCompatActivity {
 
                 String myFormat = "h:mm a"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                try {
-                    myCalendar.setTime(sdf.parse(jam));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
                 waktuTxt.setText(sdf.format(myCalendar.getTime()));
 
                 timeDial.dismiss();
@@ -238,15 +315,15 @@ public class VideoCall extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
 
-//                tglJadwal = tglTxt.getText().toString();
-//                jamJadwal = waktuTxt.getText().toString();
-//
-//                if(tglJadwal.equals("") || jamJadwal.equals("")){
-//                    Toast.makeText(DetailRequest.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
-//                }else{
-//
-//                    updateStatusRequest(urlUpdateRequest);
-//                }
+                tglJadwal = tglTxt.getText().toString();
+                jamJadwal = waktuTxt.getText().toString();
+
+                if(tglJadwal.equals("") || jamJadwal.equals("")){
+                    Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
+                }else{
+
+                    ubahJadwal(tglJadwal, jamJadwal, urlUpdateJadwal);
+                }
                 dialog.dismiss();
 
             }
@@ -265,6 +342,126 @@ public class VideoCall extends AppCompatActivity {
         alert.show();
     }
 
+    private void ubahJadwal(final String tanggal, final String jam, final String url){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL UPDATE JADWAL", url);
+                        Log.e("UPDATE JADWAL ", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+                                Intent home = new Intent(VideoCall.this, MainActivity.class);
+                                startActivity(home);
+                            }else{
+                                Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(VideoCall.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", String.format("tgl='%s',jam='%s'", tanggal, jam));
+                params.put("where", String.format("where id='%s'",jadwalId));
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+    }
+
+
+    private void ubahNilai(final String nilai, final String catatan, final String url){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL UPDATE NILAI", url);
+                        Log.e("UPDATE NILAI", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+                                Intent home = new Intent(VideoCall.this, MainActivity.class);
+                                startActivity(home);
+                            }else{
+                                Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(VideoCall.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", String.format("nilai='%s',catatan='%s'", nilai, catatan));
+                params.put("where", String.format("where id='%s'",jadwalId));
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+    }
 
 
 
@@ -382,8 +579,9 @@ public class VideoCall extends AppCompatActivity {
                 mWebRTCWebView.loadUrl("about:blank");
                 mWebRTCWebView.setVisibility(View.GONE);
                 editLay.setVisibility(View.VISIBLE);
-
                 break;
+            case R.id.reschedule_menu:
+                showScheduleDialog();
         }
 
 

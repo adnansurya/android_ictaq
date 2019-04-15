@@ -23,16 +23,17 @@
                 android:title="@string/resetroomid"
                 app:showAsAction="ifRoom"
                 android:icon="@drawable/ic_sync"/>
-            <item
-                android:id="@+id/edit_menu"
-                android:title="@string/scoring"
-                app:showAsAction="ifRoom"
-                android:icon="@drawable/ic_edit"/>
+
             <item
                 android:id="@+id/reschedule_menu"
                 android:title="@string/reschedule"
                 app:showAsAction="ifRoom"
                 android:icon="@drawable/ic_event"/>
+            <item
+                android:id="@+id/edit_menu"
+                android:title="@string/scoring"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_edit"/>
         </menu>
     </item>
 
