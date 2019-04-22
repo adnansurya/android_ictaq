@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -49,11 +51,12 @@ public class DetailRequest extends AppCompatActivity {
     ActionBar actBar;
     String idRequest, idRegis, idPenguji, tanggal, status;
     TextView typeTxt, tanggalTxt, namaTxt, pekerjaanTxt, alamatTxt, tgl_LahirTxt, ayah_ibuTxt, tahunTxt, emailTxt, telpTxt;
+    ImageView sendEmailImg, phoneCallImg;
 
     CardView kontakCard;
     LinearLayout personLay;
 
-    String nama;
+    String nama, email, phone;
     String url, urlUpdateRequest, urlAddJadwal, urlAddRoom;
 
     String tglJadwal, jamJadwal;
@@ -92,6 +95,9 @@ public class DetailRequest extends AppCompatActivity {
 
         kontakCard = findViewById(R.id.kontakCard);
         personLay = findViewById(R.id.personLay);
+
+        sendEmailImg = findViewById(R.id.sendEmailImg);
+        phoneCallImg = findViewById(R.id.phoneCallImg);
 
 
         sharePrefMan = new SharedPreferenceManager(this);
@@ -147,17 +153,36 @@ public class DetailRequest extends AppCompatActivity {
 
                         try {
 
-                            JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            final JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             nama = profile.getString("nama");
+                            email = profile.getString("email");
+                            phone = profile.getString("telp");
                             namaTxt.setText(nama);
                             if(sharePrefMan.getSpType().equals("2")){
                                 tahunTxt.setText(profile.getString("thn_menghafal"));
                                 pekerjaanTxt.setText(profile.getString("pekerjaan"));
                                 tgl_LahirTxt.setText(profile.getString("tgl_lahir"));
                                 alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota") + ", " + profile.getString("provinsi"));
-                                telpTxt.setText(profile.getString("telp"));
-                                emailTxt.setText(profile.getString("email"));
+                                telpTxt.setText(phone);
+                                emailTxt.setText(email);
                                 ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+
+                                sendEmailImg.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                                        emailIntent.setData(Uri.parse("mailto:"+email));
+                                        startActivity(emailIntent);
+                                    }
+                                });
+
+                                phoneCallImg.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                                        startActivity(intent);
+                                    }
+                                });
                             }
 
 

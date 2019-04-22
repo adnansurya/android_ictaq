@@ -207,41 +207,95 @@
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/stdLine1"
                         android:background="@color/colorPrimary"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/email"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/email"
+                            android:textStyle="bold"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:id="@+id/labelEmail"/>
 
-                    <TextView
-                        android:id="@+id/emailTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/email"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <TextView
+                            android:layout_below="@+id/labelEmail"
+                            android:id="@+id/emailTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/email"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:textIsSelectable="true"
+                            android:layout_marginBottom="@dimen/stdMargin0"/>
+                        <ImageView
+                            android:id="@+id/sendEmailImg"
+                            android:layout_width="@dimen/itemImageButton"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:src="@drawable/ic_email"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="@dimen/stdMargin1"
+                            android:tint="@color/colorPrimary"
+                            android:layout_centerVertical="true"
+                            />
+                    </RelativeLayout>
+
                     <View
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/stdLine"
-                        android:background="#c0c0c0"/>
+                        android:background="#c0c0c0"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/labelTelp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:text="@string/telp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"/>
+
+                        <TextView
+                            android:id="@+id/telpTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/stdMargin0"
+                            android:text="@string/telp"
+                            android:textIsSelectable="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:textSize="@dimen/stdSmallTxt"
+                            android:layout_below="@+id/labelTelp"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/itemImageButton"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:src="@drawable/ic_phone"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="@dimen/stdMargin1"
+                            android:tint="@color/colorPrimary"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/phoneCallImg"
+                            />
+
+                    </RelativeLayout>
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/telp"
-                        android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/telpTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/stdSmallTxt"
-                        android:text="@string/telp"
-                        android:layout_marginBottom="@dimen/stdMargin0"/>
+
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
