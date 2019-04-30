@@ -12,9 +12,9 @@
         android:icon="@drawable/ic_local_library"/>
 
     <item
-        android:id="@+id/ustadz_menu"
-        android:title="@string/ustadz"
-        android:icon="@drawable/ic_supervisor"/>
+        android:id="@+id/hafizh_menu"
+        android:title="@string/hafizh"
+        android:icon="@mipmap/ic_hafizh"/>
     <item
         android:id="@+id/schedule_menu"
         android:title="@string/schedule"

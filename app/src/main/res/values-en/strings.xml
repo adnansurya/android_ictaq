@@ -60,7 +60,6 @@
 
     <string name="admin">Administrator</string>
     <string name="examiner">Examiner</string>
-    <string name="memorizer">Hafizh</string>
 
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
@@ -109,7 +108,7 @@
     <string name="micnotallowed">Microphone permission rejected!</string>
 
     <string name="examrequest">Exam Request</string>
-    <string name="examrequestdialog">Request exam schedule from</string>
+    <string name="examrequestdialog">Do you want to request an exam schedule?</string>
     <string name="makeschedule">Set a schedule</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
@@ -137,5 +136,7 @@
     <string name="second">Second</string>
     <string name="preferences_category_general">General</string>
     <string name="preferences_language">Language</string>
+    <string name="history">History</string>
+    <string name="hafizh">Hafizh</string>
 
 </resources>

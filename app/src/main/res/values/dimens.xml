@@ -21,5 +21,7 @@
 
     <dimen name="itemImageView">50dp</dimen>
     <dimen name="itemImageButton">30dp</dimen>
+
+    <dimen name="floatActionButton">60dp</dimen>
     
 </resources>

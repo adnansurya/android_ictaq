@@ -37,6 +37,8 @@ public class Profile extends AppCompatActivity {
 
     boolean itemLoaded = false;
 
+    String url;
+
 
 
 
@@ -68,8 +70,12 @@ public class Profile extends AppCompatActivity {
             typeTxt.setText(getApplicationContext().getString(R.string.admin));
         }else if(sharePrefMan.getSpType().equals("2")){
             typeTxt.setText(getApplicationContext().getString(R.string.examiner));
+            url = getApplicationContext().getString(R.string.urlmain) +
+                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=penguji";
         }else if(sharePrefMan.getSpType().equals("3")){
-            typeTxt.setText(getApplicationContext().getString(R.string.memorizer));
+            typeTxt.setText(getApplicationContext().getString(R.string.hafizh));
+            url = getApplicationContext().getString(R.string.urlmain) +
+                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
         }else{
             typeTxt.setText(sharePrefMan.getSpType());
         }
@@ -80,8 +86,6 @@ public class Profile extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        final String url = getApplicationContext().getString(R.string.urlmain) +
-                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -99,14 +103,19 @@ public class Profile extends AppCompatActivity {
                             JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             profileData = profile.toString();
                             namaTxt.setText(profile.getString("nama"));
-                            tahunTxt.setText(profile.getString("thn_menghafal"));
                             provinsiTxt.setText(profile.getString("provinsi"));
-                            pekerjaanTxt.setText(profile.getString("pekerjaan"));
-                            tgl_lahirTxt.setText(profile.getString("tgl_lahir"));
                             alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota"));
                             telpTxt.setText(profile.getString("telp"));
                             emailTxt.setText(profile.getString("email"));
-                            ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+
+                            if(sharePrefMan.getSpType().equals("3")){
+                                pekerjaanTxt.setText(profile.getString("pekerjaan"));
+                                tgl_lahirTxt.setText(profile.getString("tgl_lahir"));
+                                tahunTxt.setText(profile.getString("thn_menghafal"));
+                                ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+                            }
+
+
 
 
 

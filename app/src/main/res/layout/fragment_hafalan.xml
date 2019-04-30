@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/stdMargin2"
+            android:layout_marginStart="@dimen/stdMargin1"
+            android:layout_marginEnd="@dimen/stdMargin1"
+            android:layout_marginBottom="@dimen/stdMargin2"
+            card_view:cardElevation="3dp"
+            card_view:cardCornerRadius="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginStart="@dimen/stdMargin0"
+                    android:text="@string/schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/stdMargin0"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/tvUser1" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stdLine1"
+                    android:background="@color/colorPrimary"/>
+                <RelativeLayout
+                    android:id="@+id/reqNotReadyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/stdMargin0">
+                    <ImageView
+                        android:id="@+id/itemImageView"
+                        android:layout_width="@dimen/itemImageView"
+                        android:layout_height="@dimen/itemImageView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/stdMargin1"
+                        android:layout_marginEnd="@dimen/stdMargin1"
+                        android:src="@drawable/ic_description" />
+
+                    <TextView
+                        android:id="@+id/judulTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/itemImageView"
+                        android:layout_toEndOf="@+id/itemImageView"
+                        android:text="@string/title"
+                        android:textSize="@dimen/itemSmallTxt"/>
+
+
+                    <ImageView
+                        android:id="@+id/detailImg"
+                        android:layout_width="@dimen/itemImageView"
+                        android:layout_height="@dimen/itemImageView"
+                        android:padding="@dimen/stdMargin1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_info"/>
+
+
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/reqIsReadyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/stdMargin0">
+                    <RelativeLayout
+                        android:id="@+id/bodyLayout"
+                        android:layout_width="match_parent"
+                        android:layout_toLeftOf="@+id/editImg"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/itemImageView1"
+                            android:layout_width="@dimen/itemImageButton"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center"
+                            android:layout_marginRight="@dimen/stdMargin1"
+                            android:layout_marginEnd="@dimen/stdMargin1"
+                            android:src="@drawable/ic_event" />
+                        <TextView
+                            android:id="@+id/tanggalTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:layout_toRightOf="@+id/itemImageView1"
+                            android:layout_toEndOf="@+id/itemImageView1"
+                            android:text="@string/date"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/itemSmallTxt"/>
+
+                        <ImageView
+                            android:id="@+id/itemImageView3"
+                            android:layout_width="@dimen/itemImageButton"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:gravity="center"
+                            android:layout_below="@+id/itemImageView1"
+                            android:layout_marginRight="@dimen/stdMargin1"
+                            android:layout_marginEnd="@dimen/stdMargin1"
+                            android:src="@drawable/ic_alarm" />
+
+                        <TextView
+                            android:id="@+id/jamTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/itemImageButton"
+                            android:layout_toRightOf="@+id/itemImageView3"
+                            android:layout_toEndOf="@+id/itemImageView3"
+                            android:text="@string/time"
+                            android:layout_alignBottom="@+id/itemImageView3"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/itemSmallTxt"/>
+
+                    </RelativeLayout>
+
+
+
+                    <ImageView
+                        android:id="@+id/editImg"
+                        android:layout_width="@dimen/itemImageView"
+                        android:layout_height="@dimen/itemImageView"
+                        android:src="@drawable/ic_edit"
+                        android:padding="@dimen/stdMargin1"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/personImg"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
+                        android:layout_toStartOf="@+id/personImg"/>
+
+
+
+                    <ImageView
+                        android:id="@+id/personImg"
+                        android:layout_width="@dimen/itemImageView"
+                        android:layout_height="@dimen/itemImageView"
+                        android:src="@drawable/ic_assignment_ind"
+                        android:padding="@dimen/stdMargin1"
+                        android:layout_toLeftOf="@+id/nextImg"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/nextImg"/>
+
+
+                    <ImageView
+                        android:id="@+id/nextImg"
+                        android:layout_width="@dimen/itemImageView"
+                        android:layout_height="@dimen/itemImageView"
+                        android:padding="@dimen/stdMargin1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_next"/>
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/stdMargin1"
+            card_view:cardElevation="3dp"
+            card_view:cardCornerRadius="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginStart="@dimen/stdMargin0"
+                    android:text="@string/history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/stdMargin0"
+                    android:textSize="@dimen/stdMediumTxt"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/tvUser" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stdLine1"
+                    android:background="@color/colorPrimary"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="@dimen/floatActionButton"
+        android:layout_height="@dimen/floatActionButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/ic_ustadz"
+        android:tint="@color/colorPrimary"
+        android:layout_marginEnd="@dimen/stdMargin1"
+        android:layout_marginBottom="@dimen/stdMargin0"/>
+
+
+
+</RelativeLayout>

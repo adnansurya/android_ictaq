@@ -61,7 +61,7 @@
 
     <string name="admin">Administrator</string>
     <string name="examiner">Penguji</string>
-    <string name="memorizer">Penghafal</string>
+    <string name="hafizh">Penghafal</string>
 
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
@@ -123,7 +123,7 @@
     <string name="micnotallowed">Izin microphone ditolak!</string>
 
     <string name="examrequest">Permintaan Ujian</string>
-    <string name="examrequestdialog">Meminta jadwal ujian dari</string>
+    <string name="examrequestdialog">Anda ingin meminta jadwal ujian?</string>
     <string name="makeschedule">Atur Jadwal</string>
     <string name="date">Tanggal</string>
     <string name="time">Waktu</string>
@@ -138,6 +138,7 @@
     <string name="recently">Baru Saja</string>
     <string name="soon">Sesaat Lagi</string>
     <string name="notavailable">Belum Tersedia</string>
+    <string name="history">Histori</string>
     
     <string name="scorea">Tuntas : A (91 &#8211; 100)</string>
     <string name="scoreb">Sangat Baik : B (80 &#8211; 90)</string>

@@ -88,6 +88,7 @@ public class VideoCall extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,7 +180,7 @@ public class VideoCall extends AppCompatActivity {
                         nilai = "C";
                     }
 
-                    ubahNilai(nilai, catatan, urlUpdateJadwal);
+                    ubahNilai("1", nilai, catatan, urlUpdateJadwal);
                 }else{
                     Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
                 }
@@ -403,7 +404,7 @@ public class VideoCall extends AppCompatActivity {
     }
 
 
-    private void ubahNilai(final String nilai, final String catatan, final String url){
+    private void ubahNilai(final String mulai, final String nilai, final String catatan, final String url){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
         progressDialog.show();
@@ -453,7 +454,7 @@ public class VideoCall extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("value", String.format("nilai='%s',catatan='%s'", nilai, catatan));
+                params.put("value", String.format("mulai='%s',nilai='%s',catatan='%s'",mulai, nilai, catatan));
                 params.put("where", String.format("where id='%s'",jadwalId));
 
                 return params;

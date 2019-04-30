@@ -63,6 +63,7 @@ public class RequestFragment extends Fragment {
 
         mList.setHasFixedSize(true);
         mList.setLayoutManager(linearLayoutManager);
+        mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
 
         url = getContext().getString(R.string.urlmain) +
@@ -147,9 +148,9 @@ public class RequestFragment extends Fragment {
 
                 Map<String, String> params = new HashMap<String, String>();
                 if(sharePrefMan.getSpType().equals("3")){
-                    params.put("where", String.format("where id_regis='%s' AND status='0'",sharePrefMan.getSpKode() ));
+                    params.put("where", String.format("where id_regis='%s' AND status='0' order by id desc",sharePrefMan.getSpKode() ));
                 }else if(sharePrefMan.getSpType().equals("2")){
-                    params.put("where", String.format("where id_penguji='%s' AND status='0'",sharePrefMan.getSpKode() ));
+                    params.put("where", String.format("where id_penguji='%s' AND status='0' order by id desc",sharePrefMan.getSpKode() ));
                 }
                 return params;
             }

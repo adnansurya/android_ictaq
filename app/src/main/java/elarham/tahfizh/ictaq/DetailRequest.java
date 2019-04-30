@@ -110,7 +110,7 @@ public class DetailRequest extends AppCompatActivity {
             url = getApplicationContext().getString(R.string.urlmain) +
                     "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
         }else if(sharePrefMan.getSpType().equals("2")){
-            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.memorizer));
+            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.hafizh));
             url = getApplicationContext().getString(R.string.urlmain) +
                     "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
 
@@ -485,7 +485,7 @@ public class DetailRequest extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("field", "id_permintaan,tgl,jam,mulai");
-                params.put("value", String.format("'%s','%s','%s','%s'", idRequest, tglJadwal, jamJadwal, "1" ));
+                params.put("value", String.format("'%s','%s','%s','%s'", idRequest, tglJadwal, jamJadwal, "0" ));
 
 
                 return params;

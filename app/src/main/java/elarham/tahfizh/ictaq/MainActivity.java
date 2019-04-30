@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import elarham.tahfizh.ictaq.Global.LocaleHelper;
@@ -62,9 +61,15 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         if(sharePrefMan.getSpType().trim().equals("2")){
-            MenuItem ustadz = bottomNavigationView.getMenu().findItem(R.id.ustadz_menu);
+            MenuItem ustadz = bottomNavigationView.getMenu().findItem(R.id.hafizh_menu);
             ustadz.setVisible(false);
+            MenuItem sertifikat = bottomNavigationView.getMenu().findItem(R.id.certificate_menu);
+            sertifikat.setVisible(false);
+        }else if(sharePrefMan.getSpType().trim().equals("3")){
+            MenuItem schedule = bottomNavigationView.getMenu().findItem(R.id.schedule_menu);
+            schedule.setVisible(false);
         }
+
 
 
         checkRequestPermission();
@@ -165,8 +170,8 @@ public class MainActivity extends AppCompatActivity
                 fragment = new QuranFragment();
                 actBar.setElevation(0);
                 break;
-            case R.id.ustadz_menu:
-                fragment = new UstadzFragment();
+            case R.id.hafizh_menu:
+                fragment = new HafizhFragment();
                 actBar.setElevation(defaultElevation);
                 break;
             case R.id.schedule_menu:
@@ -191,6 +196,7 @@ public class MainActivity extends AppCompatActivity
             MenuItem check = menu.findItem(R.id.profile_menu);
             check.setVisible(false);
         }
+
 
         return true;
     }

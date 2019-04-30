@@ -40,7 +40,6 @@ public class ReadyFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     DividerItemDecoration dividerItemDecoration;
     List<Jadwal> readyList;
-    List<Request> reqList;
     RecyclerView.Adapter adapter;
     SharedPreferenceManager sharePrefMan;
 
@@ -56,7 +55,6 @@ public class ReadyFragment extends Fragment {
         mList = view.findViewById(R.id.recycleList);
 
         readyList = new ArrayList<>();
-        reqList = new ArrayList<>();
         adapter = new ReadyAdapter(getContext(),readyList);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -65,6 +63,7 @@ public class ReadyFragment extends Fragment {
 
         mList.setHasFixedSize(true);
         mList.setLayoutManager(linearLayoutManager);
+        mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
 
         url = getContext().getString(R.string.urlmain) +
@@ -211,7 +210,7 @@ public class ReadyFragment extends Fragment {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", String.format("where id_permintaan IN %s",reqSiap.toString()));
+                params.put("where", String.format("where id_permintaan IN %s order by id desc",reqSiap.toString()));
                 return params;
             }
         };
