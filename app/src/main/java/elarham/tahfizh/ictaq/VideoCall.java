@@ -18,7 +18,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +37,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -54,8 +57,11 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -80,10 +86,12 @@ public class VideoCall extends AppCompatActivity {
     RadioGroup nilaiRad;
     RadioButton nilaiRadBtn, radBtnA, radBtnB, radBtnC;
     Button simpanBtn;
+    ImageView juzBtn;
 
     String nilai = "";
 
-
+    boolean[] checkedJuz;
+    SparseBooleanArray selectedJuz;
 
 
 
@@ -95,13 +103,17 @@ public class VideoCall extends AppCompatActivity {
         setContentView(R.layout.activity_video_call);
 
         jadwalTxt = findViewById(R.id.jadwalTxt);
+
         catatanTxt = findViewById(R.id.catatanTxt);
         nilaiRad = findViewById(R.id.nilaiRadio);
         radBtnA = findViewById(R.id.scoreA);
         radBtnB = findViewById(R.id.scoreB);
         radBtnC = findViewById(R.id.scoreC);
         simpanBtn = findViewById(R.id.simpanBtn);
+        juzBtn = findViewById(R.id.juzBtn);
 
+
+        checkedJuz = new boolean[30];
 
 
         sharePrefMan = new SharedPreferenceManager(this);
@@ -130,6 +142,8 @@ public class VideoCall extends AppCompatActivity {
             }
 
         }
+
+
 
 
 
@@ -194,8 +208,66 @@ public class VideoCall extends AppCompatActivity {
             }
         });
 
+        if(sharePrefMan.getSpType().equals("2")){
+            chooseJuz();
+
+        }
+        juzBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseJuz();
+            }
+        });
 
 
+
+
+    }
+    AlertDialog alert;
+    AlertDialog.Builder builder;
+    private void chooseJuz(){
+        List<String> listItems = new ArrayList<String>();
+        for(int i=0; i<30; i++){
+            listItems.add(getApplicationContext().getString(R.string.juz) + " " + String.valueOf(i+1));
+        }
+        final CharSequence[] allJuz = listItems.toArray(new CharSequence[listItems.size()]);
+
+
+
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle(getApplicationContext().getString(R.string.selecttestedjuz));
+        builder.setIcon(R.drawable.ic_local_library);
+        builder.setMultiChoiceItems(allJuz, checkedJuz, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item, boolean isChecked) {
+                checkedJuz[item] = isChecked;
+
+            }
+        });
+
+        builder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+
+//                        selectedJuz = alert.getListView().getCheckedItemPositions();
+                        Toast.makeText(VideoCall.this, String.valueOf(alert.getListView().getCheckedItemPositions()), Toast.LENGTH_SHORT).show();
+//
+//                        for(int i=0; i< selectedJuz.size(); i++){
+//                            String juz = String.valueOf(selectedJuz.keyAt(i));
+//                            Toast.makeText(VideoCall.this, String.valueOf(juz), Toast.LENGTH_SHORT).show();
+////                            checkedJuz[Integer.parseInt(juz)] = true;
+//                        }
+
+
+
+                        //Toast.makeText(VideoCall.this, String.valueOf(alert.getListView().getCheckedItemPositions()), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        alert = builder.create();
+        alert.show();
     }
     private void setWebChromeClient(){
 
@@ -397,7 +469,7 @@ public class VideoCall extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
 
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
 
                 params.put("value", String.format("tgl='%s',jam='%s'", tanggal, jam));
                 params.put("where", String.format("where id='%s'",jadwalId));

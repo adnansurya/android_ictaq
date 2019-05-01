@@ -137,6 +137,7 @@
     <string name="preferences_category_general">General</string>
     <string name="preferences_language">Language</string>
     <string name="history">History</string>
-    <string name="hafizh">Hafizh</string>
+    <string name="clickheretoedit">Click here to edit</string>
+    <string name="selecttestedjuz">Select the tested Juz</string>
 
 </resources>

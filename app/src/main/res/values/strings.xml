@@ -61,7 +61,7 @@
 
     <string name="admin">Administrator</string>
     <string name="examiner">Penguji</string>
-    <string name="hafizh">Penghafal</string>
+    <string name="hafizh" translatable="false">Hafizh</string>
 
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
@@ -139,6 +139,7 @@
     <string name="soon">Sesaat Lagi</string>
     <string name="notavailable">Belum Tersedia</string>
     <string name="history">Histori</string>
+    <string name="selecttestedjuz">Pilih Juz yang diujikan</string>
     
     <string name="scorea">Tuntas : A (91 &#8211; 100)</string>
     <string name="scoreb">Sangat Baik : B (80 &#8211; 90)</string>
