@@ -66,12 +66,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
             judulTxt = itemView.findViewById(R.id.judulTxt);
             detailImg = itemView.findViewById(R.id.detailImg);
+            detailImg.setVisibility(View.GONE);
 
-
-            detailImg.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     int position = getAdapterPosition();
 
                     Request request = list.get(position);
@@ -84,9 +83,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                     open.putExtra("status", request.getStatus());
                     context.startActivity(open);
 
-
                 }
             });
+
+
+
         }
     }
 

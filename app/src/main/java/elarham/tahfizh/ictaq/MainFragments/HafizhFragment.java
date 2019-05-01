@@ -3,11 +3,13 @@ package elarham.tahfizh.ictaq.MainFragments;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,9 +44,9 @@ import java.util.Map;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Jadwal;
-import elarham.tahfizh.ictaq.Models.User;
 import elarham.tahfizh.ictaq.R;
 import elarham.tahfizh.ictaq.ScheduleFragments.ReadyAdapter;
+import elarham.tahfizh.ictaq.VideoCall;
 
 
 public class HafizhFragment extends Fragment {
@@ -57,18 +60,20 @@ public class HafizhFragment extends Fragment {
     SharedPreferenceManager sharePrefMan;
 
     RelativeLayout reqIsReadyLayout, reqNotReadyLayout;
-    TextView judulTxt, tanggalTxt, waktuTxt;
+    TextView judulTxt, tanggalTxt, waktuTxt, requestTxt;
 
 
     String url;
-    String id_penguji;
+    String id_penguji, id_request, id_jadwal;
 
     StringBuilder reqSiap;
+    ImageView detailImg, nextImg;
+    CardView historyCard;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_hafalan, container, false);
+        View view = inflater.inflate(R.layout.fragment_hafizh, container, false);
 
         mList = view.findViewById(R.id.recycleList);
         fab = view.findViewById(R.id.fab);
@@ -79,6 +84,14 @@ public class HafizhFragment extends Fragment {
         judulTxt = view.findViewById(R.id.judulTxt);
         tanggalTxt = view.findViewById(R.id.tanggalTxt);
         waktuTxt = view.findViewById(R.id.jamTxt);
+        requestTxt = view.findViewById(R.id.requestTxt);
+
+        detailImg = view.findViewById(R.id.detailImg);
+        nextImg = view.findViewById(R.id.nextImg);
+
+        historyCard = view.findViewById(R.id.historyCard);
+
+
 
 
         readyList = new ArrayList<>();
@@ -105,6 +118,8 @@ public class HafizhFragment extends Fragment {
 
 
         getReqAccData();
+
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +169,8 @@ public class HafizhFragment extends Fragment {
     }
 
 
+
+
     private void getLastReq(){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getContext().getString(R.string.loading));
@@ -171,7 +188,7 @@ public class HafizhFragment extends Fragment {
                         Log.e("LAST REQ", response);
 
                         try {
-                            String status, tanggal, id;
+                            final String status, tanggal;
                             JSONArray dataQuery = new JSONObject(response).getJSONArray("data");
                             if(dataQuery.length()==0){
                                 fab.show();
@@ -182,19 +199,27 @@ public class HafizhFragment extends Fragment {
 
                             }else{
                                 fab.hide();
-                                id =  dataQuery.getJSONObject(0).getString("id");
+                                id_request =  dataQuery.getJSONObject(0).getString("id");
                                 status = dataQuery.getJSONObject(0).getString("status");
                                 tanggal = dataQuery.getJSONObject(0).getString("tgl");
                                 if(status.equals("0")){
                                     reqIsReadyLayout.setVisibility(View.GONE);
                                     reqNotReadyLayout.setVisibility(View.VISIBLE);
                                     judulTxt.setText(getContext().getString(R.string.sent) + " : " + new StringUtility().relativeTime(tanggal, getContext()));
+                                    detailImg.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            new StringUtility().simpleDialog(getContext().getString(R.string.examrequest),
+                                                    getContext().getString(R.string.sent) + " : " + new StringUtility().exactTime(tanggal, getContext()) , getContext());
+
+                                        }
+                                    });
                                 }else if(status.equals("1")){
                                     reqIsReadyLayout.setVisibility(View.VISIBLE);
                                     reqNotReadyLayout.setVisibility(View.GONE);
                                     url = getContext().getString(R.string.urlmain) +
                                             "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
-                                    getLastReady(id);
+                                    getLastReady(id_request);
                                 }
                             }
 
@@ -256,15 +281,30 @@ public class HafizhFragment extends Fragment {
                                 Toast.makeText(getContext(), getContext().getString(R.string.data) + " " + getContext().getString(R.string.notavailable), Toast.LENGTH_SHORT).show();
 
                             }else{
-
+                                id_jadwal = dataQuery.getJSONObject(0).getString("id");
                                 mulai =  dataQuery.getJSONObject(0).getString("mulai");
                                 waktu =  dataQuery.getJSONObject(0).getString("jam");
                                 nilai = dataQuery.getJSONObject(0).getString("nilai");
                                 catatan = dataQuery.getJSONObject(0).getString("catatan");
                                 tanggal = dataQuery.getJSONObject(0).getString("tgl");
+                                requestTxt.setText(getContext().getString(R.string.schedule));
                                 if(mulai.equals("0")){
                                     waktuTxt.setText(waktu);
                                     tanggalTxt.setText(new StringUtility().relativeTime(tanggal, getContext()));
+                                    nextImg.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+
+
+                                            url = getContext().getString(R.string.urlmain) +
+                                                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=room";
+
+                                            getRoomById(id_request, id_jadwal);
+
+
+                                        }
+                                    });
                                 }else if(mulai.equals("1")){
                                     reqIsReadyLayout.setVisibility(View.GONE);
                                     fab.show();
@@ -344,6 +384,7 @@ public class HafizhFragment extends Fragment {
                                         "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
                                 getReadyData();
                             }else{
+                                historyCard.setVisibility(View.GONE);
                                 Toast.makeText(getContext(), getContext().getString(R.string.history) + " " + getContext().getString(R.string.notavailable), Toast.LENGTH_SHORT).show();
                             }
 
@@ -571,6 +612,67 @@ public class HafizhFragment extends Fragment {
         };
 
         queue.add(strRequest);
+
+    }
+
+    public void getRoomById(final String idReq, final String idJadwal){
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getContext().getString(R.string.loading));
+        progressDialog.show();
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+        StringRequest strRequest = new StringRequest(com.android.volley.Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL ROOM ID", url);
+                        Log.e("ROOM ID", response);
+
+                        try {
+
+                            JSONObject room = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            Intent vidCall = new Intent(getContext(), VideoCall.class);
+                            vidCall.putExtra("idJadwal", idJadwal);
+                            vidCall.putExtra("idRoom", room.getString("id_room"));
+                            vidCall.putExtra("idReq", idReq);
+
+                            getContext().startActivity(vidCall);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("where", String.format("where id_permintaan='%s'",idReq));
+
+                return params;
+            }
+        };
+
+        requestQueue.add(strRequest);
+
 
     }
 }

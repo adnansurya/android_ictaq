@@ -26,7 +26,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:layout_marginStart="@dimen/stdMargin0"
-                    android:text="@string/schedule"
+                    android:text="@string/examrequest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -34,7 +34,7 @@
                     android:layout_marginTop="@dimen/stdMargin0"
                     android:textSize="@dimen/stdMediumTxt"
                     android:textColor="@color/colorPrimaryDark"
-                    android:id="@+id/tvUser1" />
+                    android:id="@+id/requestTxt" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/stdLine1"
@@ -151,18 +151,6 @@
                         android:layout_toStartOf="@+id/personImg"/>
 
 
-
-                    <ImageView
-                        android:id="@+id/personImg"
-                        android:layout_width="@dimen/itemImageView"
-                        android:layout_height="@dimen/itemImageView"
-                        android:src="@drawable/ic_assignment_ind"
-                        android:padding="@dimen/stdMargin1"
-                        android:layout_toLeftOf="@+id/nextImg"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/nextImg"/>
-
-
                     <ImageView
                         android:id="@+id/nextImg"
                         android:layout_width="@dimen/itemImageView"
@@ -179,7 +167,7 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
-            android:id="@+id/card_view1"
+            android:id="@+id/historyCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

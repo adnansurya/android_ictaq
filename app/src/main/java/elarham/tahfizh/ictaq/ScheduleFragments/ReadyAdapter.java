@@ -104,6 +104,14 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
             editImg = itemView.findViewById(R.id.editImg);
             nextImg = itemView.findViewById(R.id.nextImg);
 
+            sharePrefMan = new SharedPreferenceManager(context);
+            if(sharePrefMan.getSpType().equals("3")) {
+                nextImg.setVisibility(View.INVISIBLE);
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)personImg.getLayoutParams();
+                params.addRule(RelativeLayout.ALIGN_PARENT_END);
+                personImg.setLayoutParams(params);
+            }
+
             personImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -145,6 +153,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
             });
 
 
+
             nextImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -162,7 +171,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         }
     }
 
-    private void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan){
+    public void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
         progressDialog.show();

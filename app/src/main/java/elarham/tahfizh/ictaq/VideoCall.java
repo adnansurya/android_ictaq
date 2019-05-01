@@ -111,10 +111,14 @@ public class VideoCall extends AppCompatActivity {
         roomId = getIntent().getStringExtra("idRoom");
         jadwalId = getIntent().getStringExtra("idJadwal");
         reqId = getIntent().getStringExtra("idReq");
-        jam = getIntent().getStringExtra("jam");
-        tanggal = getIntent().getStringExtra("tanggal");
-        nilai = getIntent().getStringExtra("nilai");
-        catatan = getIntent().getStringExtra("catatan");
+
+        if(sharePrefMan.getSpType().equals("2")){
+            jam = getIntent().getStringExtra("jam");
+            tanggal = getIntent().getStringExtra("tanggal");
+            nilai = getIntent().getStringExtra("nilai");
+            catatan = getIntent().getStringExtra("catatan");
+        }
+
 
         if(!nilai.equals("null")){
             if(nilai.equals("A")){
@@ -146,18 +150,20 @@ public class VideoCall extends AppCompatActivity {
         if(sharePrefMan.getSpType().equals("2")){
             mWebRTCWebView.setVisibility(View.GONE);
             editLay.setVisibility(View.VISIBLE);
+            jadwalTxt.setText(new StringUtility().exactTime(tanggal, this) + " " + jam);
+            if(catatan.trim().equals("null")){
+                catatanTxt.setText("");
+            }else{
+                catatanTxt.setText(catatan);
+            }
         }else if(sharePrefMan.getSpType().equals("3")){
             editLay.setVisibility(View.GONE);
             openRTC();
         }
 
-        jadwalTxt.setText(new StringUtility().exactTime(tanggal, this) + " " + jam);
 
-        if(catatan.trim().equals("null")){
-            catatanTxt.setText("");
-        }else{
-            catatanTxt.setText(catatan);
-        }
+
+
 
         simpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override

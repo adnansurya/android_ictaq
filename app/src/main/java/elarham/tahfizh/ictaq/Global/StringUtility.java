@@ -1,6 +1,8 @@
 package elarham.tahfizh.ictaq.Global;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.widget.Toast;
 
 import org.ocpsoft.prettytime.PrettyTime;
@@ -54,6 +56,24 @@ public class StringUtility {
         return dateFormatted;
 
 
+    }
+
+    public void simpleDialog(String title, String message, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle(title);
+        builder.setMessage(message);
+
+        builder.setPositiveButton(context.getString(R.string.close), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public String exactTime(String dateStr, Context context){

@@ -106,13 +106,14 @@ public class Profile extends AppCompatActivity {
                             provinsiTxt.setText(profile.getString("provinsi"));
                             alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota"));
                             telpTxt.setText(profile.getString("telp"));
-                            emailTxt.setText(profile.getString("email"));
+
 
                             if(sharePrefMan.getSpType().equals("3")){
                                 pekerjaanTxt.setText(profile.getString("pekerjaan"));
                                 tgl_lahirTxt.setText(profile.getString("tgl_lahir"));
                                 tahunTxt.setText(profile.getString("thn_menghafal"));
                                 ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+                                emailTxt.setText(profile.getString("email"));
                             }
 
 
@@ -150,8 +151,11 @@ public class Profile extends AppCompatActivity {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", String.format("where a.id='%s'",kode));
-
+                if(sharePrefMan.getSpType().equals("3")) {
+                    params.put("where", String.format("where a.id='%s'", kode));
+                }else  if(sharePrefMan.getSpType().equals("2")){
+                    params.put("where", String.format("where id='%s'", kode));
+                }
                 return params;
             }
         };
