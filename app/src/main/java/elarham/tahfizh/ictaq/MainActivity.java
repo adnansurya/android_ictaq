@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         actBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_USE_LOGO);
 
-        actBar.setIcon(R.mipmap.ic_mytahfizh);
+        actBar.setIcon(R.mipmap.ic_mytahfizh_black);
         actBar.setTitle(" "+ getApplicationContext().getString(R.string.app_name));
 
 
