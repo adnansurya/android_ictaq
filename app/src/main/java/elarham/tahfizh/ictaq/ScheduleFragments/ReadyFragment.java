@@ -56,6 +56,7 @@ public class ReadyFragment extends Fragment {
 
         readyList = new ArrayList<>();
         adapter = new ReadyAdapter(getContext(),readyList);
+        
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -93,26 +94,33 @@ public class ReadyFragment extends Fragment {
                         Log.e("URL REQ READY", url);
                         Log.e("REQ READY", response);
 
+
+
                         try {
 
                             JSONArray request = new JSONObject(response).getJSONArray("data");
-                            for (int i=0; i <request.length(); i++){
+                            if(request.length()==0){
+                                Toast.makeText(getContext(), getContext().getString(R.string.data) + " " + getContext().getString(R.string.notavailable), Toast.LENGTH_SHORT).show();
+                            }else{
+                                for (int i=0; i <request.length(); i++){
 
-                                JSONObject jsonObj = request.getJSONObject(i);
+                                    JSONObject jsonObj = request.getJSONObject(i);
 
-                                String id = jsonObj.getString("id");
+                                    String id = jsonObj.getString("id");
 
-                                reqSiap.append(id);
-                                reqSiap.append(",");
+                                    reqSiap.append(id);
+                                    reqSiap.append(",");
 
 
+                                }
+                                reqSiap.deleteCharAt(reqSiap.length()-1);
+                                reqSiap.append(")");
+
+                                url = getContext().getString(R.string.urlmain) +
+                                        "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
+                                getData();
                             }
-                            reqSiap.deleteCharAt(reqSiap.length()-1);
-                            reqSiap.append(")");
 
-                            url = getContext().getString(R.string.urlmain) +
-                                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
-                            getData();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -182,6 +190,7 @@ public class ReadyFragment extends Fragment {
                                 jadwal.setCatatan(jsonObj.getString("catatan"));
 
                                 readyList.add(jadwal);
+
 
                             }
 

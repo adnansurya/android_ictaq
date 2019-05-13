@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".VideoCall">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -45,9 +48,36 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/stdMargin2"
+            android:layout_marginStart="@dimen/stdMargin2"
+            android:layout_marginRight="@dimen/stdMargin2"
+            android:layout_marginEnd="@dimen/stdMargin2"
+            android:layout_marginTop="@dimen/stdMargin2"
+            card_view:cardElevation="3dp"
+            card_view:cardCornerRadius="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/juzBtn"
+                    android:layout_margin="@dimen/stdMargin1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/selecttestedjuz"
+                    android:textColor="@color/colorNavigationText"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
+            android:id="@+id/card_view_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -69,13 +99,8 @@
                     android:layout_alignParentStart="true"
                     android:textStyle="bold"/>
 
-                <ImageView
-                    android:id="@+id/juzBtn"
-                    android:layout_width="@dimen/stdMargin3"
-                    android:layout_height="@dimen/stdMargin3"
-                    android:src="@drawable/ic_settings"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"/>
+
+
                 <LinearLayout
                     android:id="@+id/scoreLay"
                     android:layout_width="match_parent"
@@ -83,51 +108,18 @@
                     android:orientation="vertical"
                     android:layout_below="@+id/scoreTitleTxt">
 
-
-                    <RadioGroup
-                        android:id="@+id/nilaiRadio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView1"
-                        android:layout_marginBottom="@dimen/stdMargin2">
-
-                        <RadioButton
-                            android:id="@+id/scoreA"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/stdMediumTxt"
-                            android:text="@string/scorea"
-                            android:layout_marginBottom="@dimen/stdMargin1"/>
-
-                        <RadioButton
-                            android:id="@+id/scoreB"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/scoreb"
-                            android:textSize="@dimen/stdMediumTxt"
-                            android:layout_marginBottom="@dimen/stdMargin1"/>
-
-                        <RadioButton
-                            android:id="@+id/scoreC"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/scorec"
-                            android:textSize="@dimen/stdMediumTxt"
-                            android:layout_marginBottom="@dimen/stdMargin1"/>
+                </LinearLayout>
 
 
 
 
-                    </RadioGroup>
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:stepSize="1.0"
-                        android:rating="3.0"
-                        style="?android:attr/ratingBarStyleIndicator"
-                        android:isIndicator="false"
-                        />
+                <LinearLayout
+                    android:layout_marginTop="@dimen/stdMargin1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/scoreLay">
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -166,6 +158,7 @@
 
 
     </LinearLayout>
+    </ScrollView>
 
     <WebView
         android:layout_width="match_parent"

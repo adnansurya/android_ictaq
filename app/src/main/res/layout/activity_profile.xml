@@ -14,13 +14,15 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp">
+                android:layout_height="320dp"
+                android:layout_marginBottom="@dimen/stdMargin2">
                 <LinearLayout
                     android:background="@drawable/gradientbackground"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/profPicImg"
                         android:layout_marginTop="@dimen/stdMargin2"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
@@ -46,11 +48,12 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="180dp"
                     card_view:cardElevation="10dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
                         <LinearLayout
                             android:gravity="center"
                             android:orientation="vertical"
@@ -74,30 +77,7 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tahun"
-                                android:textSize="20sp"
-                                />
 
-                            <TextView
-                                android:id="@+id/tahunTxt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="10dp"
-                                android:text="@string/startyear"
-                                android:textColor="@color/startgold"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
                         <LinearLayout
                             android:gravity="center"
                             android:orientation="vertical"
@@ -133,14 +113,14 @@
                 android:orientation="vertical"
                 android:layout_gravity="left"
                 android:layout_marginStart="@dimen/stdMargin3"
-                android:layout_marginLeft="@dimen/stdMargin3"
-                android:layout_marginTop="@dimen/stdMargin2">
+                android:layout_marginLeft="@dimen/stdMargin3">
 
                 <LinearLayout
-
+                    android:id="@+id/pekerjaanView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/stdMargin4">
 
                     <ImageView
                         android:layout_width="36dp"
@@ -150,7 +130,6 @@
 
                     <TextView
                         android:id="@+id/pekerjaanTxt"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -160,7 +139,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="@dimen/stdMargin4"
+                    android:layout_marginBottom="@dimen/stdMargin4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -182,7 +161,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="@dimen/stdMargin4"
+                    android:layout_marginBottom="@dimen/stdMargin4"
                     android:orientation="horizontal"
 
                     android:layout_width="match_parent"
@@ -205,7 +184,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="@dimen/stdMargin4"
+                    android:layout_marginBottom="@dimen/stdMargin4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -227,7 +206,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="@dimen/stdMargin4"
+                    android:layout_marginBottom="@dimen/stdMargin4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -252,7 +231,7 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/stdMargin4"
+                    android:id="@+id/ayahIbuView"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

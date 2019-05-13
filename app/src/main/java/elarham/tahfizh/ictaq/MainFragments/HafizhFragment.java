@@ -64,11 +64,13 @@ public class HafizhFragment extends Fragment {
 
 
     String url;
-    String id_penguji, id_request, id_jadwal;
+    String id_penguji, antrian_penguji, id_request, id_jadwal;
 
     StringBuilder reqSiap;
     ImageView detailImg, nextImg;
     CardView historyCard;
+    Calendar myCalendar;
+    SimpleDateFormat sdf;
 
     @Nullable
     @Override
@@ -92,7 +94,8 @@ public class HafizhFragment extends Fragment {
         historyCard = view.findViewById(R.id.historyCard);
 
 
-
+        reqIsReadyLayout.setVisibility(View.GONE);
+        reqNotReadyLayout.setVisibility(View.GONE);
 
         readyList = new ArrayList<>();
         adapter = new ReadyAdapter(getContext(),readyList);
@@ -114,6 +117,8 @@ public class HafizhFragment extends Fragment {
                 "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=permintaan";
         reqSiap = new StringBuilder("(");
 
+
+
         getLastReq();
 
 
@@ -127,9 +132,9 @@ public class HafizhFragment extends Fragment {
 
               
 
-                final Calendar myCalendar = Calendar.getInstance();
+                myCalendar = Calendar.getInstance();
                 String myFormat = "yyyy-MM-dd"; //In which you need put here
-                final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                sdf = new SimpleDateFormat(myFormat, Locale.US);
 
 
 
@@ -142,8 +147,10 @@ public class HafizhFragment extends Fragment {
 
                     public void onClick(DialogInterface dialog, int which) {
 
-                        requestJadwal(sharePrefMan.getSpKode(), id_penguji, String.valueOf(sdf.format(myCalendar.getTime())),"0");
+
                         getIdPenguji();
+
+
                         dialog.dismiss();
                     }
                 });
@@ -288,7 +295,10 @@ public class HafizhFragment extends Fragment {
                                 catatan = dataQuery.getJSONObject(0).getString("catatan");
                                 tanggal = dataQuery.getJSONObject(0).getString("tgl");
                                 requestTxt.setText(getContext().getString(R.string.schedule));
-                                if(mulai.equals("0")){
+                                if(mulai.equals("2")){
+                                    reqIsReadyLayout.setVisibility(View.GONE);
+                                    fab.show();
+                                }else{
                                     waktuTxt.setText(waktu);
                                     tanggalTxt.setText(new StringUtility().relativeTime(tanggal, getContext()));
                                     nextImg.setOnClickListener(new View.OnClickListener() {
@@ -305,9 +315,6 @@ public class HafizhFragment extends Fragment {
 
                                         }
                                     });
-                                }else if(mulai.equals("1")){
-                                    reqIsReadyLayout.setVisibility(View.GONE);
-                                    fab.show();
                                 }
                             }
 
@@ -485,7 +492,7 @@ public class HafizhFragment extends Fragment {
             {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("where", String.format("where id_permintaan IN %s AND mulai='1' order by id desc",reqSiap.toString()));
+                params.put("where", String.format("where id_permintaan IN %s AND mulai='2' order by id desc",reqSiap.toString()));
                 return params;
             }
         };
@@ -518,8 +525,11 @@ public class HafizhFragment extends Fragment {
                         try {
 
                             id_penguji = new JSONObject(response).getJSONArray("data").getJSONObject(0).getString("id");
+                            antrian_penguji = new JSONObject(response).getJSONArray("data").getJSONObject(0).getString("antrian");
+                            Log.e("PENGUJI DATA : ", id_penguji +"/"+ antrian_penguji);
+                            addAntrian(id_penguji);
 
-                            Toast.makeText(getContext(), id_penguji, Toast.LENGTH_SHORT).show();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getContext(), getContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
@@ -542,7 +552,7 @@ public class HafizhFragment extends Fragment {
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("where", "order by rand() limit 1");
+                params.put("where", "order by antrian asc limit 1");
 
 
                 return params;
@@ -551,6 +561,60 @@ public class HafizhFragment extends Fragment {
 
         queue.add(strRequest);
     }
+
+    private void addAntrian(final String id){
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getContext().getString(R.string.loading));
+        progressDialog.show();
+
+        antrian_penguji = String.valueOf(Integer.valueOf(antrian_penguji)+ 1);
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        String url = getContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=penguji";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("PENGUJI", response);
+                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        requestJadwal(sharePrefMan.getSpKode(), id_penguji, String.valueOf(sdf.format(myCalendar.getTime())),"0");
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                Toast.makeText(getContext(), getContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", String.format("antrian='%s'", antrian_penguji));
+                params.put("where", String.format("where id='%s'",id));
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+
+    }
+
     private void requestJadwal(final String id_regis, final String id_penguji, final String tanggal, final String status){
 
 
@@ -573,11 +637,10 @@ public class HafizhFragment extends Fragment {
                         Log.e("PROFILE EDIT SIMPAN", response);
                         progressDialog.dismiss();
 
-//                        Intent ubah = new Intent(ProfileEdit.this, MainActivity.class);
-//                        startActivity(ubah);
                         try {
                             JSONObject simpan = new JSONObject(response);
                             if(simpan.getString("status").equals("sukses")){
+
                                 Toast.makeText(getContext(), R.string.registerok, Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package elarham.tahfizh.ictaq;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -172,6 +174,9 @@ public class Login extends AppCompatActivity {
 
                         try {
 
+                            final Intent home = new Intent(Login.this, MainActivity.class);
+
+
                             JSONObject userData = new JSONObject(response).getJSONArray("data").getJSONObject(0);
                             sharePrefMan.setSPString(sharePrefMan.SP_USERDATA, userData.toString());
                             sharePrefMan.setSPString(sharePrefMan.SP_KODE, userData.getString("kode"));
@@ -179,14 +184,51 @@ public class Login extends AppCompatActivity {
                             sharePrefMan.setSPString(sharePrefMan.SP_USERNAME, userData.getString("username"));
                             sharePrefMan.setSPString(sharePrefMan.SP_PASSWORD, userData.getString("password"));
                             sharePrefMan.setSPString(sharePrefMan.SP_ID_USER, userData.getString("id_user"));
-
-                            sharePrefMan.setSPString(sharePrefMan.SP_TYPE, userData.getString("type"));
                             sharePrefMan.setSPBoolean(sharePrefMan.SP_SUDAH_LOGIN, true);
                             Log.e("KODE",sharePrefMan.getSpKode());
 
-                            Intent home = new Intent(Login.this, MainActivity.class);
                             home.putExtra("username", username);
-                            startActivity(home);
+
+
+                            String userType = userData.getString("type");
+                            if(userType.equals("1")){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+
+                                builder.setTitle("Administrator");
+                                builder.setMessage("Login Sebagai : ");
+
+                                builder.setPositiveButton(getApplicationContext().getString(R.string.hafizh), new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharePrefMan.setSPString(sharePrefMan.SP_TYPE,"3");
+                                        startActivity(home);
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                builder.setNegativeButton(getApplicationContext().getString(R.string.ustadz), new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharePrefMan.setSPString(sharePrefMan.SP_TYPE,"2");
+                                        startActivity(home);
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }else{
+                                sharePrefMan.setSPString(sharePrefMan.SP_TYPE,userType);
+                                startActivity(home);
+                            }
+
+
+
+
+
+
 
 
                         } catch (JSONException e) {

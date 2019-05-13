@@ -97,28 +97,33 @@ public class RequestFragment extends Fragment {
                         try {
 
                             JSONArray request = new JSONObject(response).getJSONArray("data");
-                            for (int i=0; i <request.length(); i++){
+                            if(request.length()==0){
+                                Toast.makeText(getContext(), getContext().getString(R.string.data) + " " + getContext().getString(R.string.notavailable), Toast.LENGTH_SHORT).show();
+                            }else{
+                                for (int i=0; i <request.length(); i++){
 
-                                JSONObject jsonObj = request.getJSONObject(i);
-
-
-                                String id,status;
-                                id = jsonObj.getString("id");
-                                status = jsonObj.getString("status");
+                                    JSONObject jsonObj = request.getJSONObject(i);
 
 
-
-                                Request req = new Request();
-                                req.setId(id);
-                                req.setIdRegis(jsonObj.getString("id_regis"));
-                                req.setIdPenguji(jsonObj.getString("id_penguji"));
-                                req.setTanggal(jsonObj.getString("tgl"));
-                                req.setStatus(status);
-                                reqList.add(req);
+                                    String id,status;
+                                    id = jsonObj.getString("id");
+                                    status = jsonObj.getString("status");
 
 
 
+                                    Request req = new Request();
+                                    req.setId(id);
+                                    req.setIdRegis(jsonObj.getString("id_regis"));
+                                    req.setIdPenguji(jsonObj.getString("id_penguji"));
+                                    req.setTanggal(jsonObj.getString("tgl"));
+                                    req.setStatus(status);
+                                    reqList.add(req);
+
+
+
+                                }
                             }
+
 
 
                         } catch (JSONException e) {

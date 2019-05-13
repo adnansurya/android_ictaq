@@ -153,7 +153,7 @@ public class DetailRequest extends AppCompatActivity {
 
                         try {
 
-                            final JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            final JSONObject profile = new JSONObject(response.replace(":null,",":-, ")).getJSONArray("data").getJSONObject(0);
                             nama = profile.getString("nama");
                             email = profile.getString("email");
                             phone = profile.getString("telp");

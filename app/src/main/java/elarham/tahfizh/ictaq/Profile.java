@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 
 public class Profile extends AppCompatActivity {
 
@@ -33,13 +37,13 @@ public class Profile extends AppCompatActivity {
     SharedPreferenceManager sharePrefMan;
     String profileData, kode;
     TextView namaTxt, typeTxt, tahunTxt, provinsiTxt, pekerjaanTxt, tgl_lahirTxt, alamatTxt, telpTxt, emailTxt, ayah_ibuTxt;
+    ImageView profPicImg;
 
 
     boolean itemLoaded = false;
+    LinearLayout pekerjaanView, ayahIbuView;
 
     String url;
-
-
 
 
     @Override
@@ -65,6 +69,10 @@ public class Profile extends AppCompatActivity {
         telpTxt = findViewById(R.id.telpTxt);
         emailTxt = findViewById(R.id.emailTxt);
         ayah_ibuTxt = findViewById(R.id.ayah_ibuTxt);
+
+        profPicImg = findViewById(R.id.profPicImg);
+        pekerjaanView = findViewById(R.id.pekerjaanView);
+        ayahIbuView = findViewById(R.id.ayahIbuView);
 
         if(sharePrefMan.getSpType().equals("1")){
             typeTxt.setText(getApplicationContext().getString(R.string.admin));
@@ -96,26 +104,34 @@ public class Profile extends AppCompatActivity {
                         Log.e("URL PROFILE", url);
                         Log.e("ID", kode);
                         Log.e("PROFILE ", response);
-
+                       // response = response.replace("null", "-");
 
                         try {
 
-                            JSONObject profile = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            JSONObject profile = new JSONObject(response.replace(":null,",":-,")).getJSONArray("data").getJSONObject(0);
                             profileData = profile.toString();
                             namaTxt.setText(profile.getString("nama"));
                             provinsiTxt.setText(profile.getString("provinsi"));
                             alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota"));
                             telpTxt.setText(profile.getString("telp"));
+                            emailTxt.setText(profile.getString("email"));
+                            tgl_lahirTxt.setText(new StringUtility().exactTime(profile.getString("tgl_lahir"), Profile.this));
 
 
                             if(sharePrefMan.getSpType().equals("3")){
-                                pekerjaanTxt.setText(profile.getString("pekerjaan"));
-                                tgl_lahirTxt.setText(profile.getString("tgl_lahir"));
-                                tahunTxt.setText(profile.getString("thn_menghafal"));
-                                ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
-                                emailTxt.setText(profile.getString("email"));
-                            }
 
+                                pekerjaanTxt.setText(profile.getString("pekerjaan"));
+
+//                                tahunTxt.setText(profile.getString("thn_menghafal"));
+                                ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
+                                profPicImg.setImageResource(R.mipmap.ic_hafizh);
+
+                            }else if(sharePrefMan.getSpType().equals("2")){
+
+                                pekerjaanView.setVisibility(View.GONE);
+                                ayahIbuView.setVisibility(View.GONE);
+                                profPicImg.setImageResource(R.mipmap.ic_ustadz);
+                            }
 
 
 
@@ -154,7 +170,7 @@ public class Profile extends AppCompatActivity {
                 if(sharePrefMan.getSpType().equals("3")) {
                     params.put("where", String.format("where a.id='%s'", kode));
                 }else  if(sharePrefMan.getSpType().equals("2")){
-                    params.put("where", String.format("where id='%s'", kode));
+                    params.put("where", String.format("where a.id='%s'", kode));
                 }
                 return params;
             }
@@ -172,6 +188,10 @@ public class Profile extends AppCompatActivity {
         if(itemLoaded){
             check.setVisible(true);
         }else{
+            check.setVisible(false);
+        }
+
+        if(sharePrefMan.getSpType().equals("2")) {
             check.setVisible(false);
         }
 

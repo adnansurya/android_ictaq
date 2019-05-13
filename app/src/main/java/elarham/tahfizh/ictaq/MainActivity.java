@@ -192,10 +192,10 @@ public class MainActivity extends AppCompatActivity
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actionbar_menu, menu);
 
-        if(sharePrefMan.getSpType().trim().equals("2")){
-            MenuItem check = menu.findItem(R.id.profile_menu);
-            check.setVisible(false);
-        }
+//        if(sharePrefMan.getSpType().trim().equals("2")){
+//            MenuItem check = menu.findItem(R.id.profile_menu);
+//            check.setVisible(false);
+//        }
 
 
         return true;
