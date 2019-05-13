@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import elarham.tahfizh.ictaq.DetailRequest;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Jadwal;
@@ -67,7 +68,7 @@ public class HafizhFragment extends Fragment {
     String id_penguji, antrian_penguji, id_request, id_jadwal;
 
     StringBuilder reqSiap;
-    ImageView detailImg, nextImg;
+    ImageView detailImg, nextImg, personImg;
     CardView historyCard;
     Calendar myCalendar;
     SimpleDateFormat sdf;
@@ -90,6 +91,7 @@ public class HafizhFragment extends Fragment {
 
         detailImg = view.findViewById(R.id.detailImg);
         nextImg = view.findViewById(R.id.nextImg);
+        personImg = view.findViewById(R.id.personImg);
 
         historyCard = view.findViewById(R.id.historyCard);
 
@@ -195,7 +197,7 @@ public class HafizhFragment extends Fragment {
                         Log.e("LAST REQ", response);
 
                         try {
-                            final String status, tanggal;
+                            final String status, tanggal, id_ustadz, id_regis;
                             JSONArray dataQuery = new JSONObject(response).getJSONArray("data");
                             if(dataQuery.length()==0){
                                 fab.show();
@@ -209,15 +211,17 @@ public class HafizhFragment extends Fragment {
                                 id_request =  dataQuery.getJSONObject(0).getString("id");
                                 status = dataQuery.getJSONObject(0).getString("status");
                                 tanggal = dataQuery.getJSONObject(0).getString("tgl");
+                                id_ustadz = dataQuery.getJSONObject(0).getString("id_penguji");
+                                id_regis = dataQuery.getJSONObject(0).getString("id_regis");
                                 if(status.equals("0")){
                                     reqIsReadyLayout.setVisibility(View.GONE);
                                     reqNotReadyLayout.setVisibility(View.VISIBLE);
-                                    judulTxt.setText(getContext().getString(R.string.sent) + " : " + new StringUtility().relativeTime(tanggal, getContext()));
+                                    judulTxt.setText(getContext().getString(R.string.sent) + " : " + new StringUtility().relativeDate(tanggal, getContext()));
                                     detailImg.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             new StringUtility().simpleDialog(getContext().getString(R.string.examrequest),
-                                                    getContext().getString(R.string.sent) + " : " + new StringUtility().exactTime(tanggal, getContext()) , getContext());
+                                                    getContext().getString(R.string.sent) + " : " + new StringUtility().exactDate(tanggal, getContext()) , getContext());
 
                                         }
                                     });
@@ -227,6 +231,18 @@ public class HafizhFragment extends Fragment {
                                     url = getContext().getString(R.string.urlmain) +
                                             "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=jadwal";
                                     getLastReady(id_request);
+                                    personImg.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent detailReq = new Intent(getContext(), DetailRequest.class);
+                                            detailReq.putExtra("id", id_request);
+                                            detailReq.putExtra("idRegis", id_regis);
+                                            detailReq.putExtra("idPenguji", id_ustadz);
+                                            detailReq.putExtra("tanggal", tanggal);
+                                            detailReq.putExtra("status",status);
+                                            getContext().startActivity(detailReq);
+                                        }
+                                    });
                                 }
                             }
 
@@ -265,6 +281,73 @@ public class HafizhFragment extends Fragment {
         requestQueue.add(strRequest);
     }
 
+    private void getReqData(final String idReq) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getContext().getString(R.string.loading));
+        progressDialog.show();
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+        final String url = getContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=permintaan";
+
+        StringRequest strRequest = new StringRequest(com.android.volley.Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL REQUEST DETAIL", url);
+                        Log.e("REQUEST DETAIL", response);
+
+                        try {
+
+                            JSONObject request = new JSONObject(response).getJSONArray("data").getJSONObject(0);
+                            Intent detailReq = new Intent(getContext(), DetailRequest.class);
+                            detailReq.putExtra("id", request.getString("id"));
+                            detailReq.putExtra("idRegis", request.getString("id_regis"));
+                            detailReq.putExtra("idPenguji", request.getString("id_penguji"));
+                            detailReq.putExtra("tanggal", request.getString("tgl"));
+                            detailReq.putExtra("status",request.getString("status"));
+                            getContext().startActivity(detailReq);
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("where", String.format("where id='%s'",idReq));
+
+                return params;
+            }
+        };
+
+        requestQueue.add(strRequest);
+
+
+    }
+
     private void getLastReady(final String id){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getContext().getString(R.string.loading));
@@ -300,7 +383,7 @@ public class HafizhFragment extends Fragment {
                                     fab.show();
                                 }else{
                                     waktuTxt.setText(waktu);
-                                    tanggalTxt.setText(new StringUtility().relativeTime(tanggal, getContext()));
+                                    tanggalTxt.setText(new StringUtility().relativeDate(tanggal, getContext()));
                                     nextImg.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {

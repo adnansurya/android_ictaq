@@ -12,15 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,8 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.CookieManager;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
@@ -39,10 +34,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -57,12 +49,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -70,7 +60,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import elarham.tahfizh.ictaq.Global.LocaleHelper;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Global.StringUtility;
 
@@ -163,7 +152,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         if(sharePrefMan.getSpType().equals("2")){
             mWebRTCWebView.setVisibility(GONE);
             editLay.setVisibility(View.VISIBLE);
-            jadwalTxt.setText(new StringUtility().exactTime(tanggal, this) + " " + jam);
+            jadwalTxt.setText(new StringUtility().exactDate(tanggal, this) + " " + jam);
             if(catatan.trim().equals("null")){
                 catatanTxt.setText("");
             }else{

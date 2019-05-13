@@ -139,5 +139,8 @@
     <string name="history">History</string>
     <string name="clickheretoedit">Click here to edit</string>
     <string name="selecttestedjuz">Select the tested Juz</string>
+    <string name="achievement">Achievement</string>
+    <string name="organization">Organization</string>
+    <string name="education">Education</string>
 
 </resources>

@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +34,6 @@ import elarham.tahfizh.ictaq.DetailRequest;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
 import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Jadwal;
-import elarham.tahfizh.ictaq.Models.Request;
 import elarham.tahfizh.ictaq.R;
 import elarham.tahfizh.ictaq.VideoCall;
 
@@ -63,7 +61,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
 
         sharePrefMan = new SharedPreferenceManager(context);
         Jadwal ready = list.get(position);
-        holder.tanggalTxt.setText(new StringUtility().relativeTime(ready.getTanggal(), context));
+        holder.tanggalTxt.setText(new StringUtility().relativeDate(ready.getTanggal(), context));
         holder.jamTxt.setText(ready.getJam());
         if(ready.getNilai().equals("null")){
             holder.nilaiTxt.setText(context.getString(R.string.notavailable));

@@ -108,14 +108,14 @@ public class Profile extends AppCompatActivity {
 
                         try {
 
-                            JSONObject profile = new JSONObject(response.replace(":null,",":-,")).getJSONArray("data").getJSONObject(0);
+                            JSONObject profile = new JSONObject(response.replace(":null," , ":\""+ getApplicationContext().getString(R.string.notavailable) + "\",")).getJSONArray("data").getJSONObject(0);
                             profileData = profile.toString();
                             namaTxt.setText(profile.getString("nama"));
                             provinsiTxt.setText(profile.getString("provinsi"));
                             alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota"));
                             telpTxt.setText(profile.getString("telp"));
                             emailTxt.setText(profile.getString("email"));
-                            tgl_lahirTxt.setText(new StringUtility().exactTime(profile.getString("tgl_lahir"), Profile.this));
+                            tgl_lahirTxt.setText(new StringUtility().exactDate(profile.getString("tgl_lahir"), Profile.this));
 
 
                             if(sharePrefMan.getSpType().equals("3")){

@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,7 @@ public class DetailRequest extends AppCompatActivity {
     ActionBar actBar;
     String idRequest, idRegis, idPenguji, tanggal, status;
     TextView typeTxt, tanggalTxt, namaTxt, pekerjaanTxt, alamatTxt, tgl_LahirTxt, ayah_ibuTxt, tahunTxt, emailTxt, telpTxt;
+    TextView penghargaanTxt, pendidikanTxt, organisasiTxt;
     ImageView sendEmailImg, phoneCallImg;
 
     CardView kontakCard;
@@ -62,6 +64,7 @@ public class DetailRequest extends AppCompatActivity {
     String tglJadwal, jamJadwal;
 
     SharedPreferenceManager sharePrefMan;
+    LinearLayout hafizhLayout, pengujiLayout;
 
 
     @Override
@@ -93,8 +96,14 @@ public class DetailRequest extends AppCompatActivity {
         telpTxt = findViewById(R.id.telpTxt);
         typeTxt = findViewById(R.id.typeTxt);
 
+        organisasiTxt = findViewById(R.id.organisasiTxt);
+        pendidikanTxt = findViewById(R.id.pendidikanTxt);
+        penghargaanTxt = findViewById(R.id.penghargaanTxt);
+
         kontakCard = findViewById(R.id.kontakCard);
         personLay = findViewById(R.id.personLay);
+        hafizhLayout = findViewById(R.id.hafizhLayout);
+        pengujiLayout = findViewById(R.id.pengujiLayout);
 
         sendEmailImg = findViewById(R.id.sendEmailImg);
         phoneCallImg = findViewById(R.id.phoneCallImg);
@@ -104,15 +113,16 @@ public class DetailRequest extends AppCompatActivity {
 
 
         if(sharePrefMan.getSpType().equals("3")){
-            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.examiner));
-            kontakCard.setVisibility(View.GONE);
-            personLay.setVisibility(View.GONE);
+            typeTxt.setText(getApplicationContext().getString(R.string.examiner));
+            hafizhLayout.setVisibility(View.GONE);
             url = getApplicationContext().getString(R.string.urlmain) +
-                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=user";
+                    "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=penguji";
         }else if(sharePrefMan.getSpType().equals("2")){
-            typeTxt.setText(getApplicationContext().getString(R.string.data)+ " " + getApplicationContext().getString(R.string.hafizh));
+            typeTxt.setText(getApplicationContext().getString(R.string.hafizh));
+            pengujiLayout.setVisibility(View.GONE);
             url = getApplicationContext().getString(R.string.urlmain) +
                     "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=registrasi";
+
 
         }
 
@@ -126,7 +136,7 @@ public class DetailRequest extends AppCompatActivity {
                 "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=insert&tabel=room";
 
 
-        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + new StringUtility().exactTime(tanggal,this));
+        tanggalTxt.setText(getApplicationContext().getString(R.string.sent)+ " : " + new StringUtility().exactDate(tanggal,this));
 
         getUserData();
 
@@ -153,36 +163,73 @@ public class DetailRequest extends AppCompatActivity {
 
                         try {
 
-                            final JSONObject profile = new JSONObject(response.replace(":null,",":-, ")).getJSONArray("data").getJSONObject(0);
+                            final JSONObject profile = new JSONObject(response.replace(":null," , ":\""+ getApplicationContext().getString(R.string.notavailable) + "\",")).getJSONArray("data").getJSONObject(0);
                             nama = profile.getString("nama");
-                            email = profile.getString("email");
                             phone = profile.getString("telp");
+                            email = profile.getString("email");
+
                             namaTxt.setText(nama);
+                            telpTxt.setText(phone);
+                            emailTxt.setText(email);
+
+
+                            alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota") + ", " + profile.getString("provinsi"));
+
+                            sendEmailImg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                                    emailIntent.setData(Uri.parse("mailto:"+email));
+                                    startActivity(emailIntent);
+                                }
+                            });
+
+                            phoneCallImg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                                    startActivity(intent);
+                                }
+                            });
                             if(sharePrefMan.getSpType().equals("2")){
                                 tahunTxt.setText(profile.getString("thn_menghafal"));
                                 pekerjaanTxt.setText(profile.getString("pekerjaan"));
                                 tgl_LahirTxt.setText(profile.getString("tgl_lahir"));
-                                alamatTxt.setText(profile.getString("alamat") + ", " + profile.getString("kota") + ", " + profile.getString("provinsi"));
-                                telpTxt.setText(phone);
-                                emailTxt.setText(email);
+
+
                                 ayah_ibuTxt.setText(profile.getString("ayah_ibu"));
 
-                                sendEmailImg.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                                        emailIntent.setData(Uri.parse("mailto:"+email));
-                                        startActivity(emailIntent);
-                                    }
-                                });
 
-                                phoneCallImg.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
-                                        startActivity(intent);
-                                    }
-                                });
+                            }else if(sharePrefMan.getSpType().equals("3")){
+                                tgl_LahirTxt.setText(profile.getString("tempat_lahir") + " - " + new StringUtility().exactDate(profile.getString("tgl_lahir"), DetailRequest.this));
+                                String penghargaan, pendidikan, organisasi;
+                                penghargaan = profile.getString("penghargaan");
+                                pendidikan = profile.getString("pendidikan");
+                                organisasi = profile.getString("organisasi");
+
+
+                                if(penghargaan.equals(getApplicationContext().getString(R.string.notavailable))){
+                                    penghargaanTxt.setText(penghargaan);
+                                }else{
+                                    penghargaanTxt.setText(penghargaan.replace(";", "\n\n"));
+                                }
+
+
+                                if(pendidikan.equals(getApplicationContext().getString(R.string.notavailable))){
+                                    pendidikanTxt.setText(pendidikan);
+                                }else{
+                                    pendidikanTxt.setText(pendidikan.replace(";", "\n\n"));
+                                }
+
+                                if(organisasi.equals(getApplicationContext().getString(R.string.notavailable))){
+                                    organisasiTxt.setText(pendidikan);
+                                }else{
+                                    organisasiTxt.setText(organisasi.replace(";", "\n\n"));
+                                }
+
+
+
+
                             }
 
 
@@ -212,7 +259,7 @@ public class DetailRequest extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<String, String>();
                 if(sharePrefMan.getSpType().equals("3")){
-                    params.put("where", String.format("where kode='%s'",idPenguji));
+                    params.put("where", String.format("where a.id='%s'",idPenguji));
                 }else if(sharePrefMan.getSpType().equals("2")){
                     params.put("where", String.format("where a.id='%s'",idRegis));
                 }

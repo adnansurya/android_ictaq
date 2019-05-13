@@ -25,7 +25,7 @@ public class StringUtility {
         return "ictaqroom_"+roomId;
     }
 
-    public String relativeTime(String dateStr, Context context){
+    public String relativeDate(String dateStr, Context context){
         String dateFormatted= "";
         try
         {
@@ -49,9 +49,14 @@ public class StringUtility {
         }
         catch (Exception e)
         {
+
             e.printStackTrace();
+
             Toast.makeText(context, context.getString(R.string.wrongdataformat), Toast.LENGTH_SHORT).show();
+            return dateStr;
+
         }
+
 
         return dateFormatted;
 
@@ -76,7 +81,7 @@ public class StringUtility {
         alert.show();
     }
 
-    public String exactTime(String dateStr, Context context){
+    public String exactDate(String dateStr, Context context){
         String dateFormatted= "";
 
         try {
@@ -87,6 +92,7 @@ public class StringUtility {
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(context, context.getString(R.string.wrongdataformat), Toast.LENGTH_SHORT).show();
+            return dateStr;
         }
         return dateFormatted;
     }

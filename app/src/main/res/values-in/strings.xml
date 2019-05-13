@@ -140,5 +140,8 @@
     <string name="history">Histori</string>
     <string name="clickheretoedit">Tekan di sini untuk mengubah</string>
     <string name="selecttestedjuz">Pilih Juz yang diujikan</string>
+    <string name="achievement">Prestasi</string>
+    <string name="organization">Organisasi</string>
+    <string name="education">Pendidikan</string>
 
 </resources>

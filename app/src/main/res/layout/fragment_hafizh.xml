@@ -139,16 +139,16 @@
 
 
                     <ImageView
-                        android:id="@+id/editImg"
+                        android:id="@+id/personImg"
                         android:layout_width="@dimen/itemImageView"
                         android:layout_height="@dimen/itemImageView"
-                        android:src="@drawable/ic_edit"
+                        android:src="@drawable/ic_assignment_ind"
                         android:padding="@dimen/stdMargin1"
                         android:layout_alignParentTop="true"
-                        android:layout_toLeftOf="@+id/personImg"
+                        android:layout_toLeftOf="@+id/nextImg"
                         android:layout_centerVertical="true"
-                        android:visibility="gone"
-                        android:layout_toStartOf="@+id/personImg"/>
+
+                        android:layout_toStartOf="@+id/nextImg"/>
 
 
                     <ImageView

@@ -3,7 +3,6 @@ package elarham.tahfizh.ictaq.ScheduleFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         sharePrefMan = new SharedPreferenceManager(context);
 
 
-        holder.judulTxt.setText(context.getString(R.string.sent) + " : " + new StringUtility().relativeTime(request.getTanggal(), context));
+        holder.judulTxt.setText(context.getString(R.string.sent) + " : " + new StringUtility().relativeDate(request.getTanggal(), context));
         if(sharePrefMan.getSpType().equals("3")){
             holder.detailImg.setImageDrawable(context.getDrawable(R.drawable.ic_assignment_ind));
         }

@@ -77,7 +77,7 @@ public class ProfileEdit extends AppCompatActivity {
         actBar.setTitle(getApplicationContext().getString(R.string.editprofile));
         actBar.setDisplayHomeAsUpEnabled(true);
 
-        profileData = getIntent().getStringExtra("profileData").replace(":null," , ":\"\",");
+        profileData = getIntent().getStringExtra("profileData").replace(":\""+ getApplicationContext().getString(R.string.notavailable) + "\"," , ":\"\",");
 
         try {
             JSONObject profile = new JSONObject(profileData);

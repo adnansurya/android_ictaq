@@ -164,5 +164,9 @@
     <string name="urledition" translatable="false">/quran-simple,id.indonesian,en.yusufali,en.transliteration</string>
 
     <string name="urlmain" translatable="false">http://elarham-tahfizh.online</string>
+    <string name="achievement">Prestasi</string>
+    <string name="organization">Organisasi</string>
+    <string name="clickheretoedit">Tekan di sini untuk mengubah</string>
+    <string name="education">Pendidikan</string>
 
 </resources>
