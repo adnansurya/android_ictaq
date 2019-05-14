@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                 actBar.setElevation(0);
                 break;
             case R.id.certificate_menu:
-                fragment = new CertificateFragment();
+                fragment = new AchievementFragment();
                 actBar.setElevation(defaultElevation);
                 break;
         }

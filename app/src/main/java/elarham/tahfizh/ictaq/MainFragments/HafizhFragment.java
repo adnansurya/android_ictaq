@@ -666,7 +666,7 @@ public class HafizhFragment extends Fragment {
                     public void onResponse(String response)
                     {
                         Log.e("PENGUJI", response);
-                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+
                         progressDialog.dismiss();
                         requestJadwal(sharePrefMan.getSpKode(), id_penguji, String.valueOf(sdf.format(myCalendar.getTime())),"0");
 

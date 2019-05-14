@@ -250,7 +250,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         });
 
         if(mulai.equals("2")){
-
+            actBar.setTitle(getApplicationContext().getString(R.string.result));
             mWebRTCWebView.setVisibility(GONE);
             editLay.setVisibility(View.VISIBLE);
             scoreCard.setVisibility(View.VISIBLE);
@@ -358,7 +358,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                             scoreCard.setVisibility(View.INVISIBLE);
                         }
 
-//                        Toast.makeText(VideoCall.this, String.valueOf(alert.getListView().getCheckedItemPositions()), Toast.LENGTH_SHORT).show();
+
                         Log.e("SelectedJUZ", selectedJuz.toString());
                     }
                 });
@@ -653,6 +653,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
     private void getAntrian(final String id){
 
 
+        Log.e("id PENGUJI", id);
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -859,7 +860,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
                         Log.e("Volley Error", error.toString());
                         progressDialog.dismiss();
                     }
