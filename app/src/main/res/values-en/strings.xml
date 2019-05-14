@@ -142,5 +142,6 @@
     <string name="achievement">Achievement</string>
     <string name="organization">Organization</string>
     <string name="education">Education</string>
+    <string name="medal">Medal</string>
 
 </resources>

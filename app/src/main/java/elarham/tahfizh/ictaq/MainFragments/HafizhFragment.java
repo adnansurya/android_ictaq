@@ -545,6 +545,8 @@ public class HafizhFragment extends Fragment {
                                 jadwal.setMulai(jsonObj.getString("mulai"));
                                 jadwal.setNilai(jsonObj.getString("nilai"));
                                 jadwal.setCatatan(jsonObj.getString("catatan"));
+                                jadwal.setSavedJuz(jsonObj.getString("juz"));
+                                jadwal.setSavedNilai(jsonObj.getString("nilai_juz"));
 
                                 readyList.add(jadwal);
 
@@ -610,7 +612,7 @@ public class HafizhFragment extends Fragment {
                             id_penguji = new JSONObject(response).getJSONArray("data").getJSONObject(0).getString("id");
                             antrian_penguji = new JSONObject(response).getJSONArray("data").getJSONObject(0).getString("antrian");
                             Log.e("PENGUJI DATA : ", id_penguji +"/"+ antrian_penguji);
-                            addAntrian(id_penguji);
+                            ubahAntrian(id_penguji);
 
 
                         } catch (JSONException e) {
@@ -645,7 +647,7 @@ public class HafizhFragment extends Fragment {
         queue.add(strRequest);
     }
 
-    private void addAntrian(final String id){
+    private void ubahAntrian(final String id){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getContext().getString(R.string.loading));
         progressDialog.show();

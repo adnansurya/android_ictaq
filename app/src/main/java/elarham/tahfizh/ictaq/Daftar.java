@@ -89,6 +89,7 @@ public class Daftar extends AppCompatActivity {
                                             JSONObject daftar = new JSONObject(response);
                                             Log.e("RESPON : ", response);
                                             if(daftar.getString("status").equals("sukses")){
+
                                                 Toast.makeText(Daftar.this, R.string.registerok, Toast.LENGTH_SHORT).show();
 
                                                 Intent login = new Intent(Daftar.this, Login.class);
@@ -143,7 +144,7 @@ public class Daftar extends AppCompatActivity {
                             public void retry(VolleyError error) throws VolleyError {
 
                             }
-                        });;
+                        });
 
 
                     }else{
@@ -155,6 +156,10 @@ public class Daftar extends AppCompatActivity {
         });
 
     }
+
+
+
+
 
 
 

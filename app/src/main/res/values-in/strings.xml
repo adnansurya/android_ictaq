@@ -143,5 +143,6 @@
     <string name="achievement">Prestasi</string>
     <string name="organization">Organisasi</string>
     <string name="education">Pendidikan</string>
+    <string name="medal">Medali</string>
 
 </resources>

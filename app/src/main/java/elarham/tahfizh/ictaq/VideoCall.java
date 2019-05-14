@@ -73,9 +73,10 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
     private WebView mWebRTCWebView;
     LinearLayout editLay;
     ActionBar actBar;
-    String roomId, url, urlUpdateJadwal;
+    String roomId, url, urlUpdateJadwal, urlUpdateHafalan;
 
-    String jadwalId, reqId, jam, tanggal, catatan;
+    String jadwalId, reqId, jam, tanggal, catatan, mulai, antrian_penguji;
+    String savedNilai, savedJuz;
 
     TextView jadwalTxt;
     EditText catatanTxt;
@@ -86,14 +87,13 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
     String nilai = "";
 
     boolean[] checkedJuz;
-    StringBuilder selectedJuz, nilaiJuz;
+    StringBuilder selectedJuz, nilaiJuz, nilaiHafalan;
     RatingBar rb;
     LinearLayout scoreLay;
-    CardView scoreCard;
+    CardView scoreCard, juzCard;
 
     HashMap<String,String> nilaiJuzMap;
-
-
+    ProgressDialog progressDialog;
 
 
 
@@ -118,19 +118,33 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         editLay = findViewById(R.id.editLay);
         scoreLay = findViewById(R.id.scoreLay);
         scoreCard = findViewById(R.id.card_view_score);
+        juzCard = findViewById(R.id.juzCard);
 
         roomId = getIntent().getStringExtra("idRoom");
         jadwalId = getIntent().getStringExtra("idJadwal");
         reqId = getIntent().getStringExtra("idReq");
+        mulai = getIntent().getStringExtra("mulai");
+        savedNilai = getIntent().getStringExtra("savedNilai");
+        savedJuz = getIntent().getStringExtra("savedJuz");
 
-        if(sharePrefMan.getSpType().equals("2")){
-            jam = getIntent().getStringExtra("jam");
-            tanggal = getIntent().getStringExtra("tanggal");
-            nilai = getIntent().getStringExtra("nilai");
-            catatan = getIntent().getStringExtra("catatan");
+
+        jam = getIntent().getStringExtra("jam");
+        tanggal = getIntent().getStringExtra("tanggal");
+        nilai = getIntent().getStringExtra("nilai");
+        catatan = getIntent().getStringExtra("catatan");
+
+
+
+
+
+        jadwalTxt.setText(new StringUtility().exactDate(tanggal, this) + " " + jam);
+
+
+        if(catatan.trim().equals("null")){
+            catatanTxt.setText("");
+        }else{
+            catatanTxt.setText(catatan);
         }
-
-
 
 
 
@@ -149,23 +163,28 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         urlUpdateJadwal = getApplicationContext().getString(R.string.urlmain) +
                 "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=jadwal";
 
+        urlUpdateHafalan = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update_hafalan";
+
         if(sharePrefMan.getSpType().equals("2")){
             mWebRTCWebView.setVisibility(GONE);
             editLay.setVisibility(View.VISIBLE);
-            jadwalTxt.setText(new StringUtility().exactDate(tanggal, this) + " " + jam);
-            if(catatan.trim().equals("null")){
-                catatanTxt.setText("");
-            }else{
-                catatanTxt.setText(catatan);
-            }
+
         }else if(sharePrefMan.getSpType().equals("3")){
             editLay.setVisibility(GONE);
             openRTC();
+
         }
+
+
+
 
 
         simpanBtn.setEnabled(false);
         scoreCard.setVisibility(View.INVISIBLE);
+
+        progressDialog = new ProgressDialog(VideoCall.this);
+        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
 
 
 
@@ -173,12 +192,15 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
             @Override
             public void onClick(View v) {
 
+                progressDialog.show();
+
                 catatan = catatanTxt.getText().toString();
 
                 String[] data = selectedJuz.toString().split(";");
                 Log.e("Ukuran Data", String.valueOf(data.length) + " " + String.valueOf(nilaiJuzMap.size()));
                 if(data.length != nilaiJuzMap.size()){
                     Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.datanotcomplete), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else{
                     nilaiJuz = new StringBuilder();
                     selectedJuz = new StringBuilder();
@@ -191,16 +213,25 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                         selectedJuz.append(";");
                         nilaiJuz.append(pair.getValue());
                         nilaiJuz.append(";");
+                        nilaiHafalan.append("juz_");
+                        nilaiHafalan.append(pair.getKey());
+                        nilaiHafalan.append("='");
+                        nilaiHafalan.append(pair.getValue());
+                        nilaiHafalan.append("',");
+
                         it.remove(); // avoids a ConcurrentModificationException
                     }
 
                     if(selectedJuz.length()>0 && nilaiJuz.length()>0){
                         selectedJuz.deleteCharAt(selectedJuz.length()-1);
                         nilaiJuz.deleteCharAt(nilaiJuz.length()-1);
+                        nilaiHafalan.deleteCharAt(nilaiHafalan.length()-1);
                         ubahNilai("2",nilaiJuz.toString(), selectedJuz.toString(), catatan, urlUpdateJadwal );
+                        scoreLay.removeAllViews();
 
                     }else{
                         Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     }
 
 
@@ -218,12 +249,52 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
             }
         });
 
+        if(mulai.equals("2")){
 
+            mWebRTCWebView.setVisibility(GONE);
+            editLay.setVisibility(View.VISIBLE);
+            scoreCard.setVisibility(View.VISIBLE);
+            juzCard.setVisibility(View.GONE);
+            simpanBtn.setVisibility(GONE);
+            catatanTxt.setEnabled(false);
+            generateResults(savedJuz, savedNilai);
+
+        }
 
 
     }
+
+    private void generateResults(String juz, String nilai_juz){
+        String[] juzR = juz.split(";");
+        String[] nilaiR = nilai_juz.split(";");
+        if(nilaiR.length == juzR.length){
+            for(int i=0; i<nilaiR.length;i++){
+                TextView txt = new TextView(VideoCall.this);
+                txt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                scoreLay.addView(txt);
+
+                txt.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.juzSelectTxt));
+                txt.setText(getApplicationContext().getString(R.string.juz) +" "+  String.valueOf(juzR[i]));
+
+                rb = new RatingBar(VideoCall.this, null, android.R.attr.ratingBarStyleIndicator);
+                rb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                scoreLay.addView(rb);
+                rb.setNumStars(5);
+                rb.setStepSize(Float.parseFloat("1.0"));
+                rb.setRating(Float.parseFloat(nilaiR[i]));
+                rb.setEnabled(false);
+                rb.setIsIndicator(false);
+            }
+        }else{
+            Toast.makeText(this, getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+            Intent error = new Intent(VideoCall.this, MainActivity.class);
+            startActivity(error);
+        }
+    }
+
     AlertDialog alert;
     AlertDialog.Builder builder;
+
     private void chooseJuz(){
         List<String> listItems = new ArrayList<String>();
         for(int i=0; i<30; i++){
@@ -249,7 +320,8 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                     public void onClick(DialogInterface dialog, int id) {
 
                         scoreLay.removeAllViews();
-                        selectedJuz = new StringBuilder("");
+                        selectedJuz = new StringBuilder();
+                        nilaiHafalan =  new StringBuilder();
                         nilaiJuzMap = new HashMap<>();
                         for(int i=0; i<checkedJuz.length; i++){
                             if(checkedJuz[i]){
@@ -578,12 +650,123 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         queue.add(strRequest);
     }
 
+    private void getAntrian(final String id){
 
+
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        final String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=penguji";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL PENGUJI", url);
+                        Log.e("PENGUJI", response);
+
+                        progressDialog.dismiss();
+
+                        try {
+
+
+                            antrian_penguji = new JSONObject(response).getJSONArray("data").getJSONObject(0).getString("antrian");
+                            Log.e("PENGUJI DATA : ", sharePrefMan.getSpKode() +"/"+ antrian_penguji);
+                            ubahAntrian(sharePrefMan.getSpKode());
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("where", String.format("where a.id='%s'",id));
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+    }
+
+    private void ubahAntrian(final String id){
+
+
+
+        antrian_penguji = String.valueOf(Integer.valueOf(antrian_penguji)-1);
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        String url = getApplicationContext().getString(R.string.urlmain) +
+                "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=update&tabel=penguji";
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        progressDialog.dismiss();
+                        Log.e("PENGUJI", response);
+                        Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
+                        Intent home = new Intent(VideoCall.this, MainActivity.class);
+                        startActivity(home);
+
+
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", String.format("antrian='%s'", antrian_penguji));
+                params.put("where", String.format("where id='%s'",id));
+
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+
+    }
 
     private void ubahNilai(final String mulai, final String nilai, final String juz, final String catatan, final String url){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-        progressDialog.show();
+
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -599,9 +782,11 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                         try {
                             JSONObject simpan = new JSONObject(response);
                             if(simpan.getString("status").equals("sukses")){
-                                Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
-                                Intent home = new Intent(VideoCall.this, MainActivity.class);
-                                startActivity(home);
+
+
+                                ubahHafalan(jadwalId,nilaiHafalan.toString(), urlUpdateHafalan );
+                                Log.e("STRING HAFALAN", nilaiHafalan.toString());
+
                             }else{
                                 Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
                             }
@@ -640,65 +825,61 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         queue.add(strRequest);
     }
 
-//    private void ubahHafalan(final String id_regis, final String nilai, final String juz){
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-//        progressDialog.show();
-//
-//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-//
-//        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response)
-//                    {
-//                        Log.e("URL UPDATE NILAI", url);
-//                        Log.e("UPDATE NILAI", response);
-//
-//                        try {
-//                            JSONObject simpan = new JSONObject(response);
-//                            if(simpan.getString("status").equals("sukses")){
-//                                Toast.makeText(VideoCall.this, getApplicationContext().getString(R.string.editsuccess), Toast.LENGTH_SHORT).show();
-//                                Intent home = new Intent(VideoCall.this, MainActivity.class);
-//                                startActivity(home);
-//                            }else{
-//                                Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(VideoCall.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                        progressDialog.dismiss();
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error)
-//                    {
-//                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
-//                        Log.e("Volley Error", error.toString());
-//                        progressDialog.dismiss();
-//                    }
-//                })
-//        {
-//            @Override
-//            protected Map<String, String> getParams()
-//            {
-//
-//                Map<String, String> params = new HashMap<String, String>();
-//
-//                params.put("value", String.format("mulai='%s',juz='%s',nilai_juz='%s',catatan='%s'",mulai, juz, nilai, catatan));
-//                params.put("where", String.format("where id='%s'",jadwalId));
-//
-//                return params;
-//            }
-//        };
-//
-//        queue.add(strRequest);
-//    }
+    private void ubahHafalan(final String id_jadwal, final String nilai, final String url){
+
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.e("URL UPDATE HAFALAN", url);
+                        Log.e("UPDATE HAFALAN", response);
+
+                        try {
+                            JSONObject simpan = new JSONObject(response);
+                            if(simpan.getString("status").equals("sukses")){
+                                getAntrian(sharePrefMan.getSpKode());
+                            }else{
+                                Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(VideoCall.this, R.string.wrongdataformat, Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(VideoCall.this, R.string.error, Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", error.toString());
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("value", nilai);
+                params.put("where", id_jadwal);
+
+                return params;
+            }
+        };
+
+        queue.add(strRequest);
+    }
 
 
 
@@ -772,6 +953,10 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
              MenuItem reschedule = menu.findItem(R.id.reschedule_menu);
              reschedule.setVisible(false);
          }
+         if(mulai.equals("2")){
+             MenuItem check = menu.findItem(R.id.vidcall_menu);
+             check.setVisible(false);
+         }
 
         return true;
     }
@@ -826,9 +1011,6 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
     }
 
     public void changeRoomId(final String idReq, final String newRoomId){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getApplicationContext().getString(R.string.loading));
-        progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 

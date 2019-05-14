@@ -2,7 +2,7 @@ package elarham.tahfizh.ictaq.Models;
 
 public class Jadwal {
 
-    public String id, idReq, tanggal, jam, mulai, nilai, catatan;
+    public String id, idReq, tanggal, jam, mulai, nilai, catatan, savedNilai, savedJuz;
 
     public Jadwal(){
 
@@ -73,5 +73,21 @@ public class Jadwal {
 
     public void setCatatan(String catatan) {
         this.catatan = catatan;
+    }
+
+    public String getSavedJuz() {
+        return savedJuz;
+    }
+
+    public void setSavedJuz(String savedJuz) {
+        this.savedJuz = savedJuz;
+    }
+
+    public String getSavedNilai() {
+        return savedNilai;
+    }
+
+    public void setSavedNilai(String savedNilai) {
+        this.savedNilai = savedNilai;
     }
 }

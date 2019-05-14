@@ -188,6 +188,8 @@ public class ReadyFragment extends Fragment {
                                 jadwal.setMulai(jsonObj.getString("mulai"));
                                 jadwal.setNilai(jsonObj.getString("nilai"));
                                 jadwal.setCatatan(jsonObj.getString("catatan"));
+                                jadwal.setSavedJuz(jsonObj.getString("juz"));
+                                jadwal.setSavedNilai(jsonObj.getString("nilai_juz"));
 
                                 readyList.add(jadwal);
 

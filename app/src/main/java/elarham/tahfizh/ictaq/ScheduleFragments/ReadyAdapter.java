@@ -103,12 +103,12 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
             nextImg = itemView.findViewById(R.id.nextImg);
 
             sharePrefMan = new SharedPreferenceManager(context);
-            if(sharePrefMan.getSpType().equals("3")) {
-                nextImg.setVisibility(View.INVISIBLE);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)personImg.getLayoutParams();
-                params.addRule(RelativeLayout.ALIGN_PARENT_END);
-                personImg.setLayoutParams(params);
-            }
+//            if(sharePrefMan.getSpType().equals("3")) {
+//                nextImg.setVisibility(View.INVISIBLE);
+//                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)personImg.getLayoutParams();
+//                params.addRule(RelativeLayout.ALIGN_PARENT_END);
+//                personImg.setLayoutParams(params);
+//            }
 
             personImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -161,7 +161,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
                     url = context.getString(R.string.urlmain) +
                             "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=room";
 
-                   getRoomById(ready.getIdReq(), ready.getId(), ready.getJam(), ready.getTanggal(), ready.getNilai(), ready.getCatatan());
+                   getRoomById(ready.getIdReq(), ready.getId(), ready.getJam(), ready.getTanggal(), ready.getNilai(), ready.getCatatan(), ready.getMulai(), ready.getSavedNilai(), ready.getSavedJuz());
 
 
                 }
@@ -169,7 +169,8 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         }
     }
 
-    public void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan){
+    public void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan,
+                            final String mulai, final String savedNilai, final String savedJuz){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
         progressDialog.show();
@@ -196,6 +197,9 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
                             vidCall.putExtra("tanggal", tanggal);
                             vidCall.putExtra("nilai",nilai);
                             vidCall.putExtra("catatan",catatan);
+                            vidCall.putExtra("mulai", mulai);
+                            vidCall.putExtra("savedNilai", savedNilai);
+                            vidCall.putExtra("savedJuz", savedJuz);
                             context.startActivity(vidCall);
 
 
