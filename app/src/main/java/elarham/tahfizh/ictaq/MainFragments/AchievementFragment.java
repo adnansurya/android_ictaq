@@ -34,6 +34,7 @@ import java.util.Map;
 
 import elarham.tahfizh.ictaq.AchievementFragments.AchievementAdapter;
 import elarham.tahfizh.ictaq.Global.SharedPreferenceManager;
+import elarham.tahfizh.ictaq.Global.StringUtility;
 import elarham.tahfizh.ictaq.Models.Hafalan;
 import elarham.tahfizh.ictaq.Models.Jadwal;
 import elarham.tahfizh.ictaq.R;
@@ -43,7 +44,7 @@ public class AchievementFragment extends Fragment {
 
 
     String hafizhMedal;
-    ImageView medalImg;
+    ImageView medalImg, infoImg;
     TextView medalTxt;
     SharedPreferenceManager sharePrefMan;
 
@@ -61,6 +62,7 @@ public class AchievementFragment extends Fragment {
 
         medalImg = view.findViewById(R.id.medalImg);
         medalTxt = view.findViewById(R.id.medalTxt);
+        infoImg = view.findViewById(R.id.infoImg);
 
         mList = view.findViewById(R.id.recycleList);
 
@@ -81,6 +83,22 @@ public class AchievementFragment extends Fragment {
 
         getMedal(sharePrefMan.getSpKode());
         getHafalan(sharePrefMan.getSpKode());
+
+        infoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String judul = getContext().getString(R.string.medal);
+                String medaliHijau = getContext().getString(R.string.medalgreeninfo);
+                String medaliPerak = getContext().getString(R.string.medalsilverinfo);
+                String medaliEmas = getContext().getString(R.string.medalgoldinfo);
+                String hijau = getContext().getString(R.string.colorgreen);
+                String perak = getContext().getString(R.string.colorsilver);
+                String emas = getContext().getString(R.string.colorgold);
+                String medaliInfo = getContext().getString(R.string.medalinfo);
+                String msg = String.format("%s : %s\n\n%s : %s\n\n%s : %s\n\n\n%s",hijau, medaliHijau,perak, medaliPerak,emas, medaliEmas, medaliInfo);
+                new StringUtility().simpleDialog(judul, msg, getContext());
+            }
+        });
 
 
 
@@ -112,10 +130,13 @@ public class AchievementFragment extends Fragment {
                             hafizhMedal = new JSONObject(response).getString("medal");
                             if(hafizhMedal.equals("GREEN")){
                                 medalImg.setImageResource(R.mipmap.medal_green);
+                                medalTxt.setText(getContext().getString(R.string.medalgreeninfo));
                             }else if(hafizhMedal.equals("SILVER")){
                                 medalImg.setImageResource(R.mipmap.medal_silver);
+                                medalTxt.setText(getContext().getString(R.string.medalsilverinfo));
                             }else if(hafizhMedal.equals("GOLD")){
                                 medalImg.setImageResource(R.mipmap.medal_gold);
+                                medalTxt.setText(getContext().getString(R.string.medalgoldinfo));
                             }else{
                                 medalImg.setImageResource(R.mipmap.locked_logo);
                                 medalTxt.setText(getContext().getString(R.string.notavailable));

@@ -144,5 +144,17 @@
     <string name="education">Education</string>
     <string name="medal">Medal</string>
     <string name="result">Result</string>
+    <string name="staroneinfo">1 Star : Smooth memorization, Bad makhraj</string>
+    <string name="startwoinfo">2 Stars : Smooth memorization, tajwid is appropriate based on makhraj and reading law</string>
+    <string name="starthreeinfo">3 Stars : Smooth memorization, tajwid is appropriate based on makhraj, reading law is correct</string>
+    <string name="starfourinfo">4 Stars : Smooth memorization and following the tajwid rules perfectly</string>
+    <string name="starfiveinfo">5 Stars : Perfect memorization, qiraah, and tajwid</string>
+    <string name="medalgreeninfo">1-10 Juz</string>
+    <string name="medalsilverinfo">1-20 Juz</string>
+    <string name="medalgoldinfo">21-30 Juz</string>
+    <string name="medalinfo">* Obtained medals are accumulated from each juz which has a 5 star value</string>
+    <string name="colorgold">Gold</string>
+    <string name="colorgreen">Green</string>
+    <string name="colorsilver">Silver</string>
 
 </resources>

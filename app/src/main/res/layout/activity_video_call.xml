@@ -99,6 +99,14 @@
                     android:layout_alignParentStart="true"
                     android:textStyle="bold"/>
 
+                <ImageView
+                    android:id="@+id/infoBtn"
+                    android:layout_width="@dimen/stdMargin3"
+                    android:layout_height="@dimen/stdMargin3"
+                    android:src="@drawable/ic_info"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"/>
+
 
 
                 <LinearLayout

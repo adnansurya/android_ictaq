@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -83,6 +85,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
 
     Button simpanBtn;
     Button juzBtn;
+    ImageView infoBtn;
 
     String nilai = "";
 
@@ -108,6 +111,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
 
         simpanBtn = findViewById(R.id.simpanBtn);
         juzBtn = findViewById(R.id.juzBtn);
+        infoBtn = findViewById(R.id.infoBtn);
 
 
         checkedJuz = new boolean[30];
@@ -134,7 +138,19 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         catatan = getIntent().getStringExtra("catatan");
 
 
-
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String judul = getApplicationContext().getString(R.string.scoring);
+                String bintang1 = getApplicationContext().getString(R.string.staroneinfo);
+                String bintang2 = getApplicationContext().getString(R.string.startwoinfo);
+                String bintang3 = getApplicationContext().getString(R.string.starthreeinfo);
+                String bintang4 = getApplicationContext().getString(R.string.starfourinfo);
+                String bintang5 = getApplicationContext().getString(R.string.starfiveinfo);
+                String msg = String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s", bintang1, bintang2, bintang3, bintang4, bintang5);
+                new StringUtility().simpleDialog(judul, msg,VideoCall.this);
+            }
+        });
 
 
         jadwalTxt.setText(new StringUtility().exactDate(tanggal, this) + " " + jam);

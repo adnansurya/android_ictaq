@@ -73,11 +73,12 @@
                             android:layout_toEndOf="@+id/medalImg"
                             android:layout_toRightOf="@+id/medalImg"
                             android:text="@string/title"
-                            android:textSize="@dimen/itemSmallTxt" />
+                            android:textSize="@dimen/stdLargeTxt"
+                            android:textStyle="bold"/>
 
 
                         <ImageView
-                            android:id="@+id/detailImg"
+                            android:id="@+id/infoImg"
                             android:layout_width="@dimen/itemImageView"
                             android:layout_height="@dimen/itemImageView"
                             android:layout_alignParentEnd="true"

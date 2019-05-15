@@ -170,5 +170,17 @@
     <string name="education">Pendidikan</string>
     <string name="medal">Medali</string>
     <string name="result">Hasil</string>
+    <string name="staroneinfo">Bintang 1 : Hafalan lancar, makhrajul huruf belum bagus</string>
+    <string name="startwoinfo">Bintang 2 : Hafalan lancar, tajwid sesuai makhraj dan hukum bacaan</string>
+    <string name="starthreeinfo">Bintang 3 : Hafalan lancar, tajwid sesuai makhraj dan sifat huruf, hukum bacaan sudah benar</string>
+    <string name="starfourinfo">Bintang 4 : Hafalan lancar sesuai kaidah ilmu tajwid sempurna</string>
+    <string name="starfiveinfo">Bintang 5 : Hafalan, tajwid, dan qiraah sempurna</string>
+    <string name="medalgreeninfo">1-10 Juz</string>
+    <string name="medalsilverinfo">11-20 Juz</string>
+    <string name="medalgoldinfo">21-30 Juz</string>
+    <string name="medalinfo">*Medali yang didapatkan adalah hasil akumulasi dari setiap juz yang memiliki nilai bintang 5</string>
+    <string name="colorgreen">Hijau</string>
+    <string name="colorsilver">Perak</string>
+    <string name="colorgold">Emas</string>
 
 </resources>
