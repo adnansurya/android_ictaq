@@ -25,5 +25,7 @@
     <dimen name="itemImageButton">30dp</dimen>
 
     <dimen name="floatActionButton">60dp</dimen>
+
+    <dimen name="medalView">100dp</dimen>
     
 </resources>
