@@ -19,7 +19,6 @@
         android:id="@+id/lafazTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lafaz"
         android:textSize="@dimen/itemSmallTxt"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -28,7 +27,6 @@
         android:id="@+id/translateTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lafaz"
         android:textSize="@dimen/itemSmallTxt"
         android:textColor="@color/colorPrimaryDark"/>
 </LinearLayout>

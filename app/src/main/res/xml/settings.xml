@@ -37,7 +37,7 @@
             android:title="@string/translationlang"
             android:summary="%s"
             android:key="@string/translationlangkey"
-            android:defaultValue="ina"
+            android:defaultValue="in"
             android:entryValues="@array/listLanguageValues"
             android:entries="@array/listLanguage"
             />
