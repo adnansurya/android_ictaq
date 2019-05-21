@@ -385,7 +385,7 @@ public class HafizhFragment extends Fragment {
                                     fab.show();
                                 }else{
                                     waktuTxt.setText(waktu);
-                                    tanggalTxt.setText(new StringUtility().relativeDate(tanggal, getContext()));
+                                    tanggalTxt.setText(new StringUtility().exactDate(tanggal, getContext()));
                                     nextImg.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -551,6 +551,7 @@ public class HafizhFragment extends Fragment {
                                 jadwal.setSavedNilai(jsonObj.getString("nilai_juz"));
 
                                 readyList.add(jadwal);
+
 
                             }
 

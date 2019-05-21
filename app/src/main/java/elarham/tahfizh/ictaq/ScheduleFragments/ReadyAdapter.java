@@ -61,7 +61,12 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
 
         sharePrefMan = new SharedPreferenceManager(context);
         Jadwal ready = list.get(position);
-        holder.tanggalTxt.setText(new StringUtility().relativeDate(ready.getTanggal(), context));
+        if(ready.getMulai().equals("2")){
+            holder.nextImg.setImageResource(R.drawable.ic_info);
+        }else{
+            holder.nextImg.setImageResource(R.drawable.ic_next);
+        }
+
         holder.jamTxt.setText(ready.getJam());
         if(ready.getNilai().equals("null")){
             holder.nilaiTxt.setText(context.getString(R.string.notavailable));
@@ -71,12 +76,8 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
             holder.nilaiTxt.setText(context.getString(R.string.score)+ " : " + ready.getNilai());
         }
 
+        holder.tanggalTxt.setText(new StringUtility().relativeDateTime(ready.getTanggal()+ " " + ready.getJam(), context));
 
-        if(sharePrefMan.getSpType().equals("3")){
-            holder.editImg.setVisibility(View.INVISIBLE);
-        }else{
-            holder.editImg.setVisibility(View.INVISIBLE);
-        }
 
 
     }
@@ -99,7 +100,6 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
             jamTxt = itemView.findViewById(R.id.jamTxt);
             nilaiTxt = itemView.findViewById(R.id.nilaiTxt);
             personImg = itemView.findViewById(R.id.personImg);
-            editImg = itemView.findViewById(R.id.editImg);
             nextImg = itemView.findViewById(R.id.nextImg);
 
             sharePrefMan = new SharedPreferenceManager(context);
