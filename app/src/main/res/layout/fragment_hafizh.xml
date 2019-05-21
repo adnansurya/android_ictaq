@@ -78,7 +78,7 @@
                             android:padding="@dimen/stdMargin1"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_info"/>
+                            android:src="@drawable/ic_more_vert"/>
 
 
 

@@ -62,7 +62,7 @@ public class ReadyAdapter extends RecyclerView.Adapter<ReadyAdapter.ViewHolder> 
         sharePrefMan = new SharedPreferenceManager(context);
         Jadwal ready = list.get(position);
         if(ready.getMulai().equals("2")){
-            holder.nextImg.setImageResource(R.drawable.ic_info);
+            holder.nextImg.setImageResource(R.drawable.ic_list_check);
         }else{
             holder.nextImg.setImageResource(R.drawable.ic_next);
         }
