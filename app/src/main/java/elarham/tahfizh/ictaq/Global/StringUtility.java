@@ -96,4 +96,42 @@ public class StringUtility {
         }
         return dateFormatted;
     }
+
+    public String relativeDateTime(String dateTimeStr, Context context){
+        String dateFormatted= "";
+        try
+        {
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.US);
+            Date date = formatter.parse(dateTimeStr);
+            PrettyTime pTime = new PrettyTime(Locale.getDefault());
+
+            dateFormatted =  pTime.format((date));
+            if(dateFormatted.contains(context.getString(R.string.hour).toLowerCase()) ||
+                    dateFormatted.contains(context.getString(R.string.minute)) || dateFormatted.contains(context.getString(R.string.second))){
+                dateFormatted = context.getString(R.string.today);
+//                if(dateFormatted.contains("lalu")){
+//                    dateFormatted =  context.getString(R.string.recently);
+//                }else{
+//                    dateFormatted =  context.getString(R.string.soon);
+//                }
+
+            }
+
+        }
+        catch (Exception e)
+        {
+
+            e.printStackTrace();
+
+            Toast.makeText(context, context.getString(R.string.wrongdataformat), Toast.LENGTH_SHORT).show();
+            return dateTimeStr;
+
+        }
+
+
+        return dateFormatted;
+
+
+    }
 }
