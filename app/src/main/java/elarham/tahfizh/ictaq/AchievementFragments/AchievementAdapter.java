@@ -36,6 +36,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         Hafalan hafalan = list.get(position);
         holder.juzTxt.setText(hafalan.getJuzHafalan());
         holder.nilaiBar.setRating(Float.parseFloat(hafalan.getNilaiHafalan()));
+        holder.nilaiBar.setEnabled(false);
     }
 
     @Override

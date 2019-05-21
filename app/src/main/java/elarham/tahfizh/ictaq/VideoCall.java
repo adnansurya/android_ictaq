@@ -152,7 +152,6 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
             }
         });
 
-
         jadwalTxt.setText(new StringUtility().exactDate(tanggal, this) + " " + jam);
 
 
@@ -161,8 +160,6 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         }else{
             catatanTxt.setText(catatan);
         }
-
-
 
 
 

@@ -365,7 +365,7 @@ public class HafizhFragment extends Fragment {
                         Log.e("LAST READY", response);
 
                         try {
-                            String mulai, tanggal, waktu, nilai, catatan;
+                            final String mulai, tanggal, waktu, nilai, catatan, savedNilai, savedJuz;
                             JSONArray dataQuery = new JSONObject(response).getJSONArray("data");
                             if(dataQuery.length()==0){
                                 Toast.makeText(getContext(), getContext().getString(R.string.data) + " " + getContext().getString(R.string.notavailable), Toast.LENGTH_SHORT).show();
@@ -377,6 +377,8 @@ public class HafizhFragment extends Fragment {
                                 nilai = dataQuery.getJSONObject(0).getString("nilai");
                                 catatan = dataQuery.getJSONObject(0).getString("catatan");
                                 tanggal = dataQuery.getJSONObject(0).getString("tgl");
+                                savedNilai  = dataQuery.getJSONObject(0).getString("nilai_juz");
+                                savedJuz = dataQuery.getJSONObject(0).getString("juz");
                                 requestTxt.setText(getContext().getString(R.string.schedule));
                                 if(mulai.equals("2")){
                                     reqIsReadyLayout.setVisibility(View.GONE);
@@ -393,7 +395,7 @@ public class HafizhFragment extends Fragment {
                                             url = getContext().getString(R.string.urlmain) +
                                                     "/service/my_service.php?password=7ba52b255b999d6f1a7fa433a9cf7df4&aksi=select&tabel=room";
 
-                                            getRoomById(id_request, id_jadwal);
+                                            getRoomById(id_request, id_jadwal, waktu, tanggal, nilai, catatan, mulai, savedNilai, savedJuz );
 
 
                                         }
@@ -763,7 +765,8 @@ public class HafizhFragment extends Fragment {
 
     }
 
-    public void getRoomById(final String idReq, final String idJadwal){
+    public void getRoomById(final String idReq, final String idJadwal, final String jam, final String tanggal, final String nilai, final String catatan,
+                            final String mulai, final String savedNilai, final String savedJuz){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getContext().getString(R.string.loading));
         progressDialog.show();
@@ -786,7 +789,13 @@ public class HafizhFragment extends Fragment {
                             vidCall.putExtra("idJadwal", idJadwal);
                             vidCall.putExtra("idRoom", room.getString("id_room"));
                             vidCall.putExtra("idReq", idReq);
-
+                            vidCall.putExtra("jam",jam);
+                            vidCall.putExtra("tanggal", tanggal);
+                            vidCall.putExtra("nilai",nilai);
+                            vidCall.putExtra("catatan",catatan);
+                            vidCall.putExtra("mulai", mulai);
+                            vidCall.putExtra("savedNilai", savedNilai);
+                            vidCall.putExtra("savedJuz", savedJuz);
                             getContext().startActivity(vidCall);
 
 
