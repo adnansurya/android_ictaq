@@ -667,7 +667,7 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
 
 
         Log.e("id PENGUJI", id);
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         final String url = getApplicationContext().getString(R.string.urlmain) +
