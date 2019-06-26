@@ -185,7 +185,10 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
 
         }else if(sharePrefMan.getSpType().equals("3")){
             editLay.setVisibility(GONE);
-            openRTC();
+//            openRTC();
+
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            onBackPressed();
 
         }
 
@@ -959,7 +962,11 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.videocall_menu, menu);
 
+         MenuItem browser = menu.findItem(R.id.browser_menu);
+         browser.setVisible(false);
+
          if(sharePrefMan.getSpType().equals("3")){
+
              MenuItem check = menu.findItem(R.id.edit_menu);
              check.setVisible(false);
              MenuItem changeRoom = menu.findItem(R.id.room_menu);
@@ -1008,8 +1015,12 @@ public class VideoCall extends AppCompatActivity implements RatingBar.OnRatingBa
                 changeRoomId(reqId, new StringUtility().randomRoomID());
                 break;
             case R.id.exam_menu:
-                editLay.setVisibility(GONE);
-                openRTC();
+//                editLay.setVisibility(GONE);
+//                openRTC();
+                mWebRTCWebView.loadUrl("about:blank");
+                mWebRTCWebView.setVisibility(GONE);
+
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 break;
             case R.id.edit_menu:
                 mWebRTCWebView.loadUrl("about:blank");
